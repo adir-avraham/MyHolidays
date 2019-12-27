@@ -66,7 +66,7 @@ export default function Login(props: object | any) {
             id="userName"
             label="User Name"
             name="userName"
-            autoComplete="user-name"
+            autoComplete="uname"
             autoFocus
             onChange={handleChange}
           />
@@ -103,7 +103,7 @@ export default function Login(props: object | any) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Register"}
               </Link>
             </Grid>
