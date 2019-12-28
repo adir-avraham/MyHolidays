@@ -9,10 +9,11 @@ router.post('/', async (req, res, next) => {
     
     try {
         const {userName, password} = req.body;
+        if (!userName || !password) return res.json({message: "missing password or username", redirect: false});
         const salt = await getUserSalt(userName);
-        if (!salt) return res.json({message: "Incorrect password or username", redirect: false});
+        if (!salt) return res.json({message: "somethins is wrong..", redirect: false});
         const [user] = await pool.execute(getUserLoginQuery() , [userName, bcrypt.hashSync(password, salt)]); 
-        if (!user.length) return res.json({message: "Incorrect password or username", redirect: false});
+        if (user.length === 0) return res.json({message: "Incorrect password or username", redirect: false});
         const jwtToken = await getJwt({...user});
         return res.json({message: "User logged in", user: user, token: jwtToken, redirect: true});  
     } catch {

@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db/pool');
 const bcrypt = require('bcryptjs'); 
+const registerValidation = require('../validations/registerValidation');
 
+
+router.use(registerValidation);
 
 router.post('/', async (req, res, next) => {
     
