@@ -13,10 +13,45 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import useCustomForm from '../../hooks/useCustomForm';
+import axios from 'axios';
 
 
-export default function Register() {
+const registerUrl = ('http://localhost:4000/register')
+
+interface initialState {
+  firstName: string | void; 
+  lastName: string | void;
+  userName: string | void;
+  password: string | void;
+}
+
+export default function Register(props: any ) {
   const classes = useStyles();
+
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    userName: "",
+    password: "",
+  }
+
+  const [data, handleChange] = useCustomForm(initialState); 
+
+  const handleRegister = async (data: initialState) => {
+    const { firstName, lastName, userName, password} = data;
+    if (!firstName || !lastName || !userName || !password) return alert("please complete the form");
+    try {
+      const result = await axios.post(registerUrl, data);
+      const {message, redirect} = result.data;
+      const {redirectValidation} = result.data;
+      const errMessage = result.data.errMessage.details[0].message;
+      alert(errMessage ? errMessage: message);
+      if (!redirect || !redirectValidation) props.history.push('/register');;
+      } catch  {
+      console.log("some error")
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -40,6 +75,7 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -51,6 +87,7 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -62,6 +99,7 @@ export default function Register() {
                 label="User Name"
                 name="userName"
                 autoComplete="uname"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -74,6 +112,7 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -89,6 +128,7 @@ export default function Register() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={()=>{handleRegister(data)}}
           >
             Register
           </Button>

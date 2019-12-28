@@ -9,6 +9,7 @@ const cors = require('cors');
 // Routes
 const login = require('./auth/login');
 const register = require('./auth/register');
+const getHolidays = require('./routes/getHolidayes')
 
 checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use('/login', login);
 app.use('/register', register);
-
+app.use('/getHolidays', getHolidays);
 
 
 
