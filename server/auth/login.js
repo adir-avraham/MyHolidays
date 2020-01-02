@@ -45,7 +45,7 @@ function getUserSaltQuery() {
 
 function getJwt(p) {
     return new Promise((resolve, reject) => {
-        jwt.sign(p, process.env.SECRET, { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(p, process.env.SECRET, { expiresIn: '3h' }, (err, token) => {
             if (err) reject("error");
             resolve(token);
         })

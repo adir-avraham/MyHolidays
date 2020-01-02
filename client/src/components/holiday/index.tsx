@@ -16,18 +16,22 @@ import axios from 'axios';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '@material-ui/core/IconButton';
+import mainAxion from '../axios/mainAxios';
 
-
-
+const updateFollowHolidayUrl = ('http://localhost:4000/updateFollowStatus')
 
 
 export default function Holiday(props: any) {
   const classes = useStyles();
 
-  const [holidayId, setHolidayId] = useState({});
+  //const [holidayId, setHolidayId] = useState({});
   
+  const updateFollowHoliday = async (holidayId: number) => {
+    const result = await mainAxion.post('/updateFollowStatus', {holidayId});
+    console.log("res from follow=>", result)
+  }
 
-    const { id, destination, from, to, price, picture, followers } = props
+  const { id, destination, from, to, price, picture, followers } = props
     return (
     <React.Fragment>
     <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
@@ -52,8 +56,10 @@ export default function Holiday(props: any) {
 
                     <Button id={id} size="small" color="primary"  
                     onClick={()=>{  
-                         console.log(id) 
-                        setHolidayId(id)
+                         //console.log(id) 
+                        //setHolidayId(id)
+                        updateFollowHoliday(id)
+
                         }}
                     > 
                     <FavoriteIcon/> 

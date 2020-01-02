@@ -10,6 +10,7 @@ const cors = require('cors');
 const login = require('./auth/login');
 const register = require('./auth/register');
 const getHolidays = require('./routes/getHolidayes')
+const updateFollowStatus = require('./routes/updateFollowStatus');
 
 checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use('/login', login);
 app.use('/register', register);
 app.use('/getHolidays', getHolidays);
-
+app.use('/updateFollowStatus', updateFollowStatus);
 
 
 app.listen(process.env.PORT, () => {

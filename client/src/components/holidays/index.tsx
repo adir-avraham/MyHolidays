@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import HolidaysList from '../holidays-list'
+import mainAxios from '../axios/mainAxios';
 
 const getHolidaysUrl = ('http://localhost:4000/getHolidays');
 
