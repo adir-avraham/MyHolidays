@@ -86,7 +86,7 @@ export default function Navbar() {
         </List>
         <Divider />
         <List>
-          {['Holidays' ,'Trash', 'Add holiday'].map((text, index) => (
+          {['Holidays' ,'Trash', 'Create-holiday'].map((text, index) => (
             <Link key={text} className={classes.link} to={`/${text}`}> 
             <ListItem button>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
