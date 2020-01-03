@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { Link as Link1 } from 'react-router-dom';
+import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 
 const registerUrl = ('http://localhost:4000/register')
 
@@ -58,7 +59,7 @@ export default function Register(props: any ) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <PersonAddOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Register

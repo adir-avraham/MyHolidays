@@ -9,6 +9,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import HolidaysList from '../holidays-list'
 import mainAxios from '../axios/mainAxios';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { Theme, createStyles } from '@material-ui/core/styles';
 
 const getHolidaysUrl = ('http://localhost:4000/getHolidays');
 
@@ -22,7 +24,7 @@ export default function Holidays() {
   // }
 
   const [holidays, setHolidays] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
 
@@ -31,6 +33,7 @@ export default function Holidays() {
             const result = await mainAxios.post('/getHolidays');
             const {data} = result;
             setHolidays(data);
+            setLoading(false)
             console.log(data)
         } catch {
             console.log("some error");
@@ -40,7 +43,15 @@ export default function Holidays() {
 
   },[])
 
-  if (!Array.isArray(holidays)) return <div>loading..</div>
+  if (loading) return (
+    <div className={classes.root}>
+    loading..
+      <LinearProgress />
+      <LinearProgress color="secondary" />
+    </div>)
+      if (!Array.isArray(holidays)) return (<div className={classes.root}>
+        No data available...
+        </div>)  
   return (
     <React.Fragment>
       <CssBaseline />
@@ -103,5 +114,22 @@ function Copyright() {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
     },
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
   }));
+
+//   const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       width: '100%',
+//       '& > * + *': {
+//         marginTop: theme.spacing(2),
+//       },
+//     },
+//   }),
+// );
   
