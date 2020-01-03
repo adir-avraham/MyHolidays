@@ -31,7 +31,7 @@ export default function Holiday(props: any) {
     console.log("res from follow=>", result)
   }
 
-  const { id, destination, from, to, price, picture, followers } = props
+  const { id, destination, from, to, price, picture, followers, user_id } = props
     return (
     <React.Fragment>
     <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
@@ -56,13 +56,14 @@ export default function Holiday(props: any) {
 
                     <Button id={id} size="small" color="primary"  
                     onClick={()=>{  
-                         //console.log(id) 
+                         console.log(id) 
                         //setHolidayId(id)
                         updateFollowHoliday(id)
 
                         }}
                     > 
-                    <FavoriteIcon/> 
+                    {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
+                
                     {/* <FavoriteBorderIcon/> */}
                     </Button>
                     <Button size="small" color="primary" >

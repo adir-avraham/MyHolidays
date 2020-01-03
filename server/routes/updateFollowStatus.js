@@ -14,6 +14,7 @@ router.post('/', async (req , res, next)=> {
         const holidayFollowed = await isFollowed(id, holidayId);
         if (!holidayFollowed) {
             const result = await followHoliday(id, holidayId);
+
             return res.json(result)  
         }  
         if (holidayFollowed) {

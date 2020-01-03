@@ -28,9 +28,10 @@ export default function Holidays() {
 
     const initReq = async () =>{
         try{
-            const result = await axios.get(getHolidaysUrl);
+            const result = await mainAxios.post('/getHolidays');
             const {data} = result;
             setHolidays(data);
+            console.log(data)
         } catch {
             console.log("some error");
         }
@@ -39,7 +40,7 @@ export default function Holidays() {
 
   },[])
 
-  if (holidays.length < 1) return <div>loading..</div>
+  if (!Array.isArray(holidays)) return <div>loading..</div>
   return (
     <React.Fragment>
       <CssBaseline />
