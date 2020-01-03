@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
-
+import { Link as Link1 } from 'react-router-dom';
 
 interface InitialState {
   userName: string | void;
@@ -40,9 +40,10 @@ export default function Login(props: object | any) {
       //add push here
      alert(message)
       localStorage.setItem('token', token);
+      props.history.push('/holidays');
     } else {
       alert(message);
-      //props.history.push('/login');
+      props.history.push('/login');
       //add set message here
     }
   } 
@@ -103,9 +104,11 @@ export default function Login(props: object | any) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/register" variant="body2">
+            <Link1 to="/register" className={classes.link}>
+              <Link variant="body2">
                 {"Don't have an account? Register"}
               </Link>
+              </Link1>
             </Grid>
           </Grid>
         </form>
@@ -149,4 +152,7 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  link: {
+    textDecoration: 'none',
+}
 }));

@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
-
+import { Link as Link1 } from 'react-router-dom';
 
 const registerUrl = ('http://localhost:4000/register')
 
@@ -134,9 +134,11 @@ export default function Register(props: any ) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+                <Link1 to="/login" className={classes.link}>
+              <Link variant="body2">
                 Already have an account? Log in
               </Link>
+                </Link1>
             </Grid>
           </Grid>
         </form>
@@ -180,4 +182,7 @@ function Copyright() {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    link: {
+      textDecoration: 'none',
+  }
   }));
