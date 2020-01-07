@@ -8,42 +8,33 @@ import Link from '@material-ui/core/Link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import HolidaysList from '../holidays-list'
-import mainAxios from '../axios/mainAxios';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Theme, createStyles } from '@material-ui/core/styles';
+import { connect } from "react-redux";
+import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
 
-const getHolidaysUrl = ('http://localhost:4000/getHolidays');
 
 
 
-export default function Holidays() {
+
+export function Holidays(props: any) {
   const classes = useStyles();
 
-  // const initialState = {
-  //     cards: ""
-  // }
-
-  const [holidays, setHolidays] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { getHolidays, getHolidaysPending } = props.reduxActions;
 
   useEffect(()=>{
 
-    const initReq = async () =>{
-        try{
-            const result = await mainAxios.post('/getHolidays');
-            const {data} = result;
-            setHolidays(data);
-            setLoading(false)
-            console.log(data)
-        } catch {
-            console.log("some error");
-        }
+    const initReq = () =>{
+      getHolidaysPending()
+      getHolidays()
     }
     initReq();
 
   },[])
 
-  if (loading) return (
+  const { holidays, holidaysLoading } = props;
+
+  if (holidaysLoading) return (
     <div className={classes.root}>
     loading..
       <LinearProgress />
@@ -70,6 +61,35 @@ export default function Holidays() {
     </React.Fragment>
   );
 }
+
+interface State {
+  holidays: Array<object>;
+  holidaysLoading: boolean;
+}
+
+const mapStateToProps = (state: State) => {
+  let { holidays, holidaysLoading } = state;
+      return { holidays, holidaysLoading };
+  }   
+
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      reduxActions: {
+        getHolidays: () => {
+          dispatch(getHolidaysAction());
+        },
+        getHolidaysPending: () => {
+          dispatch(getHolidaysPendingAction());
+        }
+      }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Holidays);
+
+
+
 
 function Copyright() {
     return (
