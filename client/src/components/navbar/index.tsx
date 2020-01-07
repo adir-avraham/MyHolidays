@@ -20,6 +20,8 @@ import MailIcon from '@material-ui/icons/Mail';
 
 //import Link from '@material-ui/core/Link';
 import { Link } from 'react-router-dom';
+import { AppLinks } from "components/appRouter/routers";
+import { routes } from "components/appRouter/routers.config";
 
 export default function Navbar() {
   const classes = useStyles();
@@ -75,7 +77,8 @@ export default function Navbar() {
         </div>
         <Divider />
         <List>
-          {['Login', 'Register'].map((text, index) => (
+        <AppLinks routes={routes} />
+          {/* {['Login', 'Register'].map((text, index) => (
               <Link key={text} className={classes.link} to={`/${text}`}> 
               <ListItem button >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -93,7 +96,7 @@ export default function Navbar() {
               <ListItemText primary={text} />
             </ListItem>
             </Link>
-          ))}
+          ))} */}
         </List>
       </Drawer>
       <main
