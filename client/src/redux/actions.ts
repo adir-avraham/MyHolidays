@@ -1,5 +1,6 @@
 import Actions from './actions.config';
-import { getHolidaysService } from './service';
+import { getHolidaysService, updateFollowHolidayService } from './service';
+import holidays from '../components/holidays';
 
 
 
@@ -27,3 +28,18 @@ export const getHolidaysAction = () => {
         dispach(getHolidaysSuccessAction(holidays));
     };
 };
+
+export const updateFollowHolidaySuccess = (holidays: Array<object>) => {
+    return {
+        type: Actions.UPDATE_FOLLOW_HOLIDAY_SUCCESS,
+        payload: holidays
+    };
+};
+
+export const updateFollowHolidayAction = (holidayId: number) => {
+
+    return async (dispach: any) => {
+        const holidays = await updateFollowHolidayService(holidayId);
+        dispach(updateFollowHolidaySuccess(holidays))
+    }
+}

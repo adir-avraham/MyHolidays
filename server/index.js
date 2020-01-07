@@ -9,7 +9,7 @@ const cors = require('cors');
 // Routes
 const login = require('./auth/login');
 const register = require('./auth/register');
-const getHolidays = require('./routes/getHolidayes')
+const getHolidays = require('./routes/getHolidayes');
 const updateFollowStatus = require('./routes/updateFollowStatus');
 const createHoliday = require('./routes/createHoliday');
 

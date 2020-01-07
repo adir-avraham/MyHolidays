@@ -14,14 +14,14 @@ router.post('/', async (req , res, next)=> {
         const holidayFollowed = await isFollowed(id, holidayId);
         if (!holidayFollowed) {
             const result = await followHoliday(id, holidayId);
-
-            return res.json(result)  
+            const [data] = await pool.execute(getHolidaysQuery(), [id]);
+            return res.json({holidays: data})  
         }  
         if (holidayFollowed) {
             const result = await unFollowed(holidayFollowed);
-            const {affectedRows} = result;
-            if (affectedRows > 0) return res.json("unfollowed success");
-            return res.json(affectedRows)
+            //const {affectedRows} = result;
+            const [data] = await pool.execute(getHolidaysQuery(), [id]);
+            return res.json({holidays: data})
         }
     } catch {
         return res.json("something went wrong..")
@@ -72,4 +72,6 @@ function addFollowHolidayQuery() {
     return "INSERT INTO `myholidays`.`followed_holidays` (`user_id`, `holiday_id`) VALUES (?, ?)";
 }
 
-
+function getHolidaysQuery() {
+    return "SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers, myholidays.followed_holidays.user_id  FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id and (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?) ORDER BY holiday_id DESC";
+}

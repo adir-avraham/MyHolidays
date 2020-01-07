@@ -17,19 +17,24 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '@material-ui/core/IconButton';
 import mainAxion from '../axios/mainAxios';
+import { connect } from "react-redux";
+import { updateFollowHolidayAction } from '../../redux/actions';
 
 const updateFollowHolidayUrl = ('http://localhost:4000/updateFollowStatus')
 
 
-export default function Holiday(props: any) {
+export function Holiday(props: any) {
   const classes = useStyles();
+
+  const { updateFollowHoliday } = props.reduxActions;
 
   //const [holidayId, setHolidayId] = useState({});
   
-  const updateFollowHoliday = async (holidayId: number) => {
-    const result = await mainAxion.post('/updateFollowStatus', {holidayId});
-    console.log("res from follow=>", result)
-  }
+  // const updateFollowHoliday = async (holidayId: number) => {
+  //   const result = await mainAxion.post('/updateFollowStatus', {holidayId});
+  //   const { data } = result;
+  //   console.log("res from follow=>", data)
+  // }
 
   const { id, destination, from, to, price, picture, followers, user_id } = props
     return (
@@ -75,6 +80,29 @@ export default function Holiday(props: any) {
     </React.Fragment>
   );
 }
+
+interface State {
+  holidays: Array<object>;
+}
+
+const mapStateToProps = (state: State) => {
+  let { holidays } = state;
+      return { holidays };
+  }   
+
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      reduxActions: {
+        updateFollowHoliday: (holidayId: number) => {
+          dispatch(updateFollowHolidayAction(holidayId));
+        }
+
+      }
+  };
+};
+
+export default connect(null, mapDispatchToProps) (Holiday);
 
 
   

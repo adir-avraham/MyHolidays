@@ -12,4 +12,14 @@ export const getHolidaysService = async () => {
 }
 
 
+export const updateFollowHolidayService = async (holidayId: number) => {
+    try{ 
+        const result = await mainAxios.post('/updateFollowStatus', {holidayId});
+        const { data } = result;
+        return data;
+    } catch {
+        console.error("error from updateFollowAction")
+    }
+  }
+
 
