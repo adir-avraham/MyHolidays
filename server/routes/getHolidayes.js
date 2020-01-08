@@ -3,19 +3,18 @@ const router = exprees.Router();
 const pool = require('../db/pool');
 const verifyToken = require('../auth/verifyToken');
 
-router.use('/', verifyToken);
+router.use(verifyToken);
 
 router.post('/', async (req, res, next) => {
 
     try{
         const { id } = req.decoded[0];
         const [result] = await pool.execute(getHolidaysQuery(), [id]);
-        console.log("check this=====>", result)
         return res.json(result);
     } catch {
         return res.json("some error");
     }
-})
+});
 
 
 function getHolidaysQuery() {

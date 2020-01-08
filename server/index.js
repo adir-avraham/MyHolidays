@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Routes
+const verifyToken = require('./auth/verifyToken');
 const login = require('./auth/login');
 const register = require('./auth/register');
 const getHolidays = require('./routes/getHolidayes');
@@ -20,6 +21,10 @@ checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 app.use(cors());
 app.use(bodyParser.json());
 
+//app.use('/v',verifyToken);
+app.use('/v',verifyToken, (req, res) =>{
+    res.status(200).json({status:"ok"})
+});
 app.use('/login', login);
 app.use('/register', register);
 app.use('/getHolidays', getHolidays);

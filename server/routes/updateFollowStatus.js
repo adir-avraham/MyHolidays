@@ -14,6 +14,7 @@ router.post('/', async (req , res, next)=> {
         const holidayFollowed = await isFollowed(id, holidayId);
         if (!holidayFollowed) {
             const result = await followHoliday(id, holidayId);
+            //if result succes retrun true => update redux. 
             const [data] = await pool.execute(getHolidaysQuery(), [id]);
             return res.json({holidays: data})  
         }  

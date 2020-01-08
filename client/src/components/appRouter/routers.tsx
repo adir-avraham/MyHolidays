@@ -1,5 +1,4 @@
 import React from 'react'; 
-import { routes } from './routers.config';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,7 +26,7 @@ export const AppLinks = (props: any) => {
     const classes = useStyles();
     const { routes } = props;
 
-    return routes.filter((route: route) => route.isVisibale).map((route: route, index: number) => (
+    return routes.filter((route: route) => route.isVisibale).map((route: route) => (
         <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -60,7 +59,7 @@ function getItemIcon(title: string) {
 export const AppRoutes = (props: any) => {
   const { routes } = props
   const result = routes.map((route: route) => 
-      <Route path={route.path} component={route.component}/> 
+      <Route key={route.title} path={route.path} component={route.component}/> 
   )
   return <>{result}</>
 }
@@ -75,21 +74,4 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
-
-
-// export const AppLinks = (props: any) => {
-//   const classes = useStyles();
-//   const { routes } = props;
-
-//   return routes.filter((route: route) => route.isVisibale).map((route: route, index: number) => (
-//       <Link key={route.title} className={classes.link} to={route.path}> 
-//       <ListItem button >
-//       <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//       <ListItemText primary={route.title} />
-//       </ListItem>
-//       </Link>
-//   ))
-// }
 
