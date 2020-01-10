@@ -14,6 +14,7 @@ const getHolidays = require('./routes/getHolidayes');
 const updateFollowStatus = require('./routes/updateFollowStatus');
 const createHoliday = require('./routes/createHoliday');
 const deleteHoliday = require('./routes/deleteHoliday');
+const updateHoliday = require('./routes/updateHoliday');
 
 checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 
@@ -22,15 +23,10 @@ checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 app.use(cors());
 app.use(bodyParser.json());
 
-//app.use('/v',verifyToken);
-// app.use('/verifyToken',verifyToken, (req, res) =>{
-//     res.status(200).json({status:"ok"})
-// });
 
 app.use('/verifyToken',verifyToken, (req, res) =>{
     const { role } = req.decoded[0];
-console.log("role=>" + role)
-     res.json({role: role, status: "ok"})
+    res.json({role: role, status: "ok"})
 });
 
 
@@ -41,6 +37,8 @@ app.use('/getHolidays', getHolidays);
 app.use('/updateFollowStatus', updateFollowStatus);
 app.use('/createHoliday', createHoliday);
 app.use('/deleteHoliday', deleteHoliday);
+app.use('/updateHoliday', updateHoliday);
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is listening to port: ${process.env.PORT}`)

@@ -27,7 +27,6 @@ module.exports = router;
 
 async function createHoliday (payload) {
     const { destination, from, to, price, picture } = payload;
-    console.log(destination, from, to, price, picture);
     const result = await pool.execute(insertHolidayQuery(), [destination, from, to, price, picture]);
     return result;
 }
