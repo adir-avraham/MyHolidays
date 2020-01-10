@@ -43,7 +43,7 @@ export default function CreateHoliday(props: any ) {
 
   const handleCreateHoliday = async (data: initialState) => {
     const { destination, from, to, price, picture} = data;
-    //if (!destination || !from || !to || !price || !picture) return alert("please complete the form");
+    if (!destination || !from || !to || !price || !picture) return alert("please complete the form");
     try {
       const result = await axios.post(createHolidayUrl, data);
       const { message, redirect } = result.data;

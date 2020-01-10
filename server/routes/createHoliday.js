@@ -2,12 +2,17 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db/pool');
 const holidayValidation = require('../validations/holidayValidation');
+const verifyToken = require('../auth/verifyToken');
+const verifyRole = require('../auth/verifyAdminRole');
 
 
+
+router.use(verifyToken);
+router.use(verifyRole);
 router.use(holidayValidation);
 
 router.post('/', async (req, res, next) => {
-    
+
     try{
     const insertId = await createHoliday(req.body);
     console.log(insertId);

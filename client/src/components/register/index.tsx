@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -38,6 +38,8 @@ export default function Register(props: any) {
   };
 
   const [data, handleChange] = useCustomForm(initialState);
+  //const [errMessage, setErrMessage] = useState("")  
+
 
   const handleRegister = async (data: initialState) => {
     const { firstName, lastName, userName, password } = data;
@@ -48,6 +50,7 @@ export default function Register(props: any) {
       const { message, redirect } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
       if (errMessage) alert(errMessage);
+      //setErrMessage(errMessage)
       if (message) alert(message)
       if (redirect) props.history.push('/login');
     } catch {

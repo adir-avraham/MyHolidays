@@ -14,13 +14,11 @@ router.post('/', async (req , res, next)=> {
         const holidayFollowed = await isFollowed(id, holidayId);
         if (!holidayFollowed) {
             const result = await followHoliday(id, holidayId);
-            //if result succes retrun true => update redux. 
             const [data] = await pool.execute(getHolidaysQuery(), [id]);
             return res.json({holidays: data})  
         }  
         if (holidayFollowed) {
             const result = await unFollowed(holidayFollowed);
-            //const {affectedRows} = result;
             const [data] = await pool.execute(getHolidaysQuery(), [id]);
             return res.json({holidays: data})
         }
@@ -45,7 +43,6 @@ async function isHolidayExist(holiday_id) {
 }
 
 async function unFollowed(holidayFollowed) {
-    //console.log("toremove", holidayFollowed);
     const { user_id, holiday_id } = holidayFollowed;
     const [result] = await pool.execute(deleteFollowedHolidayQuery(), [user_id, holiday_id]);
     return result;

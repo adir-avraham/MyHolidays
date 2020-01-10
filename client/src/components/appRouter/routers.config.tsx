@@ -10,7 +10,7 @@ import { withAuth } from 'components/hoc/auth';
 export const routes = [
     { isVisibale: true, title: "Login", path: "/login", component: Login },
     { isVisibale: true, title: "Register", path: "/register", component: Register },
-    { isVisibale: true, title: "Holidays", path: "/holidays", component: (props: any) =>{
+    { isVisibale: true, title: "MyHolidays", path: "/holidays", component: (props: any) =>{
         const HolidaysWithAuth = withAuth(Holidays);
         return <HolidaysWithAuth {...props}/>
     } },

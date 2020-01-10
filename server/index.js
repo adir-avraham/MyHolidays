@@ -22,9 +22,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //app.use('/v',verifyToken);
-app.use('/v',verifyToken, (req, res) =>{
-    res.status(200).json({status:"ok"})
+// app.use('/verifyToken',verifyToken, (req, res) =>{
+//     res.status(200).json({status:"ok"})
+// });
+
+app.use('/verifyToken',verifyToken, (req, res) =>{
+    const { role } = req.decoded[0];
+console.log("role=>" + role)
+     res.json({role: role, status: "ok"})
 });
+
+
+
 app.use('/login', login);
 app.use('/register', register);
 app.use('/getHolidays', getHolidays);

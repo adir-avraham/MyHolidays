@@ -2,7 +2,6 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 //import Link from '@material-ui/core/Link';
@@ -44,7 +43,7 @@ function getItemIcon(title: string) {
     case 'Register': {
         return <PersonAddOutlinedIcon />;
     }
-    case 'Holidays': {
+    case 'MyHolidays': {
       return <BeachAccessIcon />;
   }
     case 'Create-holiday': {
