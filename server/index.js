@@ -13,6 +13,7 @@ const register = require('./auth/register');
 const getHolidays = require('./routes/getHolidayes');
 const updateFollowStatus = require('./routes/updateFollowStatus');
 const createHoliday = require('./routes/createHoliday');
+const deleteHoliday = require('./routes/deleteHoliday');
 
 checkEnvParams(["PORT", "HOST", "DB_PORT", "PASSWORD", "DATABASE"]);
 
@@ -39,6 +40,7 @@ app.use('/register', register);
 app.use('/getHolidays', getHolidays);
 app.use('/updateFollowStatus', updateFollowStatus);
 app.use('/createHoliday', createHoliday);
+app.use('/deleteHoliday', deleteHoliday);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is listening to port: ${process.env.PORT}`)
