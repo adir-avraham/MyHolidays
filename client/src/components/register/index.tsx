@@ -142,7 +142,7 @@ export default function Register(props: any) {
           <Grid container justify="flex-end">
             <Grid item>
               <Link1 to="/login" className={classes.link}>
-                <Link variant="body2">Already have an account? Log in</Link>
+                Already have an account? Log in
               </Link1>
             </Grid>
           </Grid>
@@ -187,6 +187,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
+    color: theme.palette.primary.main,
   }
 }));

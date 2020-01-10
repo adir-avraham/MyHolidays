@@ -37,7 +37,6 @@ export default function Login(props: object | any) {
     const result = await axios.post(loginUrl, data);
     const {message, token, redirect} = result.data;
     if (redirect) {
-      //add push here
      alert(message)
       localStorage.setItem('token', token);
       props.history.push('/holidays');
@@ -105,9 +104,9 @@ export default function Login(props: object | any) {
             </Grid>
             <Grid item>
             <Link1 to="/register" className={classes.link}>
-              <Link variant="body2">
+               {/* variant="body2" */}
                 {"Don't have an account? Register"}
-              </Link>
+       
               </Link1>
             </Grid>
           </Grid>
@@ -154,5 +153,6 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     textDecoration: 'none',
+    color: theme.palette.primary.main,
 }
 }));

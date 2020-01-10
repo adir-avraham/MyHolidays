@@ -59,6 +59,9 @@ export default function Navbar() {
           <Typography variant="h6" noWrap>
             MyHolidays
           </Typography>
+          <Typography variant="h6" noWrap>
+            / Hello 
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
