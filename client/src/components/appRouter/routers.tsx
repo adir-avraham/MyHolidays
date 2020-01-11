@@ -12,6 +12,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import Divider from '@material-ui/core/Divider';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
 interface route {
@@ -39,6 +40,9 @@ function getItemIcon(title: string) {
   switch (title) {
     case 'Login': {
         return <LockOpenOutlinedIcon />;
+    }
+    case 'Logout': {
+      return <LockOutlinedIcon />;
     }
     case 'Register': {
         return <PersonAddOutlinedIcon />;
