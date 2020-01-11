@@ -25,8 +25,9 @@ app.use(bodyParser.json());
 
 
 app.use('/verifyToken',verifyToken, (req, res) =>{
-    const { role } = req.decoded[0];
-    res.json({role: role, status: "ok"})
+    console.log(req.decoded[0])
+    const { first_name, role } = req.decoded[0];
+    res.json({status: "ok", firstName: first_name, role: role })
 });
 
 

@@ -16,6 +16,8 @@ import Container from '@material-ui/core/Container';
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { Link as Link1 } from 'react-router-dom';
+import { updateUserNameConnectedAction } from '../../redux/actions'
+import { connect } from 'react-redux';
 
 interface InitialState {
   userName: string | void;
@@ -24,7 +26,7 @@ interface InitialState {
 
 const loginUrl = ('http://localhost:4000/login');
 
-export default function Login(props: object | any) {
+export function Login(props: object | any) {
   const classes = useStyles();
   
   const initialState: InitialState = {
@@ -32,14 +34,17 @@ export default function Login(props: object | any) {
     password: "",
   }
   const [data, handleChange] = useCustomForm(initialState);
-  
+  const { updateUserNameConnected } = props.reduxActions;
+
   const handleLogin = async (data: InitialState) => {
     const result = await axios.post(loginUrl, data);
-    const {message, token, redirect} = result.data;
+    const {message, token, redirect, user} = result.data;
     if (redirect) {
      alert(message)
       localStorage.setItem('token', token);
       props.history.push('/holidays');
+      const {first_name} = user[0]
+      updateUserNameConnected(first_name)
     } else {
       alert(message);
       props.history.push('/login');
@@ -118,6 +123,19 @@ export default function Login(props: object | any) {
     </Container>
   );
 }
+
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      reduxActions: {
+        updateUserNameConnected: (firstName: string) => {
+          dispatch(updateUserNameConnectedAction(firstName));
+        }
+      }
+  };
+};
+
+export default connect(null, mapDispatchToProps) (Login);
 
 
 function Copyright() {

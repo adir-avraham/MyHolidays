@@ -22,8 +22,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom';
 import { AppLinks } from "components/appRouter/routers";
 import { routes } from "components/appRouter/routers.config";
+import { useState, useEffect } from 'react';
+import mainAxios from 'components/axios/mainAxios';
+import { connect } from 'react-redux'; 
+import { State } from 'sharing-interfaces';
 
-export default function Navbar() {
+export function Navbar(props: any) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -35,6 +39,27 @@ export default function Navbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [userNameConnectedState, setUserNameConnected] = useState(0);
+
+  const { userNameConnected } = props;
+
+  useEffect(()=>{
+    
+    const initReq = async () =>{
+      const token = localStorage.getItem('token');
+      if (token) {
+        const result = await mainAxios.post('/verifyToken');
+        const { firstName } = result.data;
+        setUserNameConnected(firstName)
+        console.log(result);
+      } 
+    }
+    initReq();
+
+  },[])
+
+
 
   return (
     <div className={classes.root}>
@@ -60,7 +85,7 @@ export default function Navbar() {
             MyHolidays
           </Typography>
           <Typography variant="h6" noWrap>
-            / Hello 
+            / Hello {userNameConnectedState ? userNameConnectedState : userNameConnected}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -135,6 +160,14 @@ export default function Navbar() {
     </div>
   );
 }
+
+const mapStateToProps = (state: State) => {
+  let { userNameConnected } = state;
+      return { userNameConnected };
+  }   
+
+export default connect(mapStateToProps, null) (Navbar);
+
 
 const drawerWidth = 240;
 

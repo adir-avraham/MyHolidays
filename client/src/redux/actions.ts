@@ -3,6 +3,13 @@ import { getHolidaysService, updateFollowHolidayService } from './service';
 import holidays from '../components/holidays';
 
 
+export const updateUserNameConnectedAction = (firstName: string) => {
+
+    return {
+        type: Actions.UPDATE_USERNAME_CONNECTED,
+        payload: {firstName}
+    };
+};
 
 export const getHolidaysSuccessAction = (holidays: Array<object>) => {
     

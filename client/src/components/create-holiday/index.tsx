@@ -17,6 +17,7 @@ import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { Link as Link1 } from 'react-router-dom';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import mainAxios from 'components/axios/mainAxios';
 
 const createHolidayUrl = ('http://localhost:4000/createHoliday')
 
@@ -45,7 +46,7 @@ export default function CreateHoliday(props: any ) {
     const { destination, from, to, price, picture} = data;
     if (!destination || !from || !to || !price || !picture) return alert("please complete the form");
     try {
-      const result = await axios.post(createHolidayUrl, data);
+      const result = await mainAxios.post('/createHoliday', data);
       const { message, redirect } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
       if (errMessage) alert(errMessage);
