@@ -8,14 +8,14 @@ export function Logout(props: any) {
   
   const { updateUserNameConnected } = props.reduxActions;  
   const token = localStorage.getItem('token');
-
+  
+  if (!token) alert("Please login...");
   if (token) {
       localStorage.removeItem('token');
       const firstName = 'Guest';
       updateUserNameConnected(firstName);
       alert("You have successfully logged out!");
   }
-  alert("Please login first...")
   
   return (
      <Redirect to="/login" />
