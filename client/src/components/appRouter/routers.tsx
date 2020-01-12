@@ -13,7 +13,7 @@ import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import Divider from '@material-ui/core/Divider';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
+import BarChartIcon from '@material-ui/icons/BarChart';
 
 interface route {
   isVisibale: boolean;
@@ -49,9 +49,12 @@ function getItemIcon(title: string) {
     }
     case 'MyHolidays': {
       return <BeachAccessIcon />;
-  }
+    }
     case 'Create-holiday': {
       return <FlightTakeoffIcon />;
+    }
+    case 'Report': {
+      return <BarChartIcon />;
     }
     default: {
         return <MailIcon />;

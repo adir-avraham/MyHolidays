@@ -5,6 +5,7 @@ import Holidays from 'components/holidays';
 import CreateHoliday from 'components/create-holiday';
 import Logout from 'components/logout';
 import { withAuth } from 'components/hoc/auth';
+import Report from 'components/report';
 
 
 
@@ -20,4 +21,8 @@ export const routes = [
         const CreateHolidayWithAuth = withAuth(CreateHoliday);
         return <CreateHolidayWithAuth {...props}/>
     }  },
+    { isVisibale: true, title: "Report", path: "/report", component:  (props: any) =>{
+        const ReportWithAuth = withAuth(Report);
+        return <ReportWithAuth {...props}/>
+    } },
 ] 

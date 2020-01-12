@@ -3,7 +3,7 @@ import mainAxios from '../components/axios/mainAxios';
 
 export const getHolidaysService = async () => {
     try {
-        const {data} = await mainAxios.post('/getHolidays');
+        const {data} = await mainAxios.post('/holidays');
         return data;
     } catch (ex) {
         return []

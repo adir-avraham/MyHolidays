@@ -160,9 +160,7 @@ export default function CreateHoliday(props: any ) {
           <Grid container justify="flex-end">
             <Grid item>
                 <Link1 to="/login" className={classes.link}>
-              <Link variant="body2">
                 Already have an account? Log in
-              </Link>
                 </Link1>
             </Grid>
           </Grid>
@@ -209,5 +207,6 @@ function Copyright() {
     },
     link: {
       textDecoration: 'none',
+      color: theme.palette.primary.main,
   }
   }));

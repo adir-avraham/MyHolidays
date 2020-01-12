@@ -34,6 +34,7 @@ export const withAuth = (WrappedComponent: any) => {
         if (status === "loading" || path === "loading" ) return <LinearIndeterminate/>;
         if (!status) return <Redirect to="/login" />;
         if (path === "/create-holiday" && role === "admin") return <WrappedComponent {...props} />;
+        if (path === "/report" && role === "admin") return <WrappedComponent {...props} />;
         if (path === "/holidays" && role === "user") return <WrappedComponent {...props} />;
         return  <Redirect to="/login" />;
     }
