@@ -18,21 +18,23 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '@material-ui/core/IconButton';
 import mainAxion from '../axios/mainAxios';
 import { connect } from "react-redux";
-import { deleteHolidayAction } from '../../redux/actions';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-
+import { updateFollowHolidayAction } from '../../redux/actions';
 
 const updateFollowHolidayUrl = ('http://localhost:4000/updateFollowStatus')
 
 
-export function Holiday(props: any) {
+export function MyHoliday(props: any) {
   const classes = useStyles();
 
-  const { deleteHoliday } = props.reduxActions;
+  const { updateFollowHoliday } = props.reduxActions;
 
+  //const [holidayId, setHolidayId] = useState({});
+  
+  // const updateFollowHoliday = async (holidayId: number) => {
+  //   const result = await mainAxion.post('/updateFollowStatus', {holidayId});
+  //   const { data } = result;
+  //   console.log("res from follow=>", data)
+  // }
 
   const { id, destination, from, to, price, picture, followers, user_id } = props
     return (
@@ -61,16 +63,16 @@ export function Holiday(props: any) {
                     onClick={()=>{  
                          console.log(id) 
                         //setHolidayId(id)
-                        deleteHoliday(parseInt(id))
+                        updateFollowHoliday(id)
+
                         }}
                     > 
-                    <DeleteForeverOutlinedIcon/>
-                    {/* <DeleteForeverIcon/> */}
+                    {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
+                
+                    {/* <FavoriteBorderIcon/> */}
                     </Button>
                     <Button size="small" color="primary" >
-                    <EditOutlinedIcon/>
-                    {/* <EditIcon/> */}
-                      
+                      Edit
                     </Button>
                   </CardActions>
             </Card>
@@ -92,15 +94,15 @@ const mapStateToProps = (state: State) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
       reduxActions: {
-        deleteHoliday: (holidayId: number) => {
-          dispatch(deleteHolidayAction(holidayId));
+        updateFollowHoliday: (holidayId: number) => {
+          dispatch(updateFollowHolidayAction(holidayId));
         }
 
       }
   };
 };
 
-export default connect(null, mapDispatchToProps) (Holiday);
+export default connect(null, mapDispatchToProps) (MyHoliday);
 
 
   

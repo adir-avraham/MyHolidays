@@ -56,6 +56,9 @@ function getItemIcon(title: string) {
     case 'Report': {
       return <BarChartIcon />;
     }
+    case 'Holidays': {
+      return <BeachAccessIcon />;
+    }
     default: {
         return <MailIcon />;
     }

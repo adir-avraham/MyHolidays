@@ -1,6 +1,6 @@
 import Actions from './actions.config';
-import { getHolidaysService, updateFollowHolidayService } from './service';
-import holidays from '../components/holidays';
+import { getHolidaysService, updateFollowHolidayService, deleteHolidayService } from './service';
+
 
 
 export const updateUserNameConnectedAction = (firstName: string) => {
@@ -47,6 +47,24 @@ export const updateFollowHolidayAction = (holidayId: number) => {
 
     return async (dispach: any) => {
         const holidays = await updateFollowHolidayService(holidayId);
+        if (!holidays) return;
         dispach(updateFollowHolidaySuccess(holidays))
+    }
+}
+
+
+export const deleteHolidaySuccess = (holidays: Array<object>) => {
+    return {
+        type: Actions.DELETE_HOLIDAY_SUCCESS,
+        payload: holidays
+    };
+};
+
+export const deleteHolidayAction = (holidayId: number) => {
+
+    return async (dispach: any) => {
+        const holidays = await deleteHolidayService(holidayId);
+        if (!holidays) return;
+        dispach(deleteHolidaySuccess(holidays))
     }
 }

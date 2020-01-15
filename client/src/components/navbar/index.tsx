@@ -26,8 +26,11 @@ import { useState, useEffect } from 'react';
 import mainAxios from 'components/axios/mainAxios';
 import { connect } from 'react-redux'; 
 import { State } from 'sharing-interfaces';
+import { updateUserNameConnectedAction } from 'redux/actions';
+
 
 export function Navbar(props: any) {
+  const { updateUserNameConnected } = props.reduxActions;  
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -51,7 +54,8 @@ export function Navbar(props: any) {
       if (token) {
         const result = await mainAxios.post('/verifyToken');
         const { firstName } = result.data;
-        setUserNameConnected(firstName)
+        //setUserNameConnected(firstName)
+        if (firstName) updateUserNameConnected(firstName)
         console.log(result);
       } 
     }
@@ -85,7 +89,7 @@ export function Navbar(props: any) {
             MyHolidays
           </Typography>
           <Typography variant="h6" noWrap>
-            / Hello {userNameConnectedState ? userNameConnectedState : userNameConnected}
+            / Hello {userNameConnected}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -166,7 +170,17 @@ const mapStateToProps = (state: State) => {
       return { userNameConnected };
   }   
 
-export default connect(mapStateToProps, null) (Navbar);
+  const mapDispatchToProps = (dispatch: any) => {
+    return {
+        reduxActions: {
+          updateUserNameConnected: (firstName: string) => {
+            dispatch(updateUserNameConnectedAction(firstName));
+          }
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Navbar);
 
 
 const drawerWidth = 240;

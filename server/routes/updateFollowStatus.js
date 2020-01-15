@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db/pool');
 const verifyToken = require('../auth/verifyToken');
+const verifyUserRole = require('../auth/verifyUserRole');
 
 router.use('/', verifyToken);
+router.use(verifyUserRole);
 
 router.post('/', async (req , res, next)=> {
      try {

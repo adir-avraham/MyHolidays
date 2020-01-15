@@ -12,28 +12,29 @@ router.use(verifyAdminRole);
 router.post('/', async (req, res, next)=> {
 
     try {
-    const { id } = req.body;
-    if (!id) return res.json({ message: "Holiday not found", status: false }); 
-    const holidayFollowed = await isFollowed(id);
+    const { holidayId } = req.body;
+    console.log("on del", req.body)
+    if (!holidayId) return res.json({ message: "Holiday not found", status: false }); 
+    const holidayFollowed = await isFollowed(holidayId);
     
     if (!holidayFollowed) {       
-        const [result] = await pool.execute(deleteHolidayQuery(), [id]);
+        const [result] = await pool.execute(deleteHolidayQuery(), [holidayId]);
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
-            const [data] = await pool.execute(getHolidaysQuery(), [id]); 
+            const [data] = await pool.execute(getHolidaysQuery(), [holidayId]); 
             return res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
         } 
         return res.json({ message: "No deleted holiday", status: false }); 
     }  
 
     if (holidayFollowed) {
-        const [result] = await pool.execute(deleteFollowedHolidayQuery(), [id]);
+        const [result] = await pool.execute(deleteFollowedHolidayQuery(), [holidayId]);
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
-            const [result] = await pool.execute(deleteHolidayQuery(), [id]);
+            const [result] = await pool.execute(deleteHolidayQuery(), [holidayId]);
             const affectedRows = result.affectedRows;
             if (affectedRows > 0) {
-                const [data] = await pool.execute(getHolidaysQuery(), [id]); 
+                const [data] = await pool.execute(getHolidaysQuery(), [holidayId]); 
                 return res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
             } 
             return res.json({ message: "No deleted holiday", status: false }); 
@@ -48,8 +49,8 @@ router.post('/', async (req, res, next)=> {
 
 module.exports = router;
 
-async function isFollowed(id) {
-    const [result] = await pool.execute(isFollowedQuery(), [id]);
+async function isFollowed(holidayId) {
+    const [result] = await pool.execute(isFollowedQuery(), [holidayId]);
     const [first] = result;
     return first;
 }

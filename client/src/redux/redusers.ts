@@ -1,4 +1,5 @@
 import Actions from './actions.config';
+import { Holiday } from 'sharing-interfaces';
 
 
 const initialState = {
@@ -13,7 +14,7 @@ interface Action {
 }
 
 export default function root(state = initialState, action: Action) {
-    console.log("paylo", action.payload)
+    console.log("paylod-redux", action.payload)
     switch (action.type) {
 
         case Actions.UPDATE_USERNAME_CONNECTED: {
@@ -33,6 +34,10 @@ export default function root(state = initialState, action: Action) {
         case Actions.UPDATE_FOLLOW_HOLIDAY_SUCCESS: {
             const { holidays } = action.payload;
             return { ...state, holidays };
+        }
+        case Actions.DELETE_HOLIDAY_SUCCESS: {
+            const { holidays } = action.payload;
+            if (holidays) return { ...state, holidays: holidays };
         }
 
         default: {

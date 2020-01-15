@@ -42,7 +42,7 @@ export function Login(props: object | any) {
     if (redirect) {
      alert(message)
       localStorage.setItem('token', token);
-      props.history.push('/holidays');
+      props.history.push('/my-holidays');
       const {first_name} = user[0]
       updateUserNameConnected(first_name)
     } else {
