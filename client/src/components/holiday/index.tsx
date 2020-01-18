@@ -16,19 +16,29 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import DeleteDialog from "components/delete-dialog";
+import DeleteDialog from "components/dialogs/delete";
+import EditDialog from "components/dialogs/edit";
+
+
 
 export default function Holiday(props: any) {
   const classes = useStyles();
   const { id, destination, from, to, price, picture, followers, user_id } = props;
   const [holidayId, setHolidayId] = useState("");
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClickOpenEdit = () => {
+    setOpenEdit(true);
+  };
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
   };
 
   return (
@@ -48,7 +58,7 @@ export default function Holiday(props: any) {
           <CardActions>
             <Button id={id} size="small" color="primary"
               onClick={() => {
-                setHolidayId(id);
+                //setHolidayId(id);
                 handleClickOpen();
               }}
             >
@@ -58,17 +68,27 @@ export default function Holiday(props: any) {
             <DeleteDialog
               open={open}
               onClose={handleClose}
-              holidayId={holidayId}
+              holidayId={id}
             />
             <Button id={id} size="small" color="primary" 
               onClick={() => {
                 setHolidayId(id);
-                handleClickOpen();
+                handleClickOpenEdit();
               }}
             >
               {/* <EditOutlinedIcon /> */}
               <EditIcon/>
             </Button>
+            <EditDialog
+              open={openEdit}
+              onClose={handleCloseEdit}
+              holidayId={id}
+              destination={destination}
+              from={from} 
+              to={to} 
+              price={price} 
+              picture={picture}
+            />
           </CardActions>
         </Card>
       </Grid>

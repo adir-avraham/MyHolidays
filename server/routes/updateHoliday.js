@@ -11,10 +11,11 @@ router.use(verifyToken);
 router.use(verifyAdminRole);
 router.use(updateHolidayValidation);
 
-router.use('/', async (req, res)=>{
+router.put('/', async (req, res)=>{
 
     try{
         const { destination, from, to, price, picture, id } = req.body;
+        console.log("from update", req.body)
         const [result] = await pool.execute(updateHolidayQuery(), [destination, from, to, price, picture, id])      
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {

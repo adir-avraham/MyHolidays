@@ -76,6 +76,7 @@ export default function CreateHoliday(props: any ) {
                 fullWidth
                 id="destination"
                 label="Destination"
+                type="text"
                 name="destination"
                 autoComplete="c-destination"
                 onChange={handleChange}

@@ -1,11 +1,14 @@
 import Actions from './actions.config';
-import { Holiday } from 'sharing-interfaces';
+
 
 
 const initialState = {
     userNameConnected: "Guest",
     holidays: [],
     holidaysLoading: false,
+    message: "",
+    errMessage: "",
+    status: false
 }
 
 interface Action {
@@ -37,7 +40,20 @@ export default function root(state = initialState, action: Action) {
         }
         case Actions.DELETE_HOLIDAY_SUCCESS: {
             const { holidays } = action.payload;
-            if (holidays) return { ...state, holidays: holidays };
+            return { ...state, holidays: holidays };
+        }
+        case Actions.UPDATE_HOLIDAY_SUCCESS: {
+            const { holidays, status } = action.payload;
+           
+            return { ...state, holidays , status, message: "", errMessage: "" };
+        }
+        case Actions.UPDATE_HOLIDAY_VALIDATION_FAILD: {
+            const { errMessage } = action.payload;      
+            return { ...state, errMessage, status: false, message: "" };
+        }
+        case Actions.UPDATE_HOLIDAY_FAILD: {
+            const { message } = action.payload;      
+            return { ...state, message, status: false, errMessage: "" };
         }
 
         default: {

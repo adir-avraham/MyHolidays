@@ -1,4 +1,5 @@
 import mainAxios from '../components/axios/mainAxios';
+import { Holiday } from 'sharing-interfaces';
 
 
 
@@ -30,5 +31,15 @@ export const deleteHolidayService = async (holidayId: number) => {
         return data;
     } catch {
         console.error("error from deleteHolidayAction")
+    }
+};
+
+export const updateHolidayService = async (holiday: Holiday) => {
+    try{ 
+        const result = await mainAxios.put('/updateHoliday', holiday);       
+        const { data } = result;
+        return data;
+    } catch {
+        console.error("error from updateHolidayAction")
     }
 };

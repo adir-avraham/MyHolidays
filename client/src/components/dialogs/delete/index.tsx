@@ -7,7 +7,7 @@ import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 
 import { connect } from "react-redux";
-import { deleteHolidayAction } from "../../redux/actions";
+import { deleteHolidayAction } from "../../../redux/actions";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(
   function Transition(props, ref) {
@@ -38,7 +38,7 @@ export function DeleteDialog(props: any) {
           </Button>
           <Button color="primary"
             onClick={() => {
-              deleteHoliday(holidayId);
+              deleteHoliday(parseInt(holidayId));
               onClose();
             }}
           >

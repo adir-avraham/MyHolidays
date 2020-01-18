@@ -13,7 +13,6 @@ router.post('/', async (req, res, next)=> {
 
     try {
     const { holidayId } = req.body;
-    console.log("on del", req.body)
     if (!holidayId) return res.json({ message: "Holiday not found", status: false }); 
     const holidayFollowed = await isFollowed(holidayId);
     
