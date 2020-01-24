@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,6 +18,8 @@ import axios from 'axios';
 import { Link as Link1 } from 'react-router-dom';
 import { updateUserNameConnectedAction } from '../../redux/actions'
 import { connect } from 'react-redux';
+import Alert from '@material-ui/lab/Alert';
+import Footer from 'components/footer';
 
 interface InitialState {
   userName: string | void;
@@ -35,24 +37,28 @@ export function Login(props: object | any) {
   }
   const [data, handleChange] = useCustomForm(initialState);
   const { updateUserNameConnected } = props.reduxActions;
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleLogin = async (data: InitialState) => {
     const result = await axios.post(loginUrl, data);
     const {message, token, status, user} = result.data;
     if (status) {
      alert(message)
-      localStorage.setItem('token', token);
-      props.history.push('/my-holidays');
       const {first_name, role} = user[0]
+      localStorage.setItem('token', token);
+      if (role === "user") props.history.push('/my-holidays');
+      if (role === "admin") props.history.push('/holidays');
       updateUserNameConnected(first_name, role)
     } else {
-      alert(message);
-      props.history.push('/login');
+      //alert(message);
+      setErrorMessage(message);
+      //props.history.push('/login');
       //add set message here
     }
   } 
   
   return (
+    <React.Fragment>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -87,10 +93,7 @@ export function Login(props: object | any) {
             autoComplete="current-password"
             onChange={handleChange}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+            {errorMessage ? <Alert severity="error">{errorMessage}</Alert>: <div></div>}
           <Button
             type="button"
             fullWidth
@@ -117,10 +120,9 @@ export function Login(props: object | any) {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
+        <Footer/>
+        </React.Fragment>
   );
 }
 
@@ -138,18 +140,6 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(null, mapDispatchToProps) (Login);
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {

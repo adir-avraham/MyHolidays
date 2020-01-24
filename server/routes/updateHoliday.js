@@ -14,9 +14,9 @@ router.use(updateHolidayValidation);
 router.put('/', async (req, res)=>{
 
     try{
-        const { destination, from, to, price, picture, id } = req.body;
-        console.log("from update", req.body)
-        const [result] = await pool.execute(updateHolidayQuery(), [destination, from, to, price, picture, id])      
+        const { destination, start_date, end_date, price, picture, id } = req.body;
+        console.log("up", req.body)
+        const [result] = await pool.execute(updateHolidayQuery(), [destination, start_date, end_date, price, picture, id])      
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
             const [data] = await pool.execute(getHolidaysQuery(), [id]); 
@@ -33,9 +33,18 @@ module.exports = router;
 
 
 function updateHolidayQuery() {
-    return "UPDATE `myholidays`.`holidays` SET `destination` = ?, `from` = ?, `to` = ?, `price` = ?, `picture` = ? WHERE (`id` = ?)";
+    return "UPDATE `myholidays`.`holidays` SET `destination` = ?, `start_date` = ?, `end_date` = ?, `price` = ?, `picture` = ? WHERE (`id` = ?)";
 }
 
 function getHolidaysQuery() {
-    return "SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers, myholidays.followed_holidays.user_id  FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id and (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?) ORDER BY holiday_id DESC";
+        return `select id, destination, start_date, end_date, price, picture , followers, user_id FROM 
+    (SELECT myholidays.holidays.id, myholidays.holidays.destination, myholidays.holidays.start_date,
+    myholidays.holidays.end_date, myholidays.holidays.price, myholidays.holidays.picture, myholidays.followed_holidays.user_id
+    FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays
+    ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id 
+    AND (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?)) as table1
+    LEFT JOIN    
+    (SELECT holiday_id ,COUNT(holiday_id) AS followers
+    FROM followed_holidays
+    GROUP BY holiday_id) as table2 on table1.id = table2.holiday_id`;
 }

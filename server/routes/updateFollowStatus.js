@@ -73,5 +73,14 @@ function addFollowHolidayQuery() {
 }
 
 function getHolidaysQuery() {
-    return "SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers, myholidays.followed_holidays.user_id  FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id and (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?) ORDER BY holiday_id DESC";
+    return `select id, destination, start_date, end_date, price, picture , followers, user_id FROM 
+    (SELECT myholidays.holidays.id, myholidays.holidays.destination, myholidays.holidays.start_date,
+    myholidays.holidays.end_date, myholidays.holidays.price, myholidays.holidays.picture, myholidays.followed_holidays.user_id
+    FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays
+    ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id 
+    AND (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?)) as table1
+    LEFT JOIN    
+    (SELECT holiday_id ,COUNT(holiday_id) AS followers
+    FROM followed_holidays
+    GROUP BY holiday_id) as table2 on table1.id = table2.holiday_id`;
 }

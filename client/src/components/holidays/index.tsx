@@ -6,14 +6,13 @@ import Link from '@material-ui/core/Link';
 
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import HolidaysList from '../holidays-list'
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { Theme, createStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
 
 import { CSSTransitionGroup } from 'react-transition-group'
+import LinearIndeterminate from 'components/loader';
+import Footer from 'components/footer';
 
 
 
@@ -37,8 +36,7 @@ export function Holidays(props: any) {
   if (holidaysLoading) return (
     <div className={classes.root}>
     loading..
-      <LinearProgress />
-      <LinearProgress color="secondary" />
+    <LinearIndeterminate/>
     </div>)
       if (!Array.isArray(holidays)) return (<div className={classes.root}>
         No data available...
@@ -54,17 +52,7 @@ export function Holidays(props: any) {
       transitionLeave={false}>
       <HolidaysList holidays={holidays}/>
       </CSSTransitionGroup>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
+    <Footer/>
     </React.Fragment>
   );
 }
@@ -97,19 +85,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (Holidays);
 
 
 
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
   
   const useStyles = makeStyles(theme => ({
     icon: {
@@ -137,10 +112,6 @@ function Copyright() {
     cardContent: {
       flexGrow: 1,
     },
-    footer: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
-    },
     root: {
       width: '100%',
       '& > * + *': {
@@ -149,14 +120,5 @@ function Copyright() {
     },
   }));
 
-//   const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       width: '100%',
-//       '& > * + *': {
-//         marginTop: theme.spacing(2),
-//       },
-//     },
-//   }),
-// );
+
   

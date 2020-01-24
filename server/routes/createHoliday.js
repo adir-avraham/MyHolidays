@@ -26,14 +26,14 @@ router.post('/', async (req, res, next) => {
 module.exports = router;
 
 async function createHoliday (payload) {
-    const { destination, from, to, price, picture } = payload;
-    const result = await pool.execute(insertHolidayQuery(), [destination, from, to, price, picture]);
+    const { destination, start_date, end_date, price, picture } = payload;
+    const result = await pool.execute(insertHolidayQuery(), [destination, start_date, end_date, price, picture]);
     return result;
 }
 
 
 function insertHolidayQuery() {
-    return "INSERT INTO `myholidays`.`holidays` (`destination`, `from`, `to`, `price`, `picture`) VALUES (?,?,?,?,?)"; 
+    return "INSERT INTO `myholidays`.`holidays` (`destination`, `start_date`, `end_date`, `price`, `picture`) VALUES (?,?,?,?,?)"; 
 }
 
 

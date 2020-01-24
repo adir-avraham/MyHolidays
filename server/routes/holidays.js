@@ -10,7 +10,6 @@ router.post('/', async (req, res, next) => {
     try{
         const { id } = req.decoded[0];
         const [result] = await pool.execute(getHolidaysQuery(), [id]);
-        //const [followers] = await pool.execute(followersReportQuery());
         return res.json({holidays: result, status: true});
     } catch {
         return res.json("some error");
@@ -19,14 +18,17 @@ router.post('/', async (req, res, next) => {
 
 
 function getHolidaysQuery() {
-    return "SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers, myholidays.followed_holidays.user_id  FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id and (myholidays.followed_holidays.user_id = null OR myholidays.followed_holidays.user_id = ?) ORDER BY holiday_id DESC";
+    return `select id, destination, start_date, end_date, price, picture , followers, user_id from 
+    (SELECT myholidays.holidays.id, myholidays.holidays.destination, myholidays.holidays.start_date,
+    myholidays.holidays.end_date, myholidays.holidays.price, myholidays.holidays.picture, myholidays.followed_holidays.user_id
+    FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays
+    ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id 
+    AND (myholidays.followed_holidays.user_id = null or myholidays.followed_holidays.user_id = ?)) as table1
+    LEFT JOIN    
+    (SELECT holiday_id ,COUNT(holiday_id) AS followers
+    FROM followed_holidays
+    GROUP BY holiday_id) as table2 on table1.id = table2.holiday_id`;
 }
-// get all from singel table
-// function getHolidaysQuery() {
-//     return "SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers FROM myholidays.holidays";
-// }
-// jion and order by query
-//    SELECT myholidays.holidays.id, myholidays.holidays.destination, DATE_FORMAT(myholidays.holidays.from,'%d/%m/%Y') as 'from', DATE_FORMAT(myholidays.holidays.to,'%d/%m/%Y') as 'to', myholidays.holidays.price, myholidays.holidays.picture, myholidays.holidays.followers, myholidays.followed_holidays.user_id  FROM myholidays.holidays LEFT JOIN myholidays.followed_holidays
-//    ON myholidays.holidays.id = myholidays.followed_holidays.holiday_id and (myholidays.followed_holidays.user_id = null or myholidays.followed_holidays.user_id = 3)  ORDER BY holiday_id DESC;
+
 
 module.exports = router;

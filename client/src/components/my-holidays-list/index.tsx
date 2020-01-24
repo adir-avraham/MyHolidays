@@ -9,8 +9,8 @@ import MyHoliday from '../my-holiday';
 
 interface Holiday {
     id: number;
-    from: string;
-    to: string;
+    start_date: string;
+    end_date: string;
     destination: string;
     price: number;
     picture: string;
@@ -63,10 +63,7 @@ const useStyles = makeStyles(theme => ({
     cardContent: {
       flexGrow: 1,
     },
-    footer: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
-    },
+
     disablePointerEvents: {
       pointerEvents: 'none',
     },

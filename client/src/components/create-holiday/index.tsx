@@ -13,18 +13,19 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
 import useCustomForm from '../../hooks/useCustomForm';
-import axios from 'axios';
 import { Link as Link1 } from 'react-router-dom';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mainAxios from 'components/axios/mainAxios';
+import Footer from 'components/footer';
 
-const createHolidayUrl = ('http://localhost:4000/createHoliday')
+
 
 interface initialState {
   destination: string | void; 
-  from: string | void;
-  to: string | void;
+  start_date: string | void;
+  end_date: string | void;
   price: number | void;
   picture: string | void;
 }
@@ -34,8 +35,8 @@ export default function CreateHoliday(props: any ) {
 
   const initialState = {
     destination: "",
-    from: "",
-    to: "",
+    start_date: "",
+    end_date: "",
     price: "",
     picture: "",
   }
@@ -43,8 +44,8 @@ export default function CreateHoliday(props: any ) {
   const [data, handleChange] = useCustomForm(initialState); 
 
   const handleCreateHoliday = async (data: initialState) => {
-    const { destination, from, to, price, picture} = data;
-    if (!destination || !from || !to || !price || !picture) return alert("please complete the form");
+    const { destination, start_date, end_date, price, picture} = data;
+    if (!destination || !start_date || !end_date || !price || !picture) return alert("please complete the form");
     try {
       const result = await mainAxios.post('/createHoliday', data);
       const { message, redirect } = result.data;
@@ -58,6 +59,7 @@ export default function CreateHoliday(props: any ) {
   }
 
   return (
+    <React.Fragment>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -84,13 +86,13 @@ export default function CreateHoliday(props: any ) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="c-from"
-                name="from"
+                autoComplete="c-start_date"
+                name="start_date"
                 variant="filled"
                 required
                 fullWidth
-                id="from"
-                label="From"
+                id="start_date"
+                label="Start date"
                 autoFocus
                 type="date"
                 InputLabelProps={{
@@ -104,10 +106,10 @@ export default function CreateHoliday(props: any ) {
                 variant="filled"
                 required
                 fullWidth
-                id="to"
-                label="To"
-                name="to"
-                autoComplete="c-to"
+                id="end_date"
+                label="End date"
+                name="end_date"
+                autoComplete="c-end_date"
                 type="date"
                 InputLabelProps={{
                   shrink: true,
@@ -158,36 +160,14 @@ export default function CreateHoliday(props: any ) {
           >
             Save 
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-                <Link1 to="/login" className={classes.link}>
-                Already have an account? Log in
-                </Link1>
-            </Grid>
-          </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
+    <Footer/>
+    </React.Fragment>
   );
 }
 
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-  
   const useStyles = makeStyles(theme => ({
     paper: {
       marginTop: theme.spacing(8),

@@ -23,7 +23,7 @@ import EditDialog from "components/dialogs/edit";
 
 export default function Holiday(props: any) {
   const classes = useStyles();
-  const { id, destination, from, to, price, picture, followers, user_id } = props;
+  const { id, destination, start_date, end_date, price, picture } = props;
   const [holidayId, setHolidayId] = useState("");
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -50,9 +50,9 @@ export default function Holiday(props: any) {
             <Typography gutterBottom variant="h5" component="h2">
               {destination}
             </Typography>
-            <Typography>Price: {price}</Typography>
+            <Typography>Price: {`$${price}`}</Typography>
             <Typography>
-              Dates: {from} - {to}
+              Dates: {start_date} - {end_date}
             </Typography>
           </CardContent>
           <CardActions>
@@ -74,6 +74,7 @@ export default function Holiday(props: any) {
               onClick={() => {
                 setHolidayId(id);
                 handleClickOpenEdit();
+
               }}
             >
               {/* <EditOutlinedIcon /> */}
@@ -84,8 +85,8 @@ export default function Holiday(props: any) {
               onClose={handleCloseEdit}
               holidayId={id}
               destination={destination}
-              from={from} 
-              to={to} 
+              start_date={start_date} 
+              end_date={end_date} 
               price={price} 
               picture={picture}
             />
@@ -124,8 +125,5 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     flexGrow: 1
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6)
-  }
+
 }));

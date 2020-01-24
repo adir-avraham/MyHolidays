@@ -12,13 +12,17 @@ import { connect } from "react-redux";
 import { updateHolidayAction } from "../../../redux/actions";
 import { Holiday, State } from "sharing-interfaces";
 
+
+import Alert from '@material-ui/lab/Alert';
+
+
 interface IEditDialogProps {
   open: any;
   onClose: any;
   holidayId: string;
   destination: string;
-  from: Date;
-  to: Date;
+  start_date: Date;
+  end_date: Date;
   price: number;
   picture: string;
   history?: any;
@@ -32,14 +36,14 @@ interface IEditDialogProps {
 
 
 export function EditDialog(props: IEditDialogProps) {
-  const { open, onClose, holidayId, destination, from, to, price, picture, holidays, message ,errMessage, status } = props;
+  const { open, onClose, holidayId, destination, start_date, end_date, price, picture, holidays, message ,errMessage, status } = props;
   const { updateHoliday } = props.reduxActions;
     
   const initialState = {
     id: holidayId,
     destination: destination,
-    from: from,
-    to: to,
+    start_date: start_date,
+    end_date: end_date,
     price: price,
     picture: picture,
   }
@@ -70,29 +74,29 @@ export function EditDialog(props: IEditDialogProps) {
           <TextField
             autoFocus
             margin="dense"
-            id="from"
-            label="From"
-            name="from"
-            type="date"
+            id="start_date"
+            label="Start date"
+            name="start_date"
+            type="text"
             fullWidth
             InputLabelProps={{
                 shrink: true,
               }}
-            value={data.from}
+            value={data.start_date}
             onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="to"
-            label="To"
-            name="to"
-            type="date"
+            id="end_date"
+            label="End date"
+            name="end_date"
+            type="text"
             fullWidth
             InputLabelProps={{
                 shrink: true,
               }}
-            value={data.to}
+            value={data.end_date}
             onChange={handleChange}
           />
           <TextField

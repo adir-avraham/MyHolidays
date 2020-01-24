@@ -17,6 +17,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link as Link1 } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
+import Footer from "components/footer";
 
 const registerUrl = "http://localhost:4000/register";
 
@@ -59,6 +60,8 @@ export default function Register(props: any) {
   };
 
   return (
+    
+    <React.Fragment>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -148,25 +151,13 @@ export default function Register(props: any) {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
+
     </Container>
+        <Footer/>
+        </React.Fragment>
   );
 }
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {

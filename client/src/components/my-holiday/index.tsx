@@ -19,6 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import mainAxion from '../axios/mainAxios';
 import { connect } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const updateFollowHolidayUrl = ('http://localhost:4000/updateFollowStatus')
 
@@ -36,7 +37,8 @@ export function MyHoliday(props: any) {
   //   console.log("res from follow=>", data)
   // }
 
-  const { id, destination, from, to, price, picture, followers, user_id } = props
+  const { id, destination, start_date, end_date, price, picture, followers, user_id } = props;
+
     return (
     <React.Fragment>
     <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
@@ -51,10 +53,10 @@ export function MyHoliday(props: any) {
                       {destination}
                     </Typography>
                     <Typography>
-                     Price: {price}
+                     Price: {`$${price}`}
                     </Typography>
                     <Typography>
-                     Dates: {from} - {to}
+                     Dates: {start_date} - {end_date}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -68,11 +70,8 @@ export function MyHoliday(props: any) {
                         }}
                     > 
                     {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
-                
+                    {followers}
                     {/* <FavoriteBorderIcon/> */}
-                    </Button>
-                    <Button size="small" color="primary" >
-                      Edit
                     </Button>
                   </CardActions>
             </Card>
@@ -131,9 +130,5 @@ export default connect(null, mapDispatchToProps) (MyHoliday);
     },
     cardContent: {
       flexGrow: 1,
-    },
-    footer: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
     },
   }));

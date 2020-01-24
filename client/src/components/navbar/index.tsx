@@ -27,6 +27,7 @@ import mainAxios from 'components/axios/mainAxios';
 import { connect } from 'react-redux'; 
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
+import { Login } from 'components/login';
 
 
 export function Navbar(props: any) {
@@ -43,7 +44,6 @@ export function Navbar(props: any) {
     setOpen(false);
   };
 
-  const [userNameConnectedState, setUserNameConnected] = useState(0);
 
   const { firstName, role } = props;
 
@@ -53,9 +53,7 @@ export function Navbar(props: any) {
       const token = localStorage.getItem('token');
       if (token) {
         const result = await mainAxios.post('/verifyToken');
-        const { firstName, role } = result.data;// get the role and make if's according to the if
-        //setUserNameConnected(firstName)
-
+        const { firstName, role } = result.data;
         if (firstName) updateUserNameConnected(firstName, role)
       } 
     }
@@ -110,25 +108,6 @@ export function Navbar(props: any) {
         <Divider />
         <List>
         <AppLinks routes={routes} role={role}/>
-          {/* {['Login', 'Register'].map((text, index) => (
-              <Link key={text} className={classes.link} to={`/${text}`}> 
-              <ListItem button >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-              </ListItem>
-              </Link>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Holidays' ,'Trash', 'Create-holiday'].map((text, index) => (
-            <Link key={text} className={classes.link} to={`/${text}`}> 
-            <ListItem button>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-            </Link>
-          ))} */}
         </List>
       </Drawer>
       <main
@@ -243,6 +222,9 @@ const useStyles = makeStyles((theme: Theme) =>
     link: {
         textDecoration: 'none',
         color: "#000",
+    },
+    firstName: {
+  
     }
   }),
 );
