@@ -6,7 +6,9 @@ import { Holiday } from 'sharing-interfaces';
 export const getHolidaysService = async () => {
     try {
         const {data} = await mainAxios.post('/holidays');
-        return data;
+        const { holidays } = data
+        console.log("dataservice", data)
+        return holidays;
     } catch (ex) {
         return []
     }

@@ -38,7 +38,7 @@ app.use('/register', register);
 app.use('/holidays', holidays);
 app.use('/updateFollowStatus', updateFollowStatus);
 app.use('/createHoliday', createHoliday);
-app.use('/deleteHoliday1', deleteHoliday);
+app.use('/deleteHoliday', deleteHoliday);
 app.use('/updateHoliday', updateHoliday);
 app.use('/followersReport', followersReport);
 

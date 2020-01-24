@@ -20,6 +20,7 @@ export default function LinearIndeterminate() {
     <div className={classes.root}>
       <LinearProgress />
       <LinearProgress color="secondary" />
+      <img src="https://static.tapjets.com/media/images/gogo-loader-plane-transparent.gif"/>
     </div>
   );
 }

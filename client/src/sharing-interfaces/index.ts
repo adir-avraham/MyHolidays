@@ -1,5 +1,5 @@
 export interface State {
-    userNameConnected: string;
+    userNameConnected: UserConnected;
     holidays: Array<object>;
     holidaysLoading: boolean;
     errMessage: string;
@@ -7,6 +7,10 @@ export interface State {
     status: boolean;
 }
 
+interface UserConnected {
+    firstName: string;
+    role: string;
+}
 
 export interface Holiday {
     id: number;

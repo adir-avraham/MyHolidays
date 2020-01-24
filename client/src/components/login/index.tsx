@@ -38,13 +38,13 @@ export function Login(props: object | any) {
 
   const handleLogin = async (data: InitialState) => {
     const result = await axios.post(loginUrl, data);
-    const {message, token, redirect, user} = result.data;
-    if (redirect) {
+    const {message, token, status, user} = result.data;
+    if (status) {
      alert(message)
       localStorage.setItem('token', token);
       props.history.push('/my-holidays');
-      const {first_name} = user[0]
-      updateUserNameConnected(first_name)
+      const {first_name, role} = user[0]
+      updateUserNameConnected(first_name, role)
     } else {
       alert(message);
       props.history.push('/login');
@@ -128,8 +128,8 @@ export function Login(props: object | any) {
 const mapDispatchToProps = (dispatch: any) => {
   return {
       reduxActions: {
-        updateUserNameConnected: (firstName: string) => {
-          dispatch(updateUserNameConnectedAction(firstName));
+        updateUserNameConnected: (firstName: string, role: string) => {
+          dispatch(updateUserNameConnectedAction(firstName, role));
         }
       }
   };

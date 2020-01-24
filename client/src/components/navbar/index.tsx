@@ -45,7 +45,7 @@ export function Navbar(props: any) {
 
   const [userNameConnectedState, setUserNameConnected] = useState(0);
 
-  const { userNameConnected } = props;
+  const { firstName, role } = props;
 
   useEffect(()=>{
     
@@ -53,10 +53,10 @@ export function Navbar(props: any) {
       const token = localStorage.getItem('token');
       if (token) {
         const result = await mainAxios.post('/verifyToken');
-        const { firstName } = result.data;
+        const { firstName, role } = result.data;// get the role and make if's according to the if
         //setUserNameConnected(firstName)
-        if (firstName) updateUserNameConnected(firstName)
-        console.log(result);
+
+        if (firstName) updateUserNameConnected(firstName, role)
       } 
     }
     initReq();
@@ -89,7 +89,7 @@ export function Navbar(props: any) {
             MyHolidays
           </Typography>
           <Typography variant="h6" noWrap>
-            / Hello {userNameConnected}
+            / Hello {firstName}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -109,7 +109,7 @@ export function Navbar(props: any) {
         </div>
         <Divider />
         <List>
-        <AppLinks routes={routes} />
+        <AppLinks routes={routes} role={role}/>
           {/* {['Login', 'Register'].map((text, index) => (
               <Link key={text} className={classes.link} to={`/${text}`}> 
               <ListItem button >
@@ -166,15 +166,15 @@ export function Navbar(props: any) {
 }
 
 const mapStateToProps = (state: State) => {
-  let { userNameConnected } = state;
-      return { userNameConnected };
+  const { firstName, role } = state.userNameConnected;
+      return { firstName, role };
   }   
 
   const mapDispatchToProps = (dispatch: any) => {
     return {
         reduxActions: {
-          updateUserNameConnected: (firstName: string) => {
-            dispatch(updateUserNameConnectedAction(firstName));
+          updateUserNameConnected: (firstName: string, role: string) => {
+            dispatch(updateUserNameConnectedAction(firstName, role));
           }
         }
     };

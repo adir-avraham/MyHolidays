@@ -4,10 +4,10 @@ import { Holiday } from 'sharing-interfaces';
 
 
 
-export const updateUserNameConnectedAction = (firstName: string) => {
+export const updateUserNameConnectedAction = (firstName: string, role: string) => {
     return {
         type: Actions.UPDATE_USERNAME_CONNECTED,
-        payload: {firstName}
+        payload: {firstName, role}
     };
 };
 
@@ -76,7 +76,6 @@ export const updateHolidayAction = (holiday: Holiday) => {
     return async (dispach: any) => {
         const data = await updateHolidayService(holiday);
         if (!data) return;
-        console.log("data  from action =>", data)
         const errMessage = data.errMessage ? data.errMessage.details[0].message : 0;
         if (errMessage) return dispach(updateHolidayValidationfaild(errMessage));
         const { message, status } = data;

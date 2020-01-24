@@ -13,7 +13,7 @@ import { Theme, createStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
 
-
+import { CSSTransitionGroup } from 'react-transition-group'
 
 
 
@@ -46,7 +46,14 @@ export function Holidays(props: any) {
   return (
     <React.Fragment>
       <CssBaseline />
+      <CSSTransitionGroup
+      transitionName="example"
+      transitionAppear={true}
+      transitionAppearTimeout={900}
+      transitionEnter={false}
+      transitionLeave={false}>
       <HolidaysList holidays={holidays}/>
+      </CSSTransitionGroup>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>

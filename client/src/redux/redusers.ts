@@ -3,7 +3,7 @@ import Actions from './actions.config';
 
 
 const initialState = {
-    userNameConnected: "Guest",
+    userNameConnected: {firstName: "Guest", role: "guest"},
     holidays: [],
     holidaysLoading: false,
     message: "",
@@ -21,8 +21,8 @@ export default function root(state = initialState, action: Action) {
     switch (action.type) {
 
         case Actions.UPDATE_USERNAME_CONNECTED: {
-            const { firstName } = action.payload;
-            return {...state, userNameConnected: firstName};
+            const { firstName, role } = action.payload;
+            return {...state, userNameConnected: {firstName: firstName , role: role}};
         }
 
         case Actions.GET_HOLIDAYS_SUCCESS: {

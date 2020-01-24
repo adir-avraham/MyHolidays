@@ -16,26 +16,46 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import BarChartIcon from '@material-ui/icons/BarChart';
 
 interface route {
-  isVisibale: boolean;
+  authorized: string;
   title: string; 
   path: string;
   component: any;
 }
 
 export const AppLinks = (props: any) => {
-    const classes = useStyles();
-    const { routes } = props;
-
-    return routes.filter((route: route) => route.isVisibale).map((route: route) => (
+  const classes = useStyles();
+  const { routes, role } = props;
+    if (role === "admin") { 
+      return routes.filter((route: route) => route.authorized === "admin" || route.authorized === "both" ).map((route: route) => (
         <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
         <ListItemText primary={route.title} />
         </ListItem>
         </Link>
-    ))
+    ))} 
+    else if (role === "user") {
+      return routes.filter((route: route) => route.authorized === "user" || route.authorized === "both" ).map((route: route) => (
+        <Link key={route.title} className={classes.link} to={route.path}> 
+        <ListItem button >
+        <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
+        <ListItemText primary={route.title} />
+        </ListItem>
+        </Link>
+      ))} 
+      else {
+        return routes.filter((route: route) => route.authorized === "guest").map((route: route) => (
+          <Link key={route.title} className={classes.link} to={route.path}> 
+          <ListItem button >
+          <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
+          <ListItemText primary={route.title} />
+          </ListItem>
+          </Link>
+        ))
+      }
 }
 
+    
 function getItemIcon(title: string) {
   switch (title) {
     case 'Login': {

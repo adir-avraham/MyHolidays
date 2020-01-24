@@ -10,22 +10,22 @@ import Holidays from 'components/holidays';
 
 
 export const routes = [
-    { isVisibale: true, title: "Login", path: "/login", component: Login },
-    { isVisibale: true, title: "Logout", path: "/logout", component: Logout },
-    { isVisibale: true, title: "Register", path: "/register", component: Register },
-    { isVisibale: true, title: "MyHolidays", path: "/my-holidays", component: (props: any) =>{
+    { authorized: "guest", title: "Login", path: "/login", component: Login },
+    { authorized: "both", title: "Logout", path: "/logout", component: Logout },
+    { authorized: "guest", title: "Register", path: "/register", component: Register },
+    { authorized: "user", title: "MyHolidays", path: "/my-holidays", component: (props: any) =>{
         const MyHolidaysWithAuth = withAuth(MyHolidays);
         return <MyHolidaysWithAuth {...props}/>
     } },
-    { isVisibale: true, title: "Create-holiday", path: "/create-holiday", component: (props: any) =>{
+    { authorized: "admin", title: "Create-holiday", path: "/create-holiday", component: (props: any) =>{
         const CreateHolidayWithAuth = withAuth(CreateHoliday);
         return <CreateHolidayWithAuth {...props}/>
     }  },
-    { isVisibale: true, title: "Report", path: "/report", component:  (props: any) =>{
+    { authorized: "admin", title: "Report", path: "/report", component:  (props: any) =>{
         const ReportWithAuth = withAuth(Report);
         return <ReportWithAuth {...props}/>
     } },
-    { isVisibale: true, title: "Holidays", path: "/holidays", component:  (props: any) =>{
+    { authorized: "admin", title: "Holidays", path: "/holidays", component:  (props: any) =>{
         const HolidaysWithAuth = withAuth(Holidays);
         return <HolidaysWithAuth {...props}/>
     } },

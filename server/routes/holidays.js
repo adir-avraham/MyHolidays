@@ -10,7 +10,8 @@ router.post('/', async (req, res, next) => {
     try{
         const { id } = req.decoded[0];
         const [result] = await pool.execute(getHolidaysQuery(), [id]);
-        return res.json(result);
+        //const [followers] = await pool.execute(followersReportQuery());
+        return res.json({holidays: result, status: true});
     } catch {
         return res.json("some error");
     }

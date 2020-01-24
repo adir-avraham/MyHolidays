@@ -12,7 +12,8 @@ export function Logout(props: any) {
   if (token) {
       localStorage.removeItem('token');
       const firstName = 'Guest';
-      updateUserNameConnected(firstName);
+      const role = 'guest';
+      updateUserNameConnected(firstName, role);
       alert("You have successfully logged out!");
   }
   
@@ -24,8 +25,8 @@ export function Logout(props: any) {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         reduxActions: {
-          updateUserNameConnected: (firstName: string) => {
-            dispatch(updateUserNameConnectedAction(firstName));
+          updateUserNameConnected: (firstName: string, role: string) => {
+            dispatch(updateUserNameConnectedAction(firstName, role));
           }
         }
     };
