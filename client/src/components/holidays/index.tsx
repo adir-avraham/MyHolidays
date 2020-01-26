@@ -35,7 +35,6 @@ export function Holidays(props: any) {
 
   if (holidaysLoading) return (
     <div className={classes.root}>
-    loading..
     <LinearIndeterminate/>
     </div>)
       if (!Array.isArray(holidays)) return (<div className={classes.root}>

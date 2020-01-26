@@ -22,10 +22,10 @@ router.post('/', async (req , res, next)=> {
         if (holidayFollowed) {
             const result = await unFollowed(holidayFollowed);
             const [data] = await pool.execute(getHolidaysQuery(), [id]);
-            return res.json({holidays: data})
+            return res.json({holidays: data});
         }
     } catch {
-        return res.json("something went wrong..")
+        return res.json("something went wrong..");
     }
 })
 

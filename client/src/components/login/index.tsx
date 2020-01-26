@@ -121,7 +121,6 @@ export function Login(props: object | any) {
         </form>
       </div>
     </Container>
-        <Footer/>
         </React.Fragment>
   );
 }

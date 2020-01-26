@@ -153,7 +153,6 @@ export default function Register(props: any) {
       </div>
 
     </Container>
-        <Footer/>
         </React.Fragment>
   );
 }
