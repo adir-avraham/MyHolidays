@@ -1,39 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db/pool');
 const holidayValidation = require('../validations/holidayValidation');
 const verifyToken = require('../auth/verifyToken');
 const verifyAdminRole = require('../auth/verifyAdminRole');
-
+const holidays = require('../data-mysqul/data-providers/holidays');
 
 
 router.use(verifyToken);
 router.use(verifyAdminRole);
 router.use(holidayValidation);
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
 
     try{
-    const insertId = await createHoliday(req.body);
-    console.log(insertId);
-    if (insertId) return res.json({message: "Holiday created successfully", redirect: true, holidayId: insertId })
-    return res.json({message: "Create holiday error..", redirect: false})
-} catch {
-    return res.json("some error from post create holiday");
-}
-})
+        const { createHoliday } = holidays;
+        const insertId = await createHoliday(req.body);
+        if (insertId) return res.json({message: "Holiday created successfully", redirect: true, holidayId: insertId });
+        res.json({message: "Create holiday error..", redirect: false}); 
+        return; 
+        } catch {
+        res.json("some error from post create holiday");
+        return; 
+    };
+});
+
 
 module.exports = router;
 
-async function createHoliday (payload) {
-    const { destination, start_date, end_date, price, picture } = payload;
-    const result = await pool.execute(insertHolidayQuery(), [destination, start_date, end_date, price, picture]);
-    return result;
-}
 
 
-function insertHolidayQuery() {
-    return "INSERT INTO `myholidays`.`holidays` (`destination`, `start_date`, `end_date`, `price`, `picture`) VALUES (?,?,?,?,?)"; 
-}
+
+
 
 

@@ -1,53 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db/pool');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs'); 
+const users = require('../data-mysqul/data-providers/users');
 
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
     
     try {
+        const { getUserSalt, getUserLogin, getJwt } = users;
         const {userName, password} = req.body;
         if (!userName || !password) return res.json({message: "missing password or username", status: false});
         const salt = await getUserSalt(userName);
         if (!salt) return res.json({message: "somethins is wrong..", status: false});
-        const [user] = await pool.execute(getUserLoginQuery() , [userName, bcrypt.hashSync(password, salt)]); 
+        const user = await getUserLogin(userName, bcrypt.hashSync(password, salt)); 
         if (user.length === 0) return res.json({message: "Incorrect password or username", status: false});
         const jwtToken = await getJwt({...user});
-        return res.json({message: "User logged in", user: user, token: jwtToken, status: true});  
+        res.json({message: "User logged in", user: user, token: jwtToken, status: true});  
+        return; 
     } catch {
-        return res.json("some error from main post")
+        res.json("some error from main post");
+        return; 
     }
 }) 
 
 
 module.exports = router;
 
-async function getUserSalt(userName) {
-    try {
-        const [result] = await pool.execute(getUserSaltQuery(), [userName]);
-        const [first] = result 
-        return first.salt;
-    } catch {
-        return res.json("some error from salt")
-    }
-} 
 
 
-function getUserLoginQuery() {
-    return "SELECT * FROM myholidays.users WHERE user_name = ? AND password = ?";
-}
-
-function getUserSaltQuery() {
-    return "SELECT myholidays.users.salt FROM myholidays.users WHERE user_name = ?";
-}
-
-function getJwt(p) {
-    return new Promise((resolve, reject) => {
-        jwt.sign(p, process.env.SECRET, { expiresIn: '3h' }, (err, token) => {
-            if (err) reject("error");
-            resolve(token);
-        })
-    })
-}
