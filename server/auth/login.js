@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
         res.json({message: "User logged in", user: user, token: jwtToken, status: true});  
         return; 
     } catch {
-        res.json("some error from main post");
+        res.json("some error from login");
         return; 
     }
 }) 

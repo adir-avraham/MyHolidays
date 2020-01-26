@@ -23,16 +23,15 @@ import Footer from 'components/footer';
 
 
 interface initialState {
-  destination: string | void; 
-  start_date: string | void;
-  end_date: string | void;
-  price: number | void;
-  picture: string | void;
+  destination: string; 
+  start_date: Date;
+  end_date: Date;
+  price: number;
+  picture: string;
 }
 
-export default function CreateHoliday(props: any ) {
+export default function CreateHoliday(props: any) {
   const classes = useStyles();
-
   const initialState = {
     destination: "",
     start_date: "",
@@ -163,7 +162,6 @@ export default function CreateHoliday(props: any ) {
         </form>
       </div>
     </Container>
-    <Footer/>
     </React.Fragment>
   );
 }

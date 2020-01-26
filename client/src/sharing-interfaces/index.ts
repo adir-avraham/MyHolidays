@@ -14,8 +14,8 @@ interface UserConnected {
 
 export interface Holiday {
     id: number;
-    from: string;
-    to: string;
+    start_date: Date;
+    end_date: Date;
     destination: string;
     price: number;
     picture: string;

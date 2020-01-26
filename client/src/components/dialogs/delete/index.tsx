@@ -15,10 +15,11 @@ const Transition = React.forwardRef<unknown, TransitionProps>(
   }
 );
 
-export function DeleteDialog(props: any) {
+
+export function DeleteDialog(props: IDeleteDialogProps) {
   const { open, onClose, holidayId } = props;
   const { deleteHoliday } = props.reduxActions;
-
+  
   return (
     <div>
       <Dialog
@@ -28,7 +29,7 @@ export function DeleteDialog(props: any) {
         onClose={onClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-      >
+        >
         <DialogTitle id="alert-dialog-slide-title">
           {"Are you sure do you want do delete this holiday?"}
         </DialogTitle>
@@ -38,10 +39,10 @@ export function DeleteDialog(props: any) {
           </Button>
           <Button color="primary"
             onClick={() => {
-              deleteHoliday(parseInt(holidayId));
+              deleteHoliday(holidayId);
               onClose();
             }}
-          >
+            >
             Yes
           </Button>
         </DialogActions>
@@ -51,6 +52,7 @@ export function DeleteDialog(props: any) {
 }
 
 const mapDispatchToProps = (dispatch: any) => {
+  console.log("dis", dispatch)
   return {
     reduxActions: {
       deleteHoliday: (holidayId: number) => {
@@ -61,3 +63,14 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 
 export default connect(null, mapDispatchToProps)(DeleteDialog);
+
+interface IDeleteDialogProps {
+  open: boolean;
+  onClose: any;
+  holidayId: number;
+  reduxActions: ReduxAction;
+}
+
+interface ReduxAction {
+  deleteHoliday: any;
+}

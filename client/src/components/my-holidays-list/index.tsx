@@ -5,17 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import MyHoliday from '../my-holiday';
+import { Holiday } from 'sharing-interfaces';
 
 
-interface Holiday {
-    id: number;
-    start_date: string;
-    end_date: string;
-    destination: string;
-    price: number;
-    picture: string;
-    followers: number;
-}
+
 
 
 export default function MyHolidaysList(props: any) {

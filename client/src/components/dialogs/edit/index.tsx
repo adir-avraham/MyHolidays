@@ -16,29 +16,10 @@ import { Holiday, State } from "sharing-interfaces";
 import Alert from '@material-ui/lab/Alert';
 
 
-interface IEditDialogProps {
-  open: any;
-  onClose: any;
-  holidayId: string;
-  destination: string;
-  start_date: Date;
-  end_date: Date;
-  price: number;
-  picture: string;
-  history?: any;
-  reduxActions?: any; 
-  updateHoliday?: Holiday;
-  holidays?: Array<object>;
-  message?: string;
-  errMessage?: string;
-  status?: boolean;
-}
-
-
 export function EditDialog(props: IEditDialogProps) {
   const { open, onClose, holidayId, destination, start_date, end_date, price, picture, holidays, message ,errMessage, status } = props;
   const { updateHoliday } = props.reduxActions;
-    
+  
   const initialState = {
     id: holidayId,
     destination: destination,
@@ -47,11 +28,11 @@ export function EditDialog(props: IEditDialogProps) {
     price: price,
     picture: picture,
   }
-
+  
   const [data, handleChange] = useCustomForm(initialState); 
 
   if (status) onClose();
-
+  
   return (
     <div>
       <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
@@ -70,7 +51,7 @@ export function EditDialog(props: IEditDialogProps) {
             fullWidth
             value={data.destination}
             onChange={handleChange}
-          />
+            />
           <TextField
             autoFocus
             margin="dense"
@@ -80,11 +61,11 @@ export function EditDialog(props: IEditDialogProps) {
             type="text"
             fullWidth
             InputLabelProps={{
-                shrink: true,
-              }}
+              shrink: true,
+            }}
             value={data.start_date}
             onChange={handleChange}
-          />
+            />
           <TextField
             autoFocus
             margin="dense"
@@ -94,11 +75,11 @@ export function EditDialog(props: IEditDialogProps) {
             type="text"
             fullWidth
             InputLabelProps={{
-                shrink: true,
-              }}
+              shrink: true,
+            }}
             value={data.end_date}
             onChange={handleChange}
-          />
+            />
           <TextField
             autoFocus
             margin="dense"
@@ -109,7 +90,7 @@ export function EditDialog(props: IEditDialogProps) {
             fullWidth
             value={data.price}
             onChange={handleChange}
-          />
+            />
           <TextField
             autoFocus
             margin="dense"
@@ -128,10 +109,10 @@ export function EditDialog(props: IEditDialogProps) {
           </Button>
           <Button color="primary"
            onClick={()=>{
-              console.log("data to func", data);
-              updateHoliday(data);
-          }}
-          >
+             console.log("data to func", data);
+             updateHoliday(data);
+            }}
+            >
             Save
           </Button>
         </DialogActions>
@@ -146,13 +127,31 @@ const mapStateToProps = (state: State) => {
 }   
 
 const mapDispatchToProps = (dispatch: any) => {
-    return {
-      reduxActions: {
-        updateHoliday: (holiday: Holiday) => {
-          dispatch(updateHolidayAction(holiday));
+  return {
+    reduxActions: {
+      updateHoliday: (holiday: Holiday) => {
+        dispatch(updateHolidayAction(holiday));
       }
     }
   };
 };
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(EditDialog);
+  
+interface IEditDialogProps {
+    open: any;
+    onClose: any;
+    holidayId: string;
+    destination: string;
+    start_date: Date;
+    end_date: Date;
+    price: number;
+    picture: string;
+    history?: any;
+    reduxActions?: any; 
+    updateHoliday?: Holiday;
+    holidays?: Array<object>;
+    message?: string;
+    errMessage?: string;
+    status?: boolean;
+}

@@ -22,13 +22,13 @@ import Alert from '@material-ui/lab/Alert';
 import Footer from 'components/footer';
 
 interface InitialState {
-  userName: string | void;
-  password: string | void;
+  userName: string;
+  password: string;
 }
 
 const loginUrl = ('http://localhost:4000/login');
 
-export function Login(props: object | any) {
+export function Login(props: any) {
   const classes = useStyles();
   
   const initialState: InitialState = {

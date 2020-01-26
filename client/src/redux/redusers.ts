@@ -13,7 +13,7 @@ const initialState = {
 
 interface Action {
     type: string; 
-    payload: object | Array<object> | any;
+    payload: any;
 }
 
 export default function root(state = initialState, action: Action) {

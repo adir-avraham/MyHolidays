@@ -5,17 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Holiday from '../holiday';
+import { Holiday as IHoliday } from 'sharing-interfaces';
 
-
-interface Holiday {
-    id: number;
-    from: string;
-    to: string;
-    destination: string;
-    price: number;
-    picture: string;
-    followers: number;
-}
 
 
 export default function HolidaysList(props: any) {
@@ -28,7 +19,7 @@ export default function HolidaysList(props: any) {
       <main>
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
-                {holidays.map((holiday: Holiday) => <Holiday key={holiday.id}  {...holiday} />)}
+                {holidays.map((holiday: IHoliday) => <Holiday key={holiday.id}  {...holiday} />)}
             </Grid>
         </Container>
       </main>

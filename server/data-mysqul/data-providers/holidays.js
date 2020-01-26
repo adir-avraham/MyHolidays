@@ -75,4 +75,4 @@ async function updateHoliday(payload) {
 }
 
 module.exports = { getHolidays, createHoliday, isFollowed, deleteHoliday, deleteFollowedHoliday,
-     followersReport, isHolidayExist, isFollowedByUser, followHoliday, unFollowed, updateHoliday };
+    followersReport, isHolidayExist, isFollowedByUser, followHoliday, unFollowed, updateHoliday };
