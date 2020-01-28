@@ -31,7 +31,6 @@ export function EditDialog(props: IEditDialogProps) {
   
   const [data, handleChange] = useCustomForm(initialState); 
 
-  if (status) onClose();
   
   return (
     <div>
@@ -58,7 +57,7 @@ export function EditDialog(props: IEditDialogProps) {
             id="start_date"
             label="Start date"
             name="start_date"
-            type="text"
+            type="date"
             fullWidth
             InputLabelProps={{
               shrink: true,
@@ -72,7 +71,7 @@ export function EditDialog(props: IEditDialogProps) {
             id="end_date"
             label="End date"
             name="end_date"
-            type="text"
+            type="date"
             fullWidth
             InputLabelProps={{
               shrink: true,
@@ -111,6 +110,7 @@ export function EditDialog(props: IEditDialogProps) {
            onClick={()=>{
              console.log("data to func", data);
              updateHoliday(data);
+             onClose();
             }}
             >
             Save

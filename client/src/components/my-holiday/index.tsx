@@ -56,7 +56,10 @@ export function MyHoliday(props: any) {
                      Price: {`$${price}`}
                     </Typography>
                     <Typography>
-                     Dates: {start_date} - {end_date}
+                     Start date: {start_date}
+                    </Typography>
+                    <Typography>
+                     End date: {end_date}
                     </Typography>
                   </CardContent>
                   <CardActions>

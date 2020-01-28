@@ -59,9 +59,8 @@ export default function Holiday(props: any) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button id={id} size="small" color="primary"
+            <Button size="small" color="primary"
               onClick={() => {
-                //setHolidayId(id);
                 handleClickOpen();
               }}
             >
@@ -73,11 +72,9 @@ export default function Holiday(props: any) {
               onClose={handleClose}
               holidayId={id}
             />
-            <Button id={id} size="small" color="primary" 
+            <Button size="small" color="primary" 
               onClick={() => {
-                setHolidayId(id);
                 handleClickOpenEdit();
-
               }}
             >
               {/* <EditOutlinedIcon /> */}

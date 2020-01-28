@@ -14,7 +14,6 @@ export function Logout(props: any) {
       const firstName = 'Guest';
       const role = 'guest';
       updateUserNameConnected(firstName, role);
-      alert("You have successfully logged out!");
   }
   
   return (
