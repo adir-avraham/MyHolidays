@@ -47,11 +47,11 @@ export default function CreateHoliday(props: any) {
     if (!destination || !start_date || !end_date || !price || !picture) return alert("please complete the form");
     try {
       const result = await mainAxios.post('/createHoliday', data);
-      const { message, redirect } = result.data;
+      const { message, status } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
       if (errMessage) alert(errMessage);
       if (message) alert(message)
-      if (redirect) props.history.push('/holidays');
+      if (status) props.history.push('/holidays');
       } catch  {
       console.log("some error from create holiday component");
     }

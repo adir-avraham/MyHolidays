@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         res.json({holidays: result, status: true});
         return; 
     } catch {
-        res.json({error :"some error", status: false});
+        res.json({error :"some error from get holidays", status: false});
         return; 
     }
 });

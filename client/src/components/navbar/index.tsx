@@ -19,7 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 //import Link from '@material-ui/core/Link';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { AppLinks } from "components/appRouter/routers";
 import { routes } from "components/appRouter/routers.config";
 import { useState, useEffect } from 'react';
@@ -61,7 +61,7 @@ export function Navbar(props: any) {
 
   },[])
 
-
+  //if ( role === 'guest' ) return <Redirect to='/login'/>
 
   return (
     <div className={classes.root}>

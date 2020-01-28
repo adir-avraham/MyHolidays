@@ -44,18 +44,18 @@ export default function Register(props: any) {
 
   const handleRegister = async (data: initialState) => {
     const { firstName, lastName, userName, password } = data;
-    if (!firstName || !lastName || !userName || !password)
-      return alert("please complete the form");
+    //if (!firstName || !lastName || !userName || !password)
+    //  return alert("please complete the form");
     try {
       const result = await axios.post(registerUrl, data);
-      const { message, redirect } = result.data;
+      const { message, status } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
       if (errMessage) alert(errMessage);
       //setErrMessage(errMessage)
       if (message) alert(message)
-      if (redirect) props.history.push('/login');
+      if (status) props.history.push('/login');
     } catch {
-      console.log("some error");
+      console.log("some error register (client)");
     }
   };
 
@@ -74,6 +74,7 @@ export default function Register(props: any) {
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
+              { initialState.firstName ?  
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -85,6 +86,16 @@ export default function Register(props: any) {
                 autoFocus
                 onChange={handleChange}
               />
+              : 
+              <TextField
+              error
+              id="outlined-error-helper-text"
+              label="Error"
+              defaultValue="Hello World"
+              helperText="Incorrect entry."
+              variant="outlined"
+            />
+}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField

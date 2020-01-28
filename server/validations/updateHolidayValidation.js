@@ -11,9 +11,8 @@ const holidaySchema = Joi.object({
 
 
 function holidayValidation (req, res, next) {
- //   console.log("from validation update", req.body)
     const { error } = holidaySchema.validate(req.body);
-    if (error) return res.json({errMessage: error, redirectValidation: false});
+    if (error) return res.json({errMessage: error, status: false});
     next(); 
 }
 

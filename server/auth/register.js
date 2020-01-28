@@ -12,13 +12,14 @@ router.post('/', async (req, res) => {
         const { isUserExist, saveUser } = users;
         const { userName } = req.body;
         const user = await isUserExist(userName);
-        if (user) return res.json({message: "User already exist", redirect: false});
+        if (user) return res.json({message: "User already exist", status: false});
         const insertId = await saveUser(req.body);
-        if (insertId) return res.json({message: "Registration completed successfully", redirect: true, userId: insertId })
-        res.json({message: "Register error!", redirect: false});
+        if (insertId) return res.json({message: "Registration completed successfully", status: true, userId: insertId })
+        res.json({message: "Register error!", status: false});
         return; 
     } catch {
-        return res.json("some error from post register");
+        res.json({error: "some error from post register", status: false});
+        return; 
     }
 })
 

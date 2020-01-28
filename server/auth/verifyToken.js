@@ -7,15 +7,14 @@ router.post('/', (req, res, next) =>{
     
     try {
         const { authorization } = req.headers;
-        if (!authorization) return res.json({message: "Verification failed", redirect: false});
+        if (!authorization) return res.json({message: "Verification failed", status: false});
         jwt.verify(authorization, process.env.SECRET, (err, decoded) =>{
             if (err) return res.json({message: "Verification failed", status: false});
-            //console.log("deco", decoded);
             req.decoded = decoded;
             next()
         });
     } catch {
-        return res.json({ status: false })
+        return res.json({ error: "error from verification", status: false })
     }
   });
 

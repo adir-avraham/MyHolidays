@@ -46,7 +46,7 @@ router.post('/', async (req, res)=> {
         };
     };
     } catch {
-        res.json({ message: "some error from delete", status: false }); 
+        res.json({ error: "some error from delete", status: false }); 
         return; 
     };
 

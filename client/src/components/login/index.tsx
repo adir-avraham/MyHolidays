@@ -43,17 +43,13 @@ export function Login(props: any) {
     const result = await axios.post(loginUrl, data);
     const {message, token, status, user} = result.data;
     if (status) {
-     alert(message)
       const {first_name, role} = user[0]
       localStorage.setItem('token', token);
       if (role === "user") props.history.push('/my-holidays');
       if (role === "admin") props.history.push('/holidays');
       updateUserNameConnected(first_name, role)
     } else {
-      //alert(message);
       setErrorMessage(message);
-      //props.history.push('/login');
-      //add set message here
     }
   } 
   
