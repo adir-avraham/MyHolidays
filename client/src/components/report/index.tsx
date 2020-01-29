@@ -3,6 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
 import mainAxios from 'components/axios/mainAxios';
 import LinearIndeterminate from 'components/loader';
+import { Container } from '@material-ui/core';
 
 
 
@@ -48,12 +49,14 @@ export default function Report() {
  
   if (!Array.isArray(report)) return <LinearIndeterminate/>;
     return (
-      <div>
-        <h2>Followers Report</h2>
+      <Container component="main" maxWidth="md">
+      <div  >
+        <h2 style={{textAlign: "center"}}>Followers Report</h2>
         <Bar data={data}
         options={options}
         />
       </div>
+      </Container>
     )  
 }
   

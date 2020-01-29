@@ -74,7 +74,7 @@ export default function Register(props: any) {
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              { initialState.firstName ?  
+           
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -86,16 +86,6 @@ export default function Register(props: any) {
                 autoFocus
                 onChange={handleChange}
               />
-              : 
-              <TextField
-              error
-              id="outlined-error-helper-text"
-              label="Error"
-              defaultValue="Hello World"
-              helperText="Incorrect entry."
-              variant="outlined"
-            />
-}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField

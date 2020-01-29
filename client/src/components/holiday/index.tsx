@@ -18,13 +18,12 @@ import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DeleteDialog from "components/dialogs/delete";
 import EditDialog from "components/dialogs/edit";
-
+import moment from 'moment';
 
 
 export default function Holiday(props: any) {
   const classes = useStyles();
   const { id, destination, start_date, end_date, price, picture } = props;
-  const [holidayId, setHolidayId] = useState("");
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
 
@@ -52,11 +51,12 @@ export default function Holiday(props: any) {
             </Typography>
             <Typography>Price: {`$${price}`}</Typography>
             <Typography>
-              Start date: {start_date} 
+              Start date: {new Date(start_date).toLocaleDateString('en-GB')} 
             </Typography>
             <Typography>
-              End date: {end_date}
+              End date: {moment(end_date).format("DD-MM-YYYY")}
             </Typography>
+              End date: {end_date}
           </CardContent>
           <CardActions>
             <Button size="small" color="primary"

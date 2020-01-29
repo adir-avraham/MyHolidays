@@ -1,10 +1,10 @@
 const Joi = require('@hapi/joi');
 
 const userSchema = Joi.object({
-    firstName: Joi.string().max(20).required(),
-    lastName: Joi.string().max(20).required(),
-    userName: Joi.string().required(),
-    password: Joi.string().required()
+    firstName: Joi.string().min(2).max(20).required(),
+    lastName: Joi.string().min(2).max(20).required(),
+    userName: Joi.string().email().required(),
+    password: Joi.string().min(4).required()
 })
 
 
