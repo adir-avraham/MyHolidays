@@ -54,9 +54,8 @@ export default function Holiday(props: any) {
               Start date: {new Date(start_date).toLocaleDateString('en-GB')} 
             </Typography>
             <Typography>
-              End date: {moment(end_date).format("DD-MM-YYYY")}
+              End date: {moment(end_date).format("DD/MM/YYYY")}
             </Typography>
-              End date: {end_date}
           </CardContent>
           <CardActions>
             <Button size="small" color="primary"

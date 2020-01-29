@@ -110,7 +110,7 @@ export function EditDialog(props: IEditDialogProps) {
            onClick={()=>{
              console.log("data to func", data);
              updateHoliday(data);
-             onClose();
+             if (status) onClose();
             }}
             >
             Save

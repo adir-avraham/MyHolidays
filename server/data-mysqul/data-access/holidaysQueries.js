@@ -1,6 +1,6 @@
 
 function getHolidaysQuery() {
-    return `select id, destination, DATE_FORMAT(start_date, "%Y-%d-%m") AS start_date, DATE_FORMAT(end_date, "%Y-%d-%m")
+    return `select id, destination, DATE_FORMAT(start_date, "%Y-%m-%d") AS start_date, DATE_FORMAT(end_date, "%Y-%m-%d")
     AS end_date, price, picture , followers, user_id 
     FROM (SELECT myholidays.holidays.id, myholidays.holidays.destination, myholidays.holidays.start_date,
     myholidays.holidays.end_date, myholidays.holidays.price, myholidays.holidays.picture, myholidays.followed_holidays.user_id
