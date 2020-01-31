@@ -11,7 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 import { useState } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
@@ -21,12 +20,14 @@ import EditDialog from "components/dialogs/edit";
 import moment from 'moment';
 
 
+
 export default function Holiday(props: any) {
   const classes = useStyles();
   const { id, destination, start_date, end_date, price, picture } = props;
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-
+  const [deleteIcon, setDeleteIcon] = useState(false);
+  const [editIcon, setEditIcon] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,26 +59,35 @@ export default function Holiday(props: any) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" color="primary"
+            <Button size="small" color="secondary" variant="text"
               onClick={() => {
                 handleClickOpen();
               }}
+              onMouseEnter={()=> {
+                setDeleteIcon(true)
+              }}
+              onMouseLeave={()=> {
+                setDeleteIcon(false)
+              }}
             >
-              {/* <DeleteForeverOutlinedIcon /> */}
-              <DeleteForeverIcon/>
+              {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon />}
             </Button>
             <DeleteDialog
               open={open}
               onClose={handleClose}
               holidayId={id}
             />
-            <Button size="small" color="primary" 
+            <Button size="small" color="secondary" 
               onClick={() => {
                 handleClickOpenEdit();
               }}
-            >
-              {/* <EditOutlinedIcon /> */}
-              <EditIcon/>
+              onMouseEnter={()=> {
+                setEditIcon(true)
+              }}
+              onMouseLeave={()=> {
+                setEditIcon(false)
+              }}
+            > {editIcon ? <EditIcon/> : <EditOutlinedIcon />}
             </Button>
             <EditDialog
               open={openEdit}

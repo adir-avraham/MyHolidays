@@ -12,13 +12,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
-//import Link from '@material-ui/core/Link';
+
+
 import { Link, Redirect } from 'react-router-dom';
 import { AppLinks } from "components/appRouter/routers";
 import { routes } from "components/appRouter/routers.config";
@@ -27,14 +23,13 @@ import mainAxios from 'components/axios/mainAxios';
 import { connect } from 'react-redux'; 
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
-import { Login } from 'components/login';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+
 
 export function Navbar(props: any) {
   const { updateUserNameConnected } = props.reduxActions;  
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);

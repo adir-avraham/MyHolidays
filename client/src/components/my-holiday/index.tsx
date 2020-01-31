@@ -8,20 +8,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import IconButton from '@material-ui/core/IconButton';
-import mainAxion from '../axios/mainAxios';
 import { connect } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
-const updateFollowHolidayUrl = ('http://localhost:4000/updateFollowStatus')
+
 
 
 export function MyHoliday(props: any) {
@@ -29,13 +24,6 @@ export function MyHoliday(props: any) {
 
   const { updateFollowHoliday } = props.reduxActions;
 
-  //const [holidayId, setHolidayId] = useState({});
-  
-  // const updateFollowHoliday = async (holidayId: number) => {
-  //   const result = await mainAxion.post('/updateFollowStatus', {holidayId});
-  //   const { data } = result;
-  //   console.log("res from follow=>", data)
-  // }
 
   const { id, destination, start_date, end_date, price, picture, followers, user_id } = props;
 
@@ -64,12 +52,9 @@ export function MyHoliday(props: any) {
                   </CardContent>
                   <CardActions>
 
-                    <Button id={id} size="small" color="secondary"  
+                    <Button size="small" color="secondary"  
                     onClick={()=>{  
-                         console.log(id) 
-                        //setHolidayId(id)
                         updateFollowHoliday(id)
-
                         }}
                     > 
                     {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}

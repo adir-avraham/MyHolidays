@@ -5,10 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -17,7 +14,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link as Link1 } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-import Footer from "components/footer";
+
 
 const registerUrl = "http://localhost:4000/register";
 
@@ -44,8 +41,8 @@ export default function Register(props: any) {
 
   const handleRegister = async (data: initialState) => {
     const { firstName, lastName, userName, password } = data;
-    //if (!firstName || !lastName || !userName || !password)
-    //  return alert("please complete the form");
+    if (!firstName || !lastName || !userName || !password)
+    return alert("please complete the form");
     try {
       const result = await axios.post(registerUrl, data);
       const { message, status } = result.data;

@@ -1,11 +1,9 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
 
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import HolidaysList from '../holidays-list'
 import { connect } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';

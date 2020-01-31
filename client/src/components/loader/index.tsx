@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { Container, Grid } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,11 +19,7 @@ export default function LinearIndeterminate() {
   return (
     <Container component="main" maxWidth="xs">
     <div className={classes.root}>
-      {/* <LinearProgress />
-      <LinearProgress color="secondary" /> */}
-
-      <img src="https://assetmaritime.in/wp-content/uploads/2018/12/loading.gif"/>
-    
+      <img src="https://assetmaritime.in/wp-content/uploads/2018/12/loading.gif" alt="Loading"/>
     </div>
     </Container>
   );

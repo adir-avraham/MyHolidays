@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -13,11 +13,9 @@ import { updateHolidayAction } from "../../../redux/actions";
 import { Holiday, State } from "sharing-interfaces";
 
 
-import Alert from '@material-ui/lab/Alert';
-
 
 export function EditDialog(props: IEditDialogProps) {
-  const { open, onClose, holidayId, destination, start_date, end_date, price, picture, holidays, message ,errMessage, status } = props;
+  const { open, onClose, holidayId, destination, start_date, end_date, price, picture, message ,errMessage, status } = props;
   const { updateHoliday } = props.reduxActions;
   
   const initialState = {

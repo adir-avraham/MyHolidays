@@ -7,7 +7,6 @@ export const getHolidaysService = async () => {
     try {
         const {data} = await mainAxios.post('/holidays');
         const { holidays } = data
-        console.log("dataservice", data)
         return holidays;
     } catch (ex) {
         return []
