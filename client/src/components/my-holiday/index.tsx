@@ -64,7 +64,7 @@ export function MyHoliday(props: any) {
                   </CardContent>
                   <CardActions>
 
-                    <Button id={id} size="small" color="primary"  
+                    <Button id={id} size="small" color="secondary"  
                     onClick={()=>{  
                          console.log(id) 
                         //setHolidayId(id)

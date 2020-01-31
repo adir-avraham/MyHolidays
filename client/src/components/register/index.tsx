@@ -77,8 +77,9 @@ export default function Register(props: any) {
            
               <TextField
                 autoComplete="fname"
+                color="secondary"
                 name="firstName"
-                variant="outlined"
+                variant="filled"
                 required
                 fullWidth
                 id="firstName"
@@ -89,7 +90,7 @@ export default function Register(props: any) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                variant="outlined"
+                variant="filled"
                 required
                 fullWidth
                 id="lastName"
@@ -101,7 +102,7 @@ export default function Register(props: any) {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant="filled"
                 required
                 fullWidth
                 id="userName"
@@ -113,7 +114,7 @@ export default function Register(props: any) {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant="filled"
                 required
                 fullWidth
                 name="password"
@@ -135,7 +136,7 @@ export default function Register(props: any) {
             type="button"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
             onClick={() => {
               handleRegister(data);

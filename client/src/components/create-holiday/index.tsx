@@ -72,6 +72,7 @@ export default function CreateHoliday(props: any) {
           <Grid container spacing={2}>
           <Grid item xs={12}>
               <TextField
+                color="secondary"
                 variant="filled"
                 required
                 fullWidth
@@ -85,6 +86,7 @@ export default function CreateHoliday(props: any) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                color="secondary"
                 autoComplete="c-start_date"
                 name="start_date"
                 variant="filled"
@@ -102,6 +104,7 @@ export default function CreateHoliday(props: any) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                color="secondary"
                 variant="filled"
                 required
                 fullWidth
@@ -118,6 +121,7 @@ export default function CreateHoliday(props: any) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                color="secondary"
                 variant="filled"
                 required
                 fullWidth
@@ -131,6 +135,7 @@ export default function CreateHoliday(props: any) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                color="secondary"
                 variant="filled"
                 required
                 fullWidth
@@ -144,7 +149,7 @@ export default function CreateHoliday(props: any) {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={<Checkbox value="allowExtraEmails" color="secondary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
@@ -153,7 +158,7 @@ export default function CreateHoliday(props: any) {
             type="button"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
             onClick={()=>{handleCreateHoliday(data)}}
           >

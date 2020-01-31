@@ -59,15 +59,16 @@ export function Login(props: any) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <LockOutlinedIcon color="inherit"/>
         </Avatar>
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant="outlined"
+            variant="filled"
             margin="normal"
+            color="secondary"
             required
             fullWidth
             id="userName"
@@ -78,8 +79,9 @@ export function Login(props: any) {
             onChange={handleChange}
           />
           <TextField
-            variant="outlined"
+            variant="filled"
             margin="normal"
+            color="secondary"
             required
             fullWidth
             name="password"
@@ -94,7 +96,7 @@ export function Login(props: any) {
             type="button"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
             onClick={() => {handleLogin(data)}}
           >

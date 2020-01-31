@@ -28,7 +28,7 @@ import { connect } from 'react-redux';
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
 import { Login } from 'components/login';
-
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 export function Navbar(props: any) {
   const { updateUserNameConnected } = props.reduxActions;  
@@ -61,13 +61,12 @@ export function Navbar(props: any) {
 
   },[])
 
-  //if ( role === 'guest' ) return <Redirect to='/login'/>
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        color="primary"
+        color="secondary"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
