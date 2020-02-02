@@ -17,7 +17,7 @@ const Transition = React.forwardRef<unknown, TransitionProps>(
 
 
 export function DeleteDialog(props: IDeleteDialogProps) {
-  const { open, onClose, holidayId } = props;
+  const { open, onClose, holidayId, destination } = props;
   const { deleteHoliday } = props.reduxActions;
   
   return (
@@ -31,11 +31,11 @@ export function DeleteDialog(props: IDeleteDialogProps) {
         aria-describedby="alert-dialog-slide-description"
         >
         <DialogTitle id="alert-dialog-slide-title">
-          {"Are you sure do you want do delete this holiday?"}
+          {`Are you sure you want to delete the holiday to ${destination}?`}
         </DialogTitle>
         <DialogActions>
           <Button color="primary" onClick={onClose}>
-            Cancel
+            No
           </Button>
           <Button color="primary"
             onClick={() => {
@@ -69,6 +69,7 @@ interface IDeleteDialogProps {
   onClose: any;
   holidayId: number;
   reduxActions: ReduxAction;
+  destination: string;
 }
 
 interface ReduxAction {

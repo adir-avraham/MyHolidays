@@ -3,15 +3,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-//import Link from '@material-ui/core/Link';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 import { Link, Route } from 'react-router-dom';
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import Divider from '@material-ui/core/Divider';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import BarChartIcon from '@material-ui/icons/BarChart';
 
@@ -20,13 +18,14 @@ interface route {
   title: string; 
   path: string;
   component: any;
+  exact?: boolean;
 }
 
 export const AppLinks = (props: any) => {
   const classes = useStyles();
   const { routes, role } = props;
     if (role === "admin") { 
-      return routes.filter((route: route) => route.authorized === "admin" || route.authorized === "both" ).map((route: route) => (
+      return routes.filter((route: route) => (route.authorized === "admin" || route.authorized === "both") && !route.exact ).map((route: route) => (
         <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -35,7 +34,7 @@ export const AppLinks = (props: any) => {
         </Link>
     ))} 
     else if (role === "user") {
-      return routes.filter((route: route) => route.authorized === "user" || route.authorized === "both" ).map((route: route) => (
+      return routes.filter((route: route) => (route.authorized === "user" || route.authorized === "both") && !route.exact ).map((route: route) => (
         <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -44,7 +43,7 @@ export const AppLinks = (props: any) => {
         </Link>
       ))} 
       else {
-        return routes.filter((route: route) => route.authorized === "guest").map((route: route) => (
+        return routes.filter((route: route) => route.authorized === "guest" && !route.exact).map((route: route) => (
           <Link key={route.title} className={classes.link} to={route.path}> 
           <ListItem button >
           <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -86,9 +85,9 @@ function getItemIcon(title: string) {
 }
 
 export const AppRoutes = (props: any) => {
-  const { routes } = props
+  const { routes } = props;
   const result = routes.map((route: route) => 
-      <Route key={route.title} path={route.path} component={route.component}/> 
+      <Route key={route.title} path={route.path} component={route.component} exact={route.exact}/> 
   )
   return <>{result}</>
 }

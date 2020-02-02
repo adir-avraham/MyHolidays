@@ -31,7 +31,6 @@ export function EditDialog(props: IEditDialogProps) {
 
   
   return (
-    <div>
       <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Edit holiday</DialogTitle>
         <DialogContent>
@@ -105,17 +104,13 @@ export function EditDialog(props: IEditDialogProps) {
             Cancel
           </Button>
           <Button color="primary"
-           onClick={()=>{
-             console.log("data to func", data);
-             updateHoliday(data);
-             if (status) onClose();
-            }}
-            >
-            Save
+           onMouseDown={()=>{updateHoliday(data)}}
+           onMouseUp={()=>{if (status) onClose()}}
+          >
+          Save
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
   );
 }
 

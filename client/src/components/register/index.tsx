@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,15 +12,16 @@ import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link as Link1 } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
+import Alert from "@material-ui/lab/Alert";
 
 
 const registerUrl = "http://localhost:4000/register";
 
 interface initialState {
-  firstName: string | void;
-  lastName: string | void;
-  userName: string | void;
-  password: string | void;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
 }
 
 export default function Register(props: any) {
@@ -36,19 +35,19 @@ export default function Register(props: any) {
   };
 
   const [data, handleChange] = useCustomForm(initialState);
-  //const [errMessage, setErrMessage] = useState("")  
+  const [errMessage, setErrMessage] = useState("")  
 
 
   const handleRegister = async (data: initialState) => {
     const { firstName, lastName, userName, password } = data;
     if (!firstName || !lastName || !userName || !password)
-    return alert("please complete the form");
+    return setErrMessage("please complete the form");
+    
     try {
       const result = await axios.post(registerUrl, data);
       const { message, status } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
-      if (errMessage) alert(errMessage);
-      //setErrMessage(errMessage)
+      if (errMessage) setErrMessage(errMessage)
       if (message) alert(message)
       if (status) props.history.push('/login');
     } catch {
@@ -70,8 +69,7 @@ export default function Register(props: any) {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-           
+            <Grid item xs={12} sm={6}> 
               <TextField
                 autoComplete="fname"
                 color="secondary"
@@ -123,10 +121,7 @@ export default function Register(props: any) {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
+            {errMessage ? <Alert severity="error">{errMessage}</Alert> : null}
             </Grid>
           </Grid>
           <Button
