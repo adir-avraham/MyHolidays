@@ -15,10 +15,10 @@ import Container from '@material-ui/core/Container';
 
 
 import useCustomForm from '../../hooks/useCustomForm';
-import { Link as Link1 } from 'react-router-dom';
+
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mainAxios from 'components/axios/mainAxios';
-import Footer from 'components/footer';
+
 
 
 

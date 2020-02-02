@@ -76,6 +76,7 @@ export default function Holiday(props: any) {
               open={open}
               onClose={handleClose}
               holidayId={id}
+              destination={destination}
             />
             <Button size="small" color="secondary" 
               onClick={() => {

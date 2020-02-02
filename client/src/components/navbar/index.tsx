@@ -77,8 +77,8 @@ export function Navbar(props: any) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            MyHolidays
+          <Typography variant="h6">
+            MyHolidays&nbsp;
           </Typography>
           <Typography variant="h6" noWrap>
             / Hello {firstName}
