@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { connect } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
+import { State } from 'sharing-interfaces';
 
 
 
@@ -68,9 +69,6 @@ export function MyHoliday(props: any) {
   );
 }
 
-interface State {
-  holidays: Array<object>;
-}
 
 const mapStateToProps = (state: State) => {
   let { holidays } = state;
