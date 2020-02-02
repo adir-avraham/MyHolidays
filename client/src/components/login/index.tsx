@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +11,7 @@ import Container from '@material-ui/core/Container';
 
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
-import { Link as Link1 } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { updateUserNameConnectedAction } from '../../redux/actions'
 import { connect } from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
@@ -99,24 +98,17 @@ export function Login(props: any) {
           >
             Log In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container justify="flex-end">
             <Grid item>
-            <Link1 to="/register" className={classes.link}>
-               {/* variant="body2" */}
+            <Link to="/register" className={classes.link}>
                 {"Don't have an account? Register"}
-       
-              </Link1>
+              </Link>
             </Grid>
           </Grid>
         </form>
       </div>
     </Container>
-        </React.Fragment>
+    </React.Fragment>
   );
 }
 

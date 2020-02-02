@@ -10,7 +10,7 @@ import Container from "@material-ui/core/Container";
 
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
-import { Link as Link1 } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import Alert from "@material-ui/lab/Alert";
 
@@ -138,9 +138,9 @@ export default function Register(props: any) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link1 to="/login" className={classes.link}>
+              <Link to="/login" className={classes.link}>
                 Already have an account? Log in
-              </Link1>
+              </Link>
             </Grid>
           </Grid>
         </form>

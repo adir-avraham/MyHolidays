@@ -17,7 +17,6 @@ interface Action {
 }
 
 export default function root(state = initialState, action: Action) {
-    console.log("paylod-redux", action.payload)
     switch (action.type) {
 
         case Actions.UPDATE_USERNAME_CONNECTED: {
