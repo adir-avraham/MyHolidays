@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { updateUserNameConnectedAction } from '../../redux/actions'
+import { updateUserNameConnectedAction } from '../../redux/actions';
 import { connect } from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
 
