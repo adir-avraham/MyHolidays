@@ -69,10 +69,6 @@ async function unFollowed(holidayFollowed) {
 
 async function updateHoliday(payload) {
     const { destination, start_date, end_date, price, picture, id } = payload;
-    console.log(" befor moment=>", start_date);
-    
-    // start_date = moment(start_date).format("YYYY-MM-DD")
-    // console.log("after  moment=>", start_date);
     const { updateHolidayQuery } = holidaysQueries;
     const [result] = await pool.execute(updateHolidayQuery(), [destination, start_date, end_date, price, picture, id])      
     return result;
