@@ -12,7 +12,6 @@ import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-import Alert from "@material-ui/lab/Alert";
 
 
 const registerUrl = "http://localhost:4000/register";
@@ -35,20 +34,17 @@ export default function Register(props: any) {
   };
 
   const [data, handleChange] = useCustomForm(initialState);
-  const [errMessage, setErrMessage] = useState("")  
-
+  const [validationsMessages, setvalidationsMessages] = useState([])  
 
   const handleRegister = async (data: initialState) => {
-    const { firstName, lastName, userName, password } = data;
-    if (!firstName || !lastName || !userName || !password)
-    return setErrMessage("please complete the form");
-    
     try {
       const result = await axios.post(registerUrl, data);
       const { message, status } = result.data;
-      const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
-      if (errMessage) setErrMessage(errMessage)
-      if (message) alert(message)
+      const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;    
+      if (errMessage) {
+        setvalidationsMessages(result.data.errMessage.details);
+      } 
+      if (message) alert(message);
       if (status) props.history.push('/login');
     } catch {
       console.log("some error register (client)");
@@ -56,7 +52,6 @@ export default function Register(props: any) {
   };
 
   return (
-    
     <React.Fragment>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -67,61 +62,65 @@ export default function Register(props: any) {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}> 
               <TextField
-                autoComplete="fname"
-                color="secondary"
-                name="firstName"
-                variant="filled"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={handleChange}
-              />
+              autoFocus
+              variant="filled"
+              required
+              fullWidth
+              id="firstName"
+              label="First Name"
+              name="firstName"
+              autoComplete="fname"
+              onChange={handleChange}
+              helperText={validation(validationsMessages, "firstName")}
+              error={validation(validationsMessages, "firstName").length > 0 ? true : false}
+            />                          
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                variant="filled"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                onChange={handleChange}
+              variant="filled"
+              required
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              autoComplete="lname"
+              onChange={handleChange}
+              helperText={validation(validationsMessages, "lastName")}
+              error={validation(validationsMessages, "lastName").length > 0 ? true : false}
+            />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+              variant="filled"
+              required
+              fullWidth
+              id="userName"
+              label="User Name"
+              name="userName"
+              autoComplete="uname"
+              onChange={handleChange}
+              helperText={validation(validationsMessages, "userName")}
+              error={validation(validationsMessages, "userName").length > 0 ? true : false}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="filled"
-                required
-                fullWidth
-                id="userName"
-                label="User Name"
-                name="userName"
-                autoComplete="uname"
-                onChange={handleChange}
+              variant="filled"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={handleChange}
+              helperText={validation(validationsMessages, "password")}
+              error={validation(validationsMessages, "password").length > 0 ? true : false}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="filled"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-            {errMessage ? <Alert severity="error">{errMessage}</Alert> : null}
             </Grid>
           </Grid>
           <Button
@@ -145,10 +144,15 @@ export default function Register(props: any) {
           </Grid>
         </form>
       </div>
-
     </Container>
         </React.Fragment>
   );
+}
+
+function validation(array: any, value: string) {
+    const [inValid] = array.filter((error: any) => error.message.includes(value))
+      if (inValid) return inValid.message
+      return [];
 }
 
 

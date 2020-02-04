@@ -4,8 +4,8 @@ const userSchema = Joi.object({
     firstName: Joi.string().min(2).max(20).required(),
     lastName: Joi.string().min(2).max(20).required(),
     userName: Joi.string().email().required(),
-    password: Joi.string().min(4).required()
-})
+    password: Joi.string().min(4).required(),   
+}).options({ abortEarly: false });
 
 
 function registerValidation (req, res, next) {
