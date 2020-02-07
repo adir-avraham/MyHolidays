@@ -96,3 +96,10 @@ export const updateHolidayfaild = (message: string) => {
         payload: {message}
     };
 };
+
+export const resetErrorMessageValidationAction = (errMessage: string) => {
+    return {
+        type: Actions.RESET_ERROR_MESSAGE_VALIDATION,
+        payload: {errMessage}
+    };
+};

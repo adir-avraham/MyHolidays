@@ -13,6 +13,7 @@ const initialState = {
 
 
 export default function root(state = initialState, action: Action) {
+    console.log(action)
     switch (action.type) {
 
         case Actions.UPDATE_USERNAME_CONNECTED: {
@@ -49,6 +50,10 @@ export default function root(state = initialState, action: Action) {
         case Actions.UPDATE_HOLIDAY_FAILD: {
             const { message } = action.payload;      
             return { ...state, message, status: false, errMessage: "" };
+        }
+        case Actions.RESET_ERROR_MESSAGE_VALIDATION: {
+            const { errMessage } = action.payload;      
+            return { ...state, errMessage };
         }
 
         default: {
