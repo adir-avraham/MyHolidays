@@ -6,12 +6,13 @@ import Container from '@material-ui/core/Container';
 
 import Holiday from '../holiday';
 import { Holiday as IHoliday } from 'sharing-interfaces';
+import MyHoliday from 'components/my-holiday';
 
 
 
-export default function HolidaysList(props: any) {
+export default function HolidaysList(props: IHolidaysListProps) {
   const classes = useStyles();
-  const { holidays } = props;
+  const { holidays ,role } = props;
 
   return (
     <React.Fragment>
@@ -19,12 +20,19 @@ export default function HolidaysList(props: any) {
       <main>
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
-                {holidays.map((holiday: IHoliday) => <Holiday key={holiday.id}  {...holiday} />)}
+                {role === 'admin' ? holidays.map((holiday: IHoliday) => <Holiday key={holiday.id} {...holiday}/>) : 
+                holidays.map((holiday: IHoliday) => <MyHoliday key={holiday.id} {...holiday}/>)}
             </Grid>
         </Container>
       </main>
     </React.Fragment>
   );
+}
+
+
+interface IHolidaysListProps {
+  holidays: Array<IHoliday>;
+  role: string;
 }
 
 
@@ -61,5 +69,5 @@ const useStyles = makeStyles(theme => ({
     disablePointerEvents: {
       pointerEvents: 'none',
     },
-  }));
+}));
   

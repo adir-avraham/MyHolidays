@@ -3,7 +3,6 @@ import { getHolidaysService, updateFollowHolidayService, deleteHolidayService, u
 import { Holiday } from 'sharing-interfaces';
 
 
-
 export const updateUserNameConnectedAction = (firstName: string, role: string) => {
     return {
         type: Actions.UPDATE_USERNAME_CONNECTED,
@@ -25,8 +24,7 @@ export const getHolidaysPendingAction = () => {
 };
 
 export const getHolidaysAction = () => {
-    return async (dispach: Function) => {
-    
+    return async (dispach: Function) => {  
         dispach(getHolidaysPendingAction());
         const holidays = await getHolidaysService();
         dispach(getHolidaysSuccessAction(holidays));
@@ -50,7 +48,7 @@ export const updateFollowHolidayAction = (holidayId: number) => {
 };
 
 
-export const deleteHolidaySuccess = (holidays: Array<object>) => {
+export const deleteHolidaySuccess = (holidays: Array<Holiday>) => {
     return {
         type: Actions.DELETE_HOLIDAY_SUCCESS,
         payload: holidays
@@ -65,7 +63,7 @@ export const deleteHolidayAction = (holidayId: number) => {
     };
 };
 
-export const updateHolidaySuccess = (data: Array<object>) => {
+export const updateHolidaySuccess = (data: Array<Holiday>) => {
     return {
         type: Actions.UPDATE_HOLIDAY_SUCCESS,
         payload: data
@@ -98,4 +96,3 @@ export const updateHolidayfaild = (message: string) => {
         payload: {message}
     };
 };
-

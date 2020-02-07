@@ -1,6 +1,6 @@
 export interface State extends UserConnected {
     userNameConnected: UserConnected;
-    holidays: Array<object>;
+    holidays: Array<Holiday>;
     holidaysLoading: boolean;
     errMessage: string;
     message: string;

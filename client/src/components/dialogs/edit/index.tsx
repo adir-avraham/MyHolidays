@@ -8,16 +8,18 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import useCustomForm from '../../../hooks/useCustomForm';
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateHolidayAction } from "../../../redux/actions";
-import { Holiday, State } from "sharing-interfaces";
+import { State } from "sharing-interfaces";
 
 
 
-export function EditDialog(props: IEditDialogProps) {
-  const { open, onClose, holidayId, destination, start_date, end_date, price, picture, message ,errMessage, status } = props;
-  const { updateHoliday } = props.reduxActions;
-  
+export default function EditDialog(props: IEditDialogProps) {
+  const { open, onClose, holidayId, destination, start_date, end_date, price, picture } = props;
+  const dispatch = useDispatch();
+  const message = useSelector((state: State) => state.message);
+  const errMessage = useSelector((state: State) => state.errMessage);
+  const status = useSelector((state: State) => state.status);
   const initialState = {
     id: holidayId,
     destination: destination,
@@ -26,9 +28,8 @@ export function EditDialog(props: IEditDialogProps) {
     price: price,
     picture: picture,
   }
-  
   const [data, handleChange] = useCustomForm(initialState); 
-
+  
   
   return (
       <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
@@ -104,7 +105,7 @@ export function EditDialog(props: IEditDialogProps) {
             Cancel
           </Button>
           <Button color="primary"
-           onMouseDown={()=>{updateHoliday(data)}}
+           onMouseDown={()=>{dispatch(updateHolidayAction(data))}}
            onMouseUp={()=>{if (status) onClose()}}
           >
           Save
@@ -114,23 +115,7 @@ export function EditDialog(props: IEditDialogProps) {
   );
 }
 
-const mapStateToProps = (state: State) => {
-  let { message ,errMessage, status } = state;
-  return { message ,errMessage, status };
-}   
-
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-    reduxActions: {
-      updateHoliday: (holiday: Holiday) => {
-        dispatch(updateHolidayAction(holiday));
-      }
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditDialog);
-  
+ 
 interface IEditDialogProps {
     open: any;
     onClose: any;
@@ -140,11 +125,4 @@ interface IEditDialogProps {
     end_date: Date;
     price: number;
     picture: string;
-    history?: any;
-    reduxActions?: any; 
-    updateHoliday?: Holiday;
-    holidays?: Array<object>;
-    message?: string;
-    errMessage?: string;
-    status?: boolean;
 }

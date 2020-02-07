@@ -13,7 +13,7 @@ import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { updateUserNameConnectedAction } from '../../redux/actions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
 
 
@@ -24,15 +24,14 @@ interface InitialState {
 
 const loginUrl = ('http://localhost:4000/login');
 
-export function Login(props: ILoginProps) {
+export default function Login(props: ILoginProps) {
   const classes = useStyles();
-  
+  const dispatch = useDispatch();
   const initialState: InitialState = {
     userName: "",
     password: "",
   }
   const [data, handleChange] = useCustomForm(initialState);
-  const { updateUserNameConnected } = props.reduxActions;
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleLogin = async (data: InitialState) => {
@@ -43,7 +42,7 @@ export function Login(props: ILoginProps) {
       localStorage.setItem('token', token);
       if (role === "user") props.history.push('/my-holidays');
       if (role === "admin") props.history.push('/holidays');
-      updateUserNameConnected(first_name, role)
+      dispatch(updateUserNameConnectedAction(first_name, role));
     } else {
       setErrorMessage(message);
     }
@@ -113,30 +112,8 @@ export function Login(props: ILoginProps) {
 }
 
 
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-      reduxActions: {
-        updateUserNameConnected: (firstName: string, role: string) => {
-          dispatch(updateUserNameConnectedAction(firstName, role));
-        }
-      }
-  };
-};
-
-export default connect(null, mapDispatchToProps) (Login);
-
-
-interface ILoginProps extends User {
-  reduxActions: UpdateUserNameConnected;
+interface ILoginProps extends History {
   history: History;
-}
-
-interface UpdateUserNameConnected {
-  updateUserNameConnected: Function;
-}
-interface User {
-  firstName: string;
-  role: string;
 }
 
 interface History {

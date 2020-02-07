@@ -14,49 +14,34 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 
-
 import { AppLinks } from "components/appRouter/routers";
 import { routes } from "components/appRouter/routers.config";
 import { useState, useEffect } from 'react';
 import mainAxios from 'components/axios/mainAxios';
-import { connect } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux'; 
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
 
-interface INavbarProps extends User {
-  reduxActions: UpdateUserNameConnected;
-}
 
-interface UpdateUserNameConnected {
-  updateUserNameConnected: Function;
-}
-interface User {
-  firstName: string;
-  role: string;
-}
-
-export function Navbar(props: INavbarProps) {
-  
+export default function Navbar() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {open ? setOpen(false) : setOpen(true)};
-  
-  const { updateUserNameConnected } = props.reduxActions;  
-  const { firstName, role } = props;
+  const firstName = useSelector((state: State)=> (state.userNameConnected.firstName));
+  const role = useSelector((state: State)=> (state.userNameConnected.role));
 
-  useEffect(()=>{
-    
+  useEffect(()=>{  
     const initReq = async () =>{
       const token = localStorage.getItem('token');
       if (token) {
         const result = await mainAxios.post('/verifyToken');
         const { firstName, role } = result.data;
-        if (firstName) updateUserNameConnected(firstName, role)
+        if (firstName) dispatch(updateUserNameConnectedAction(firstName, role));
       } 
     }
     initReq();
-
   },[])
 
 
@@ -113,32 +98,13 @@ export function Navbar(props: INavbarProps) {
         })}
       >
         <div className={classes.drawerHeader} />
-
       </main>
     </div>
   );
 }
 
-const mapStateToProps = (state: State) => {
-  const { firstName, role } = state.userNameConnected;
-      return { firstName, role };
-  }   
-
-  const mapDispatchToProps = (dispatch: Function) => {
-    return {
-        reduxActions: {
-          updateUserNameConnected: (firstName: string, role: string) => {
-            dispatch(updateUserNameConnectedAction(firstName, role));
-          }
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps) (Navbar);
-
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

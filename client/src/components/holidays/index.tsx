@@ -5,31 +5,32 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useEffect } from 'react';
 import HolidaysList from '../holidays-list'
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
-
 import { CSSTransitionGroup } from 'react-transition-group'
 import LinearIndeterminate from 'components/loader';
 import Footer from 'components/footer';
+import { State } from 'sharing-interfaces';
 
 
 
-export function Holidays(props: any) {
+export default function Holidays() {
   const classes = useStyles();
-
-  const { getHolidays, getHolidaysPending } = props.reduxActions;
+  const dispatch = useDispatch();
+  const holidays = useSelector((state: State) => state.holidays);
+  const holidaysLoading = useSelector((state: State) => state.holidaysLoading);
+  const role = useSelector((state: State) => state.userNameConnected.role);
 
   useEffect(()=>{
 
     const initReq = () =>{
-      getHolidaysPending()
-      getHolidays()
+      dispatch(getHolidaysPendingAction());
+      dispatch(getHolidaysAction());
     }
     initReq();
 
   },[])
 
-  const { holidays, holidaysLoading } = props;
 
   if (holidaysLoading) return (
     <div className={classes.root}>
@@ -47,43 +48,16 @@ export function Holidays(props: any) {
       transitionAppearTimeout={900}
       transitionEnter={false}
       transitionLeave={false}>
-      <HolidaysList holidays={holidays}/>
+      <HolidaysList holidays={holidays} role={role}/>
       </CSSTransitionGroup>
     <Footer/>
     </React.Fragment>
   );
 }
 
-interface State {
-  holidays: Array<object>;
-  holidaysLoading: boolean;
-}
-
-const mapStateToProps = (state: State) => {
-  let { holidays, holidaysLoading } = state;
-      return { holidays, holidaysLoading };
-  }   
-
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-      reduxActions: {
-        getHolidays: () => {
-          dispatch(getHolidaysAction());
-        },
-        getHolidaysPending: () => {
-          dispatch(getHolidaysPendingAction());
-        }
-      }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps) (Holidays);
-
-
 
   
-  const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     icon: {
       marginRight: theme.spacing(2),
     },
@@ -113,9 +87,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (Holidays);
       width: '100%',
       '& > * + *': {
         marginTop: theme.spacing(2),
-      },
     },
-  }));
-
-
-  
+  },
+})); 

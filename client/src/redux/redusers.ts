@@ -2,7 +2,6 @@ import Actions from './actions.config';
 import { State } from 'sharing-interfaces';
 
 
-
 const initialState = {
     userNameConnected: {firstName: "Guest", role: "guest"},
     holidays: [],
@@ -16,7 +15,6 @@ interface Action {
     type: string; 
     payload: State;
 }
-
 
 export default function root(state = initialState, action: Action) {
     switch (action.type) {

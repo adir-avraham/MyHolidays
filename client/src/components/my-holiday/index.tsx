@@ -9,23 +9,17 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
-import { State } from 'sharing-interfaces';
+import { Holiday as IMyHolidayProps } from 'sharing-interfaces';
 
 
 
-
-export function MyHoliday(props: any) {
+export default function MyHoliday(props: IMyHolidayProps) {
   const classes = useStyles();
-
-  const { updateFollowHoliday } = props.reduxActions;
-
-
+  const dispatch = useDispatch();
   const { id, destination, start_date, end_date, price, picture, followers, user_id } = props;
 
     return (
@@ -52,15 +46,13 @@ export function MyHoliday(props: any) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-
                     <Button size="small" color="secondary"  
                     onClick={()=>{  
-                        updateFollowHoliday(id)
+                        dispatch(updateFollowHolidayAction(id))
                         }}
                     > 
                     {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
                     {followers}
-                    {/* <FavoriteBorderIcon/> */}
                     </Button>
                   </CardActions>
             </Card>
@@ -68,27 +60,6 @@ export function MyHoliday(props: any) {
     </React.Fragment>
   );
 }
-
-
-const mapStateToProps = (state: State) => {
-  let { holidays } = state;
-      return { holidays };
-  }   
-
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-      reduxActions: {
-        updateFollowHoliday: (holidayId: number) => {
-          dispatch(updateFollowHolidayAction(holidayId));
-        }
-
-      }
-  };
-};
-
-export default connect(null, mapDispatchToProps) (MyHoliday);
-
 
   
   const useStyles = makeStyles(theme => ({

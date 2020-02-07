@@ -158,12 +158,10 @@ function validation(array: Array<any>, value: string) {
 interface Error {
   message: string;
 }
-
 interface IRegisterProps extends User {
   reduxActions: UpdateUserNameConnected;
   history: History;
 }
-
 interface UpdateUserNameConnected {
   updateUserNameConnected: Function;
 }
@@ -171,7 +169,6 @@ interface User {
   firstName: string;
   role: string;
 }
-
 interface History {
   push: Function;
 }

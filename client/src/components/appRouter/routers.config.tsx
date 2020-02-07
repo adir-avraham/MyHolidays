@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from 'components/login';
 import Register from 'components/register';
-import MyHolidays from 'components/my-holidays';
 import CreateHoliday from 'components/create-holiday';
 import Logout from 'components/logout';
 import { withAuth } from 'components/hoc/auth';
@@ -22,7 +21,7 @@ export const routes = [
     //     return <RegisterWithAuth {...props}/>
     // } },
     { authorized: "user", title: "MyHolidays", path: "/my-holidays", component: (props: any) =>{
-        const MyHolidaysWithAuth = withAuth(MyHolidays);
+        const MyHolidaysWithAuth = withAuth(Holidays);
         return <MyHolidaysWithAuth {...props}/>
     } },
     { authorized: "admin", title: "Create-holiday", path: "/create-holiday", component: (props: any) =>{

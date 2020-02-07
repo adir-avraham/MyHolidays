@@ -6,7 +6,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteHolidayAction } from "../../../redux/actions";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(
@@ -16,10 +16,10 @@ const Transition = React.forwardRef<unknown, TransitionProps>(
 );
 
 
-export function DeleteDialog(props: IDeleteDialogProps) {
+export default function DeleteDialog(props: IDeleteDialogProps) {
   const { open, onClose, holidayId, destination } = props;
-  const { deleteHoliday } = props.reduxActions;
-  
+  const dispatch = useDispatch();
+
   return (
     <div>
       <Dialog
@@ -39,7 +39,7 @@ export function DeleteDialog(props: IDeleteDialogProps) {
           </Button>
           <Button color="primary"
             onClick={() => {
-              deleteHoliday(holidayId);
+              dispatch(deleteHolidayAction(holidayId));
               onClose();
             }}
             >
@@ -51,26 +51,11 @@ export function DeleteDialog(props: IDeleteDialogProps) {
   );
 }
 
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-    reduxActions: {
-      deleteHoliday: (holidayId: number) => {
-        dispatch(deleteHolidayAction(holidayId));
-      }
-    }
-  };
-};
-
-export default connect(null, mapDispatchToProps)(DeleteDialog);
 
 interface IDeleteDialogProps {
   open: boolean;
   onClose: any;
   holidayId: number;
-  reduxActions: ReduxAction;
   destination: string;
 }
 
-interface ReduxAction {
-  deleteHoliday: Function;
-}
