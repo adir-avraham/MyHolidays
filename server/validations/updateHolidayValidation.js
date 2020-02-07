@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 
 const holidaySchema = Joi.object({
-    destination: Joi.string().max(25).required(),
+    destination: Joi.string().min(2).max(25).required(),
     start_date: Joi.date().greater('now').required(),
     end_date: Joi.date().greater(Joi.ref('start_date')).required(),
     price: Joi.number().integer().required(),

@@ -9,6 +9,7 @@ import { TransitionProps } from "@material-ui/core/transitions";
 import { useDispatch } from "react-redux";
 import { deleteHolidayAction } from "../../../redux/actions";
 import { IDeleteDialogProps } from "sharing-interfaces";
+import { DialogContentText, DialogContent } from "@material-ui/core";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(
   function Transition(props, ref) {
@@ -30,9 +31,12 @@ export default function DeleteDialog(props: IDeleteDialogProps) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
         >
-        <DialogTitle id="alert-dialog-slide-title">
+        <DialogTitle id="alert-dialog-slide-title">Delete Holiday</DialogTitle>
+        <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
           {`Are you sure you want to delete the holiday to ${destination}?`}
-        </DialogTitle>
+         </DialogContentText>
+         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={onClose}>
             No
@@ -48,4 +52,4 @@ export default function DeleteDialog(props: IDeleteDialogProps) {
         </DialogActions>
       </Dialog>
   );
-}
+};

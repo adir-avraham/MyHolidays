@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,6 +14,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mainAxios from 'components/axios/mainAxios';
 import {useStyles} from './style';
 import { ICreateHolidayProps, initialStateHolidayForm } from 'sharing-interfaces';
+import { validation } from '../../utils';
 
 
 export default function CreateHoliday(props: ICreateHolidayProps) {
@@ -27,15 +28,14 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
   }
 
   const [data, handleChange] = useCustomForm(initialState); 
+  const [validationsMessages, setvalidationsMessages] = useState([]);
 
   const handleCreateHoliday = async (data: initialStateHolidayForm) => {
-    const { destination, start_date, end_date, price, picture} = data;
-    if (!destination || !start_date || !end_date || !price || !picture) return alert("please complete the form");
     try {
       const result = await mainAxios.post('/createHoliday', data);
       const { message, status } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
-      if (errMessage) alert(errMessage);
+      if (errMessage) setvalidationsMessages(result.data.errMessage.details);
       if (message) alert(message)
       if (status) props.history.push('/holidays');
       } catch  {
@@ -68,6 +68,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                 name="destination"
                 autoComplete="c-destination"
                 onChange={handleChange}
+                helperText={validation(validationsMessages, "destination")}
+                error={validation(validationsMessages, "destination").length > 0 ? true : false}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -85,6 +87,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                   shrink: true,
                 }}
                 onChange={handleChange}
+                helperText={validation(validationsMessages, "start_date")}
+                error={validation(validationsMessages, "start_date").length > 0 ? true : false}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -102,6 +106,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                   shrink: true,
                 }}
                 onChange={handleChange}
+                helperText={validation(validationsMessages, "end_date")}
+                error={validation(validationsMessages, "end_date").length > 0 ? true : false}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -116,6 +122,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                 autoComplete="c-price"
                 type="number"
                 onChange={handleChange}
+                helperText={validation(validationsMessages, "price")}
+                error={validation(validationsMessages, "price").length > 0 ? true : false}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,12 +138,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                 id="picture"
                 autoComplete="c-picture"
                 onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="secondary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                helperText={validation(validationsMessages, "picture")}
+                error={validation(validationsMessages, "picture").length > 0 ? true : false}
               />
             </Grid>
           </Grid>

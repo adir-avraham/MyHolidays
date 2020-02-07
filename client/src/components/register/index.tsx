@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import { initStateRegisterForm, Error, IRegisterProps } from "sharing-interfaces";
 import { useStyles } from './style';
+import { validation } from '../../utils';
 
 const registerUrl = "http://localhost:4000/register";
 
@@ -138,10 +139,4 @@ export default function Register(props: IRegisterProps) {
       </div>
     </Container>
   );
-}
-
-function validation(array: Array<any>, value: string) {
-    const [inValid] = array.filter((error: Error) => error.message.includes(value))
-      if (inValid) return inValid.message
-      return [];
 };
