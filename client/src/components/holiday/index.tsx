@@ -18,10 +18,11 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DeleteDialog from "components/dialogs/delete";
 import EditDialog from "components/dialogs/edit";
 import moment from 'moment';
+import { Holiday as IHolidayProps } from "sharing-interfaces";
 
 
 
-export default function Holiday(props: any) {
+export default function Holiday(props: IHolidayProps) {
   const classes = useStyles();
   const { id, destination, start_date, end_date, price, picture } = props;
   const [open, setOpen] = useState(false);

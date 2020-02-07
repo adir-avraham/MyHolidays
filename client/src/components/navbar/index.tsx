@@ -23,8 +23,19 @@ import { connect } from 'react-redux';
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
 
+interface INavbarProps extends User {
+  reduxActions: UpdateUserNameConnected;
+}
 
-export function Navbar(props: any) {
+interface UpdateUserNameConnected {
+  updateUserNameConnected: Function;
+}
+interface User {
+  firstName: string;
+  role: string;
+}
+
+export function Navbar(props: INavbarProps) {
   
   const classes = useStyles();
   const theme = useTheme();
@@ -113,7 +124,7 @@ const mapStateToProps = (state: State) => {
       return { firstName, role };
   }   
 
-  const mapDispatchToProps = (dispatch: any) => {
+  const mapDispatchToProps = (dispatch: Function) => {
     return {
         reduxActions: {
           updateUserNameConnected: (firstName: string, role: string) => {

@@ -119,7 +119,7 @@ const mapStateToProps = (state: State) => {
   return { message ,errMessage, status };
 }   
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
   return {
     reduxActions: {
       updateHoliday: (holiday: Holiday) => {
@@ -134,7 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(EditDialog);
 interface IEditDialogProps {
     open: any;
     onClose: any;
-    holidayId: string;
+    holidayId: number;
     destination: string;
     start_date: Date;
     end_date: Date;

@@ -5,9 +5,9 @@ import LinearIndeterminate from 'components/loader'
 
 
 
-export const withAuth = (WrappedComponent: any) => {
+export const withAuth = (WrappedComponent: Function) => {
 
-    return function (props: any) {
+    return function (props: IWrappedComponentProps) {
         const [status, setStatus] = useState('loading');
         const [role, setRole] = useState('loading');
         const { path } = props.match
@@ -42,4 +42,11 @@ export const withAuth = (WrappedComponent: any) => {
         if (path === "/my-holidays" && role === "user") return <WrappedComponent {...props} />;
         return  <Redirect to="/login" />;
     }
+}
+
+interface IWrappedComponentProps {
+    match: Path;
+}
+interface Path {
+    path: string;
 }

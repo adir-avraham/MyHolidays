@@ -18,16 +18,7 @@ import mainAxios from 'components/axios/mainAxios';
 
 
 
-
-interface initialState {
-  destination: string; 
-  start_date: Date;
-  end_date: Date;
-  price: number;
-  picture: string;
-}
-
-export default function CreateHoliday(props: any) {
+export default function CreateHoliday(props: ICreateHolidayProps) {
   const classes = useStyles();
   const initialState = {
     destination: "",
@@ -167,6 +158,23 @@ export default function CreateHoliday(props: any) {
     </React.Fragment>
   );
 }
+
+interface ICreateHolidayProps {
+  history: History;
+}
+interface History {
+  push: Function;
+}
+
+interface initialState {
+  destination: string; 
+  start_date: Date;
+  end_date: Date;
+  price: number;
+  picture: string;
+}
+
+
 
   const useStyles = makeStyles(theme => ({
     paper: {

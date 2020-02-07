@@ -25,7 +25,7 @@ export const getHolidaysPendingAction = () => {
 };
 
 export const getHolidaysAction = () => {
-    return async (dispach: any) => {
+    return async (dispach: Function) => {
     
         dispach(getHolidaysPendingAction());
         const holidays = await getHolidaysService();
@@ -42,7 +42,7 @@ export const updateFollowHolidaySuccess = (holidays: Array<object>) => {
 };
 
 export const updateFollowHolidayAction = (holidayId: number) => {
-    return async (dispach: any) => {
+    return async (dispach: Function) => {
         const holidays = await updateFollowHolidayService(holidayId);
         if (!holidays) return;
         dispach(updateFollowHolidaySuccess(holidays))
@@ -58,7 +58,7 @@ export const deleteHolidaySuccess = (holidays: Array<object>) => {
 };
 
 export const deleteHolidayAction = (holidayId: number) => {
-    return async (dispach: any) => {
+    return async (dispach: Function) => {
         const holidays = await deleteHolidayService(holidayId);
         if (!holidays) return;
         dispach(deleteHolidaySuccess(holidays))
@@ -73,7 +73,7 @@ export const updateHolidaySuccess = (data: Array<object>) => {
 };
 
 export const updateHolidayAction = (holiday: Holiday) => {
-    return async (dispach: any) => {
+    return async (dispach: Function) => {
         const data = await updateHolidayService(holiday);
         if (!data) return;
         const errMessage = data.errMessage ? data.errMessage.details[0].message : 0;

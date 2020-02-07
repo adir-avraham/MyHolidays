@@ -13,20 +13,14 @@ import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import BarChartIcon from '@material-ui/icons/BarChart';
 
-interface route {
-  authorized: string;
-  title: string; 
-  path: string;
-  component: any;
-  exact?: boolean;
-}
 
-export const AppLinks = (props: any) => {
+
+export const AppLinks = (props: IAppLinksProps) => {
   const classes = useStyles();
   const { routes, role } = props;
-    if (role === "admin") { 
-      return routes.filter((route: route) => (route.authorized === "admin" || route.authorized === "both") && !route.exact ).map((route: route) => (
-        <Link key={route.title} className={classes.link} to={route.path}> 
+  if (role === "admin") { 
+    return routes.filter((route: IRoute) => (route.authorized === "admin" || route.authorized === "both") && !route.exact ).map((route: IRoute) => (
+      <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
         <ListItemText primary={route.title} />
@@ -34,7 +28,7 @@ export const AppLinks = (props: any) => {
         </Link>
     ))} 
     else if (role === "user") {
-      return routes.filter((route: route) => (route.authorized === "user" || route.authorized === "both") && !route.exact ).map((route: route) => (
+      return routes.filter((route: IRoute) => (route.authorized === "user" || route.authorized === "both") && !route.exact ).map((route: IRoute) => (
         <Link key={route.title} className={classes.link} to={route.path}> 
         <ListItem button >
         <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -43,7 +37,7 @@ export const AppLinks = (props: any) => {
         </Link>
       ))} 
       else {
-        return routes.filter((route: route) => route.authorized === "guest" && !route.exact).map((route: route) => (
+        return routes.filter((route: IRoute) => route.authorized === "guest" && !route.exact).map((route: IRoute) => (
           <Link key={route.title} className={classes.link} to={route.path}> 
           <ListItem button >
           <ListItemIcon>{getItemIcon(route.title)}</ListItemIcon>
@@ -52,24 +46,24 @@ export const AppLinks = (props: any) => {
           </Link>
         ))
       }
-}
-
+    }
     
-function getItemIcon(title: string) {
-  switch (title) {
-    case 'Login': {
-        return <LockOpenOutlinedIcon />;
-    }
-    case 'Logout': {
-      return <LockOutlinedIcon />;
-    }
-    case 'Register': {
-        return <PersonAddOutlinedIcon />;
-    }
-    case 'MyHolidays': {
-      return <BeachAccessIcon />;
-    }
-    case 'Create-holiday': {
+    
+    function getItemIcon(title: string) {
+      switch (title) {
+        case 'Login': {
+          return <LockOpenOutlinedIcon />;
+        }
+        case 'Logout': {
+          return <LockOutlinedIcon />;
+        }
+        case 'Register': {
+          return <PersonAddOutlinedIcon />;
+        }
+        case 'MyHolidays': {
+          return <BeachAccessIcon />;
+        }
+        case 'Create-holiday': {
       return <FlightTakeoffIcon />;
     }
     case 'Report': {
@@ -80,22 +74,38 @@ function getItemIcon(title: string) {
     }
     default: {
         return <MailIcon />;
-    }
+      }
   }
 }
 
-export const AppRoutes = (props: any) => {
+export const AppRoutes = (props: IAppRoutesProps) => {
   const { routes } = props;
-  const result = routes.map((route: route) => 
+  const result = routes.map((route: IRoute) => 
       <Route key={route.title} path={route.path} component={route.component} exact={route.exact}/> 
-  )
+      )
   return <>{result}</>
+}
+
+interface IRoute {
+  authorized: string;
+  title: string; 
+  path: string;
+  component: any;
+  exact?: boolean;
+}
+interface IAppRoutesProps {
+  routes: Array<IRoute>
+}
+
+interface IAppLinksProps {
+  routes: any;
+  role: string;
 }
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    link: {
+createStyles({
+  link: {
         textDecoration: 'none',
         color: "#000",
     }

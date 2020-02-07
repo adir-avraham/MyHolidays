@@ -1,4 +1,5 @@
 import Actions from './actions.config';
+import { State } from 'sharing-interfaces';
 
 
 
@@ -13,8 +14,9 @@ const initialState = {
 
 interface Action {
     type: string; 
-    payload: any;
+    payload: State;
 }
+
 
 export default function root(state = initialState, action: Action) {
     switch (action.type) {

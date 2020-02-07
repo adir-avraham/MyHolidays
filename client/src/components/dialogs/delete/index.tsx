@@ -51,8 +51,7 @@ export function DeleteDialog(props: IDeleteDialogProps) {
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  console.log("dis", dispatch)
+const mapDispatchToProps = (dispatch: Function) => {
   return {
     reduxActions: {
       deleteHoliday: (holidayId: number) => {
@@ -73,5 +72,5 @@ interface IDeleteDialogProps {
 }
 
 interface ReduxAction {
-  deleteHoliday: any;
+  deleteHoliday: Function;
 }

@@ -24,7 +24,7 @@ interface InitialState {
 
 const loginUrl = ('http://localhost:4000/login');
 
-export function Login(props: any) {
+export function Login(props: ILoginProps) {
   const classes = useStyles();
   
   const initialState: InitialState = {
@@ -113,7 +113,7 @@ export function Login(props: any) {
 }
 
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
   return {
       reduxActions: {
         updateUserNameConnected: (firstName: string, role: string) => {
@@ -125,6 +125,23 @@ const mapDispatchToProps = (dispatch: any) => {
 
 export default connect(null, mapDispatchToProps) (Login);
 
+
+interface ILoginProps extends User {
+  reduxActions: UpdateUserNameConnected;
+  history: History;
+}
+
+interface UpdateUserNameConnected {
+  updateUserNameConnected: Function;
+}
+interface User {
+  firstName: string;
+  role: string;
+}
+
+interface History {
+  push: Function;
+}
 
 
 const useStyles = makeStyles(theme => ({

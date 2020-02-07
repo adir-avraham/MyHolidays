@@ -23,7 +23,7 @@ export default function Report() {
   
   
   const data = {
-    labels: report.map((item: any) => item.destination),
+    labels: report.map((item: FollowedHoliday) => item.destination),
     datasets: [
       {
         label: 'Followers',
@@ -32,7 +32,7 @@ export default function Report() {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: report.map((item: any) => item.sum_of_followers)
+        data: report.map((item: FollowedHoliday) => item.sum_of_followers)
       }
     ]
   };
@@ -60,7 +60,11 @@ export default function Report() {
     )  
 }
   
-  
+interface FollowedHoliday {
+  destination: string;
+  sum_of_followers: number;
+}
+
 
 // const data = {
 //   labels: report.map((item: any) => item.destination),

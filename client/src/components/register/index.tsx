@@ -23,7 +23,7 @@ interface initialState {
   password: string;
 }
 
-export default function Register(props: any) {
+export default function Register(props: IRegisterProps) {
   const classes = useStyles();
 
   const initialState = {
@@ -149,10 +149,31 @@ export default function Register(props: any) {
   );
 }
 
-function validation(array: any, value: string) {
-    const [inValid] = array.filter((error: any) => error.message.includes(value))
+function validation(array: Array<any>, value: string) {
+    const [inValid] = array.filter((error: Error) => error.message.includes(value))
       if (inValid) return inValid.message
       return [];
+}
+
+interface Error {
+  message: string;
+}
+
+interface IRegisterProps extends User {
+  reduxActions: UpdateUserNameConnected;
+  history: History;
+}
+
+interface UpdateUserNameConnected {
+  updateUserNameConnected: Function;
+}
+interface User {
+  firstName: string;
+  role: string;
+}
+
+interface History {
+  push: Function;
 }
 
 

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { updateUserNameConnectedAction } from 'redux/actions';
 
 
-export function Logout(props: any) {
+
+export function Logout(props: ILogoutProps) {
   
   const { updateUserNameConnected } = props.reduxActions;  
   const token = localStorage.getItem('token');
@@ -21,7 +22,7 @@ export function Logout(props: any) {
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         reduxActions: {
           updateUserNameConnected: (firstName: string, role: string) => {
@@ -32,3 +33,11 @@ const mapDispatchToProps = (dispatch: any) => {
 };
   
 export default connect(null, mapDispatchToProps) (Logout);
+
+interface ILogoutProps {
+  reduxActions: ReduxActions;
+}
+
+interface ReduxActions {
+  updateUserNameConnected: Function;
+}

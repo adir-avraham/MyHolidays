@@ -1,4 +1,4 @@
-export interface State {
+export interface State extends UserConnected {
     userNameConnected: UserConnected;
     holidays: Array<object>;
     holidaysLoading: boolean;
@@ -20,4 +20,5 @@ export interface Holiday {
     price: number;
     picture: string;
     followers?: number;
+    user_id?: number;
 }
