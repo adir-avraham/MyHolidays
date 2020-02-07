@@ -22,7 +22,6 @@ export default function DeleteDialog(props: IDeleteDialogProps) {
   const dispatch = useDispatch();
 
   return (
-    <div>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -48,6 +47,5 @@ export default function DeleteDialog(props: IDeleteDialogProps) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
   );
 }

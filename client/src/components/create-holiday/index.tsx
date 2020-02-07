@@ -59,6 +59,7 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
           <Grid container spacing={2}>
           <Grid item xs={12}>
               <TextField
+                autoFocus
                 color="secondary"
                 variant="filled"
                 required
@@ -81,7 +82,6 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
                 fullWidth
                 id="start_date"
                 label="Start date"
-                autoFocus
                 type="date"
                 InputLabelProps={{
                   shrink: true,

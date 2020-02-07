@@ -37,15 +37,9 @@ export default function Holidays() {
         </div>)  
   return (
     <React.Fragment>
-      <CssBaseline />
-      <CSSTransitionGroup
-      transitionName="example"
-      transitionAppear={true}
-      transitionAppearTimeout={900}
-      transitionEnter={false}
-      transitionLeave={false}>
+
       <HolidaysList holidays={holidays} role={role}/>
-      </CSSTransitionGroup>
+
     <Footer/>
     </React.Fragment>
   );

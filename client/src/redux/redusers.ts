@@ -13,7 +13,6 @@ const initialState = {
 
 
 export default function root(state = initialState, action: Action) {
-    console.log(action)
     switch (action.type) {
 
         case Actions.UPDATE_USERNAME_CONNECTED: {

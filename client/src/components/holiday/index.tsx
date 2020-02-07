@@ -19,7 +19,8 @@ import EditDialog from "components/dialogs/edit";
 import moment from 'moment';
 import { Holiday as IHolidayProps } from "sharing-interfaces";
 import { useStyles } from './style';
-
+import Paper from '@material-ui/core/Paper';
+import Grow from '@material-ui/core/Grow';
 
 export default function Holiday(props: IHolidayProps) {
   const classes = useStyles();
@@ -39,8 +40,9 @@ export default function Holiday(props: IHolidayProps) {
 
 
   return (
-    <React.Fragment>
       <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
+      <Grow in={true} style={{ transformOrigin: '0 0 0' }} {... { timeout: 3000 } }>
+        <Paper elevation={15}>
         <Card className={classes.card}>
           <CardMedia className={classes.cardMedia} image={`${picture}`} title="Image title"/>
           <CardContent className={classes.cardContent}>
@@ -60,7 +62,7 @@ export default function Holiday(props: IHolidayProps) {
               onClick={()=>{handleClickOpen()}}
               onMouseEnter={()=>{setDeleteIcon(true)}}
               onMouseLeave={()=>{setDeleteIcon(false)}}
-            >
+              >
               {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon />}
             </Button>
             <DeleteDialog
@@ -68,12 +70,12 @@ export default function Holiday(props: IHolidayProps) {
               onClose={handleClickOpen}
               holidayId={id}
               destination={destination}
-            />
+              />
             <Button size="small" color="secondary" 
               onClick={()=>{handleClickOpenEdit()}}
               onMouseEnter={()=>{setEditIcon(true)}}
               onMouseLeave={()=>{setEditIcon(false)}}
-            > 
+              > 
             {editIcon ? <EditIcon/> : <EditOutlinedIcon />}
             </Button>
             <EditDialog
@@ -85,10 +87,11 @@ export default function Holiday(props: IHolidayProps) {
               end_date={end_date} 
               price={price} 
               picture={picture}
-            />
+              />
           </CardActions>
         </Card>
+              </Paper>
+            </Grow>
       </Grid>
-    </React.Fragment>
   );
 };

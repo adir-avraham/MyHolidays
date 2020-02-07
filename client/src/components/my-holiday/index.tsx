@@ -13,7 +13,8 @@ import { useDispatch } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
 import { Holiday as IMyHolidayProps } from 'sharing-interfaces';
 import { useStyles } from './style';
-
+import Paper from '@material-ui/core/Paper';
+import Grow from '@material-ui/core/Grow';
 
 export default function MyHoliday(props: IMyHolidayProps) {
   const classes = useStyles();
@@ -21,8 +22,9 @@ export default function MyHoliday(props: IMyHolidayProps) {
   const { id, destination, start_date, end_date, price, picture, followers, user_id } = props;
 
     return (
-    <React.Fragment>
     <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
+      <Grow in={true} style={{ transformOrigin: '0 0 0' }} {... { timeout: 3000 } }>
+        <Paper elevation={15}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -54,7 +56,8 @@ export default function MyHoliday(props: IMyHolidayProps) {
                     </Button>
                   </CardActions>
             </Card>
+            </Paper>
+            </Grow>
         </Grid>
-    </React.Fragment>
   );
 };
