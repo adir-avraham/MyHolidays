@@ -5,12 +5,12 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
+import DialogContentText from '@material-ui/core/DialogContentText';
 import useCustomForm from '../../../hooks/useCustomForm';
 import { useDispatch, useSelector } from "react-redux";
 import { updateHolidayAction, resetErrorMessageValidationAction } from "../../../redux/actions";
 import { State, IEditDialogProps } from "sharing-interfaces";
-import Alert from '@material-ui/lab/Alert';
+
 
 
 export default function EditDialog(props: IEditDialogProps) {
@@ -32,9 +32,11 @@ export default function EditDialog(props: IEditDialogProps) {
   
   return (
       <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Edit holiday</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Holiday</DialogTitle>
         <DialogContent>
-          {errMessage ? <Alert severity="error">{errMessage}</Alert> : null} 
+         <DialogContentText color="error">
+          {errMessage ? errMessage : null} 
+         </DialogContentText>
           <TextField
             autoFocus
             margin="dense"

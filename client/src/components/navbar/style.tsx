@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: "#000",
     },
     firstName: {
-  
+        color: "#ffeb3b",
     }
   }),
 );
