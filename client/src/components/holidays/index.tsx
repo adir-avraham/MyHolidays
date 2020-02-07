@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 
 import HolidaysList from '../holidays-list';
 import { useDispatch, useSelector } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
-import { CSSTransitionGroup } from 'react-transition-group';
 import LinearIndeterminate from 'components/loader';
 import Footer from 'components/footer';
 import { State } from 'sharing-interfaces';
@@ -37,9 +36,7 @@ export default function Holidays() {
         </div>)  
   return (
     <React.Fragment>
-
       <HolidaysList holidays={holidays} role={role}/>
-
     <Footer/>
     </React.Fragment>
   );

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -47,9 +46,7 @@ export default function Register(props: IRegisterProps) {
   };
 
   return (
-    <React.Fragment>
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <PersonAddOutlinedIcon />
@@ -140,7 +137,6 @@ export default function Register(props: IRegisterProps) {
         </form>
       </div>
     </Container>
-        </React.Fragment>
   );
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
@@ -14,16 +13,11 @@ export default function HolidaysList(props: IHolidaysListProps) {
   const { holidays ,role } = props;
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
                 {role === 'admin' ? holidays.map((holiday: IHoliday) => <Holiday key={holiday.id} {...holiday}/>) : 
                 holidays.map((holiday: IHoliday) => <MyHoliday key={holiday.id} {...holiday}/>)}
             </Grid>
         </Container>
-      </main>
-    </React.Fragment>
   );
 };
