@@ -108,3 +108,21 @@ export interface Action {
     type: string; 
     payload: State;
 }
+
+export interface IRoute {
+    authorized: string;
+    title: string; 
+    path: string;
+    component: any;
+    exact?: boolean;
+}
+
+export interface IAppRoutesProps {
+    routes: Array<IRoute>
+}
+  
+export interface IAppLinksProps {
+    routes: any;
+    role: string;
+    handleDrawerOpen: Function;
+}

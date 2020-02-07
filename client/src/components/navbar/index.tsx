@@ -87,7 +87,7 @@ export default function Navbar() {
         </div>
         <Divider />
         <List>
-        <AppLinks routes={routes} role={role}/>
+        <AppLinks routes={routes} role={role} handleDrawerOpen={handleDrawerOpen}/>
         </List>
       </Drawer>
       <main
