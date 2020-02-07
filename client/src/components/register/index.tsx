@@ -5,23 +5,18 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 
+import Container from "@material-ui/core/Container";
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-
+import { initStateRegisterForm, Error, IRegisterProps } from "sharing-interfaces";
+import { useStyles } from './style';
 
 const registerUrl = "http://localhost:4000/register";
 
-interface initialState {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  password: string;
-}
+
 
 export default function Register(props: IRegisterProps) {
   const classes = useStyles();
@@ -36,7 +31,7 @@ export default function Register(props: IRegisterProps) {
   const [data, handleChange] = useCustomForm(initialState);
   const [validationsMessages, setvalidationsMessages] = useState([])  
 
-  const handleRegister = async (data: initialState) => {
+  const handleRegister = async (data: initStateRegisterForm) => {
     try {
       const result = await axios.post(registerUrl, data);
       const { message, status } = result.data;
@@ -153,47 +148,4 @@ function validation(array: Array<any>, value: string) {
     const [inValid] = array.filter((error: Error) => error.message.includes(value))
       if (inValid) return inValid.message
       return [];
-}
-
-interface Error {
-  message: string;
-}
-interface IRegisterProps extends User {
-  reduxActions: UpdateUserNameConnected;
-  history: History;
-}
-interface UpdateUserNameConnected {
-  updateUserNameConnected: Function;
-}
-interface User {
-  firstName: string;
-  role: string;
-}
-interface History {
-  push: Function;
-}
-
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  link: {
-    textDecoration: "none",
-    color: theme.palette.primary.main,
-  }
-}));
+};

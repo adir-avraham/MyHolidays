@@ -1,17 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
+import { useStyles } from './style';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  }),
-);
 
 export default function LinearIndeterminate() {
   const classes = useStyles();
@@ -23,4 +13,4 @@ export default function LinearIndeterminate() {
     </div>
     </Container>
   );
-}
+};

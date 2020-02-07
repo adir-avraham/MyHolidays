@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import useCustomForm from '../../../hooks/useCustomForm';
 import { useDispatch, useSelector } from "react-redux";
 import { updateHolidayAction } from "../../../redux/actions";
-import { State } from "sharing-interfaces";
+import { State, IEditDialogProps } from "sharing-interfaces";
 
 
 
@@ -113,16 +113,4 @@ export default function EditDialog(props: IEditDialogProps) {
         </DialogActions>
       </Dialog>
   );
-}
-
- 
-interface IEditDialogProps {
-    open: any;
-    onClose: any;
-    holidayId: number;
-    destination: string;
-    start_date: Date;
-    end_date: Date;
-    price: number;
-    picture: string;
-}
+};

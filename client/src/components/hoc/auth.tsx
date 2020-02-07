@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import mainAxios from 'components/axios/mainAxios';
 import { Redirect } from 'react-router-dom';
-import LinearIndeterminate from 'components/loader'
+import LinearIndeterminate from 'components/loader';
+import { IWrappedComponentProps } from 'sharing-interfaces';
 
 
 
@@ -42,11 +43,4 @@ export const withAuth = (WrappedComponent: Function) => {
         if (path === "/my-holidays" && role === "user") return <WrappedComponent {...props} />;
         return  <Redirect to="/login" />;
     }
-}
-
-interface IWrappedComponentProps {
-    match: Path;
-}
-interface Path {
-    path: string;
-}
+};

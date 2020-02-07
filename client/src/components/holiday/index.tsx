@@ -7,7 +7,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 
 
 import { useState } from "react";
@@ -19,7 +18,7 @@ import DeleteDialog from "components/dialogs/delete";
 import EditDialog from "components/dialogs/edit";
 import moment from 'moment';
 import { Holiday as IHolidayProps } from "sharing-interfaces";
-
+import { useStyles } from './style';
 
 
 export default function Holiday(props: IHolidayProps) {
@@ -92,34 +91,4 @@ export default function Holiday(props: IHolidayProps) {
       </Grid>
     </React.Fragment>
   );
-}
-
-
-
-const useStyles = makeStyles(theme => ({
-  icon: {
-    marginRight: theme.spacing(2)
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6)
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4)
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column"
-  },
-  cardMedia: {
-    paddingTop: "56.25%" // 16:9
-  },
-  cardContent: {
-    flexGrow: 1
-  },
-}));
+};

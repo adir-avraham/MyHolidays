@@ -8,6 +8,7 @@ import { TransitionProps } from "@material-ui/core/transitions";
 
 import { useDispatch } from "react-redux";
 import { deleteHolidayAction } from "../../../redux/actions";
+import { IDeleteDialogProps } from "sharing-interfaces";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(
   function Transition(props, ref) {
@@ -50,12 +51,3 @@ export default function DeleteDialog(props: IDeleteDialogProps) {
     </div>
   );
 }
-
-
-interface IDeleteDialogProps {
-  open: boolean;
-  onClose: any;
-  holidayId: number;
-  destination: string;
-}
-

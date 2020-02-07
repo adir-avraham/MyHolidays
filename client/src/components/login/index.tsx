@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import useCustomForm from '../../hooks/useCustomForm';
@@ -15,26 +14,23 @@ import { Link } from 'react-router-dom';
 import { updateUserNameConnectedAction } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
+import { useStyles } from './style';
+import { ILoginProps, InitialStateLoginForm } from 'sharing-interfaces';
 
-
-interface InitialState {
-  userName: string;
-  password: string;
-}
 
 const loginUrl = ('http://localhost:4000/login');
 
 export default function Login(props: ILoginProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const initialState: InitialState = {
+  const initialState: InitialStateLoginForm = {
     userName: "",
     password: "",
   }
   const [data, handleChange] = useCustomForm(initialState);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleLogin = async (data: InitialState) => {
+  const handleLogin = async (data: InitialStateLoginForm) => {
     const result = await axios.post(loginUrl, data);
     const {message, token, status, user} = result.data;
     if (status) {
@@ -109,38 +105,4 @@ export default function Login(props: ILoginProps) {
     </Container>
     </React.Fragment>
   );
-}
-
-
-interface ILoginProps extends History {
-  history: History;
-}
-
-interface History {
-  push: Function;
-}
-
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  link: {
-    textDecoration: 'none',
-    color: theme.palette.primary.main,
-}
-}));
+};

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { useState, useEffect } from 'react';
 import mainAxios from 'components/axios/mainAxios';
 import LinearIndeterminate from 'components/loader';
 import { Container } from '@material-ui/core';
-
+import { FollowedHoliday } from 'sharing-interfaces';
 
 
 
@@ -58,13 +57,8 @@ export default function Report() {
       </div>
       </Container>
     )  
-}
+};
   
-interface FollowedHoliday {
-  destination: string;
-  sum_of_followers: number;
-}
-
 
 // const data = {
 //   labels: report.map((item: any) => item.destination),
