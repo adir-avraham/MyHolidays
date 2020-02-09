@@ -12,7 +12,7 @@ import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import { initStateRegisterForm, IRegisterProps } from "sharing-interfaces";
 import { useStyles } from './style';
 import { validation } from '../../utils';
-
+import Paper from '@material-ui/core/Paper';
 
 const registerUrl = "http://localhost:4000/register";
 
@@ -46,7 +46,8 @@ export default function Register(props: IRegisterProps) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
+      <Paper elevation={16}>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <PersonAddOutlinedIcon />
@@ -59,6 +60,7 @@ export default function Register(props: IRegisterProps) {
             <Grid item xs={12} sm={6}> 
               <TextField
               autoFocus
+              color="secondary"
               variant="filled"
               required
               fullWidth
@@ -73,6 +75,7 @@ export default function Register(props: IRegisterProps) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+              color="secondary"
               variant="filled"
               required
               fullWidth
@@ -87,6 +90,7 @@ export default function Register(props: IRegisterProps) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              color="secondary"
               variant="filled"
               required
               fullWidth
@@ -101,6 +105,7 @@ export default function Register(props: IRegisterProps) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              color="secondary"
               variant="filled"
               required
               fullWidth
@@ -136,6 +141,7 @@ export default function Register(props: IRegisterProps) {
           </Grid>
         </form>
       </div>
+      </Paper>
     </Container>
   );
 };

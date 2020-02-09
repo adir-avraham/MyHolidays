@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
 import { useStyles } from './style';
 import { ILoginProps, InitialStateLoginForm } from 'sharing-interfaces';
+import Paper from '@material-ui/core/Paper';
 
 
 const loginUrl = ('http://localhost:4000/login');
@@ -44,6 +45,7 @@ export default function Login(props: ILoginProps) {
   
   return (
     <Container component="main" maxWidth="xs">
+      <Paper elevation={16}>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon color="inherit"/>
@@ -98,6 +100,7 @@ export default function Login(props: ILoginProps) {
           </Grid>
         </form>
       </div>
+      </Paper>
     </Container>
   );
 };

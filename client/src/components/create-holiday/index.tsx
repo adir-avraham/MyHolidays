@@ -11,6 +11,7 @@ import mainAxios from 'components/axios/mainAxios';
 import {useStyles} from './style';
 import { ICreateHolidayProps, initialStateHolidayForm } from 'sharing-interfaces';
 import { validation } from '../../utils';
+import Paper from '@material-ui/core/Paper';
 
 
 export default function CreateHoliday(props: ICreateHolidayProps) {
@@ -40,8 +41,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
   }
 
   return (
-    <React.Fragment>
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
+      <Paper elevation={16}>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <AddCircleOutlineIcon />
@@ -151,7 +152,7 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
           </Button>
         </form>
       </div>
+      </Paper>
     </Container>
-    </React.Fragment>
   );
 };
