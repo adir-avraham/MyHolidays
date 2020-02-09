@@ -1,7 +1,7 @@
 const exprees = require('express');
 const router = exprees.Router();
 const verifyToken = require('../auth/verifyToken');
-const holidays = require('../data-mysqul/data-providers/holidays')
+const holidays = require('../data-mysqul/data-providers/holidays');
 
 
 
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     } catch {
         res.json({error :"some error from get holidays", status: false});
         return; 
-    }
+    };
 });
 
 

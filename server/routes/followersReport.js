@@ -18,10 +18,8 @@ router.post('/', async (req, res) => {
     } catch {
         res.json({error: "error from report", status: false});
         return; 
-    }
+    };
 });
 
 
 module.exports = router;
-
-

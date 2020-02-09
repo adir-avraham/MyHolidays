@@ -14,7 +14,7 @@ router.put('/', async (req, res)=>{
 
     try{
         const { id } = req.body;
-        const { updateHoliday, getHolidays } = holidays
+        const { updateHoliday, getHolidays } = holidays;
         const result = await updateHoliday(req.body);      
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {

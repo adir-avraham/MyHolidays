@@ -1,6 +1,5 @@
 const pool = require('../../db/pool');
 const holidaysQueries = require('../data-access/holidaysQueries');
-const moment = require('moment');
 
 async function getHolidays(id) {
     const { getHolidaysQuery } = holidaysQueries;

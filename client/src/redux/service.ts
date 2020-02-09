@@ -10,7 +10,7 @@ export const getHolidaysService = async () => {
         return holidays;
     } catch (ex) {
         return []
-    }
+    };
 };
 
 
@@ -21,7 +21,7 @@ export const updateFollowHolidayService = async (holidayId: number) => {
         return data;
     } catch {
         console.error("error from updateFollowAction")
-    }
+    };
 };
 
 
@@ -32,7 +32,7 @@ export const deleteHolidayService = async (holidayId: number) => {
         return data;
     } catch {
         console.error("error from deleteHolidayAction")
-    }
+    };
 };
 
 export const updateHolidayService = async (holiday: Holiday) => {
@@ -42,5 +42,5 @@ export const updateHolidayService = async (holiday: Holiday) => {
         return data;
     } catch {
         console.error("error from updateHolidayAction")
-    }
+    };
 };

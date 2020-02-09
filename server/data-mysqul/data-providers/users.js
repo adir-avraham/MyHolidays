@@ -13,8 +13,8 @@ async function getUserSalt(userName) {
     } catch {
         res.json("some error from salt");
         return;
-    }
-} 
+    };
+}; 
 
 async function getUserLogin(userName, password) {
     try {
@@ -24,8 +24,8 @@ async function getUserLogin(userName, password) {
     } catch {
         res.json("error from user login");
         return; 
-    }
-} 
+    };
+}; 
 
 function getJwt(p) {
     return new Promise((resolve, reject) => {
@@ -33,8 +33,8 @@ function getJwt(p) {
             if (err) reject("error");
             resolve(token);
         })
-    })
-}
+    });
+};
 
 async function isUserExist(userName) {
     try{
@@ -45,21 +45,20 @@ async function isUserExist(userName) {
     } catch {
         res.json("some error from user exsit");
         return; 
-    }
-}
+    };
+};
 
 async function saveUser(payload) {
     try{
         const { firstName, lastName, userName, password } = payload;
         const salt = bcrypt.genSaltSync(10);
         const { insertNewUserQuery } = usersQueries;
-        const result = await pool.execute(insertNewUserQuery(), [firstName, lastName, userName, bcrypt.hashSync(password, salt), salt])
-        console.log(result)
+        const result = await pool.execute(insertNewUserQuery(), [firstName, lastName, userName, bcrypt.hashSync(password, salt), salt]);
         return result;
     } catch {
         res.json("some error from save user");
         return; 
-    }
-}
+    };
+};
 
 module.exports = { getUserSalt, getUserLogin, getJwt, isUserExist, saveUser }

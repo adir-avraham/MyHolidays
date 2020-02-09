@@ -16,7 +16,6 @@ import { State, IEditDialogProps } from "sharing-interfaces";
 export default function EditDialog(props: IEditDialogProps) {
   const { open, onClose, holidayId, destination, start_date, end_date, price, picture } = props;
   const dispatch = useDispatch();
-  const message = useSelector((state: State) => state.message);
   const errMessage = useSelector((state: State) => state.errMessage);
   const status = useSelector((state: State) => state.status);
   const initialState = {

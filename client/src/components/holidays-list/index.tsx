@@ -1,12 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-
 import Holiday from '../holiday';
 import { Holiday as IHoliday } from 'sharing-interfaces';
 import MyHoliday from 'components/my-holiday';
 import { useStyles } from './style';
 import { IHolidaysListProps } from '../../sharing-interfaces';
+
 
 export default function HolidaysList(props: IHolidaysListProps) {
   const classes = useStyles();

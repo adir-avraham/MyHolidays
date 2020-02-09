@@ -4,18 +4,17 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
 import Container from "@material-ui/core/Container";
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-import { initStateRegisterForm, Error, IRegisterProps } from "sharing-interfaces";
+import { initStateRegisterForm, IRegisterProps } from "sharing-interfaces";
 import { useStyles } from './style';
 import { validation } from '../../utils';
 
-const registerUrl = "http://localhost:4000/register";
 
+const registerUrl = "http://localhost:4000/register";
 
 
 export default function Register(props: IRegisterProps) {

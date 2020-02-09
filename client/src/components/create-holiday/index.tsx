@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
-
 import useCustomForm from '../../hooks/useCustomForm';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mainAxios from 'components/axios/mainAxios';
@@ -158,4 +154,4 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
     </Container>
     </React.Fragment>
   );
-}
+};

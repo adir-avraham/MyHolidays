@@ -5,7 +5,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
-
 import { useDispatch } from "react-redux";
 import { deleteHolidayAction } from "../../../redux/actions";
 import { IDeleteDialogProps } from "sharing-interfaces";

@@ -10,4 +10,4 @@ export default function useCustomForm(initialState: any) {
     }
 
     return [data, handleChange];
-}
+};

@@ -11,7 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
 import { AppLinks } from "components/appRouter/routers";
 import { routes } from "components/appRouter/routers.config";
 import { useState, useEffect } from 'react';
@@ -20,7 +19,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'sharing-interfaces';
 import { updateUserNameConnectedAction } from 'redux/actions';
 import { useStyles } from './style';
-import moment from 'moment'
+import { getGreeting } from './utils';
+
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -42,7 +42,6 @@ export default function Navbar() {
     }
     initReq();
   },[])
-
 
   return (
     <div className={classes.root}>
@@ -100,29 +99,3 @@ export default function Navbar() {
     </div>
   );
 };
-
-
-function getGreeting() {
-  const format = 'HH:mm:ss';
-
-  const morning = moment(moment() ,format),
-  beforeTime1 = moment('06:00:00', format),
-  afterTime1 = moment('11:00:00', format);
-  
-  const afternoon = moment(moment() ,format),
-  beforeTime2 = moment('11:00:00', format),
-  afterTime2 = moment('17:00:00', format);
-
-  const evening = moment(moment() ,format),
-  beforeTime3 = moment('17:00:00', format),
-  afterTime3 = moment('21:00:00', format);
-
-  const night = moment(moment() ,format),
-  beforeTime4 = moment('21:00:00', format),
-  afterTime4 = moment('24:00:00', format);
-  
-  if (morning.isBetween(beforeTime1, afterTime1)) return "Good morning";
-  if (afternoon.isBetween(beforeTime2, afterTime2)) return "Good afternoon";
-  if (evening.isBetween(beforeTime3, afterTime3)) return "Good evening";
-  if (night.isBetween(beforeTime4, afterTime4)) return "Good night";
-}

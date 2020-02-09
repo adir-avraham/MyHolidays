@@ -13,7 +13,7 @@ function holidayValidation (req, res, next) {
     const { error } = holidaySchema.validate(req.body);
     if (error) return res.json({errMessage: error, redirectValidation: false});
     next(); 
-}
+};
 
 
 module.exports = holidayValidation;

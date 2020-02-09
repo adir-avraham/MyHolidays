@@ -12,8 +12,7 @@ function registerValidation (req, res, next) {
     const { error } = userSchema.validate(req.body);
     if (error) return res.json({errMessage: error, status: false});
     next(); 
-}
+};
 
 
 module.exports = registerValidation;
-

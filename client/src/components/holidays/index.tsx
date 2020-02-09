@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-
-
-
 import HolidaysList from '../holidays-list';
 import { useDispatch, useSelector } from "react-redux";
 import { getHolidaysAction, getHolidaysPendingAction } from '../../redux/actions';
@@ -9,6 +6,7 @@ import LinearIndeterminate from 'components/loader';
 import Footer from 'components/footer';
 import { State } from 'sharing-interfaces';
 import { useStyles } from './style';
+
 
 
 export default function Holidays() {
