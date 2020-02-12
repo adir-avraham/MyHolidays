@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,6 +13,7 @@ import { Holiday as IMyHolidayProps } from 'sharing-interfaces';
 import { useStyles } from './style';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
+import { IconButton } from '@material-ui/core';
 
 
 
@@ -47,14 +47,10 @@ export default function MyHoliday(props: IMyHolidayProps) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="secondary"  
-                    onClick={()=>{  
-                        dispatch(updateFollowHolidayAction(id))
-                        }}
-                    > 
-                    {!user_id ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
-                    {followers}
-                    </Button>
+                    <IconButton size="medium" onClick={()=>{dispatch(updateFollowHolidayAction(id))}}> 
+                    {!user_id ? <FavoriteBorderIcon color="disabled"/> : <FavoriteIcon color="error"/>}
+                    </IconButton>
+                    {followers ? `${followers} likes` : "Be the first to like this"}
                   </CardActions>
             </Card>
             </Paper>

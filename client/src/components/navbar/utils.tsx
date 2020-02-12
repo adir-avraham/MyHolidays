@@ -19,8 +19,8 @@ export function getGreeting() {
     beforeTime4 = moment('21:00:00', format),
     afterTime4 = moment('24:00:00', format);
     
-    if (morning.isBetween(beforeTime1, afterTime1)) return "Good morning";
-    if (afternoon.isBetween(beforeTime2, afterTime2)) return "Good afternoon";
-    if (evening.isBetween(beforeTime3, afterTime3)) return "Good evening";
-    if (night.isBetween(beforeTime4, afterTime4)) return "Good night";
+    if (morning.isBetween(beforeTime1, afterTime1)) return "Good Morning";
+    if (afternoon.isBetween(beforeTime2, afterTime2)) return "Good Afternoon";
+    if (evening.isBetween(beforeTime3, afterTime3)) return "Good Evening";
+    if (night.isBetween(beforeTime4, afterTime4)) return "Good Night";
   }
