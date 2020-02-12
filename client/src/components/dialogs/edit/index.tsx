@@ -37,7 +37,6 @@ export default function EditDialog(props: IEditDialogProps) {
           {errMessage ? errMessage : null} 
          </DialogContentText>
           <TextField
-            autoFocus
             margin="dense"
             id="destination"
             label="Destination"
@@ -48,7 +47,6 @@ export default function EditDialog(props: IEditDialogProps) {
             onChange={handleChange}
             />
           <TextField
-            autoFocus
             margin="dense"
             id="start_date"
             label="Start date"
@@ -62,7 +60,6 @@ export default function EditDialog(props: IEditDialogProps) {
             onChange={handleChange}
             />
           <TextField
-            autoFocus
             margin="dense"
             id="end_date"
             label="End date"
@@ -76,7 +73,6 @@ export default function EditDialog(props: IEditDialogProps) {
             onChange={handleChange}
             />
           <TextField
-            autoFocus
             margin="dense"
             id="price"
             label="Price"
@@ -87,7 +83,6 @@ export default function EditDialog(props: IEditDialogProps) {
             onChange={handleChange}
             />
           <TextField
-            autoFocus
             margin="dense"
             id="picture"
             label="Picture url"

@@ -56,7 +56,7 @@ export default function Holiday(props: IHolidayProps) {
               onMouseEnter={()=>{setDeleteIcon(true)}}
               onMouseLeave={()=>{setDeleteIcon(false)}}
               >
-              {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon />}
+              {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon color="disabled"/>}
             </Button>
             <DeleteDialog
               open={open}
@@ -69,7 +69,7 @@ export default function Holiday(props: IHolidayProps) {
               onMouseEnter={()=>{setEditIcon(true)}}
               onMouseLeave={()=>{setEditIcon(false)}}
               > 
-            {editIcon ? <EditIcon/> : <EditOutlinedIcon />}
+            {editIcon ? <EditIcon/> : <EditOutlinedIcon color="disabled"/>}
             </Button>
             <EditDialog
               open={openEdit}
