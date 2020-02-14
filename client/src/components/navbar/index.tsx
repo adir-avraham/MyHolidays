@@ -41,7 +41,7 @@ export default function Navbar() {
       } 
     }
     initReq();
-  },[])
+  },[dispatch])
 
   return (
     <div className={classes.root}>

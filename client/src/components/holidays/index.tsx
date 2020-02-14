@@ -22,7 +22,7 @@ export default function Holidays() {
       dispatch(getHolidaysAction());
     }
     initReq();
-  },[])
+  },[dispatch])
 
 
   if (holidaysLoading) return (

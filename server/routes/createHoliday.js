@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     try{
         const { createHoliday } = holidays;
         const insertId = await createHoliday(req.body);
-        if (insertId) return res.json({message: "Holiday created successfully", status: true, holidayId: insertId });
+        if (insertId) return res.json({message: "Holiday created successfully!", status: true, holidayId: insertId });
         res.json({message: "Create holiday error..", status: false}); 
         return; 
         } catch {

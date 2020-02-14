@@ -6,7 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useDispatch } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
 import { Holiday as IMyHolidayProps } from 'sharing-interfaces';

@@ -12,6 +12,8 @@ import {useStyles} from './style';
 import { ICreateHolidayProps, initialStateHolidayForm } from 'sharing-interfaces';
 import { validation } from '../../utils';
 import Paper from '@material-ui/core/Paper';
+import AlertDialog from 'components/dialogs/create';
+
 
 
 export default function CreateHoliday(props: ICreateHolidayProps) {
@@ -23,9 +25,12 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
     price: "",
     picture: "",
   }
-
+  
   const [data, handleChange] = useCustomForm(initialState); 
   const [validationsMessages, setvalidationsMessages] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const handleAlertOpen = () => { open ? setOpen(false) : setOpen(true)};
 
   const handleCreateHoliday = async (data: initialStateHolidayForm) => {
     try {
@@ -33,12 +38,14 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
       const { message, status } = result.data;
       const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
       if (errMessage) setvalidationsMessages(result.data.errMessage.details);
-      if (message) alert(message)
-      if (status) props.history.push('/holidays');
+      if (message && status) {
+        setSuccessMessage(message)
+        handleAlertOpen()
+      } 
       } catch  {
       console.log("some error from create holiday component");
-    }
-  }
+    };
+  };
 
   return (
     <Container component="main" maxWidth="sm">
@@ -150,6 +157,12 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
           >
             Save 
           </Button>
+          <AlertDialog
+              open={open}
+              onClose={handleAlertOpen}
+              message={successMessage}
+              history={props.history}
+              />
         </form>
       </div>
       </Paper>

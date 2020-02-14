@@ -126,3 +126,10 @@ export interface IAppLinksProps {
     role: string;
     handleDrawerOpen: Function;
 }
+
+export interface IAlertDialogProps {
+    open: any;
+    onClose: any;
+    message: string;
+    history: History;
+}
