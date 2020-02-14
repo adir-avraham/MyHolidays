@@ -8,7 +8,7 @@ import { IAlertDialogProps } from 'sharing-interfaces';
 
 export default function AlertDialog(props: IAlertDialogProps) {
 
-    const { open, onClose, message, history } = props;
+    const { open, onClose, message, history, route } = props;
 
   return (
     <div>
@@ -22,7 +22,7 @@ export default function AlertDialog(props: IAlertDialogProps) {
         <DialogActions>
           <Button onClick={()=>{
               onClose()
-              history.push('/holidays');
+              history.push(route);
               }} color="primary" autoFocus>
             OK
           </Button>

@@ -13,6 +13,7 @@ import { initStateRegisterForm, IRegisterProps } from "sharing-interfaces";
 import { useStyles } from './style';
 import { validation } from '../../utils';
 import Paper from '@material-ui/core/Paper';
+import AlertDialog from "components/dialogs/create";
 
 const registerUrl = "http://localhost:4000/register";
 
@@ -29,6 +30,9 @@ export default function Register(props: IRegisterProps) {
 
   const [data, handleChange] = useCustomForm(initialState);
   const [validationsMessages, setvalidationsMessages] = useState([])  
+  const [open, setOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const handleAlertOpen = () => { open ? setOpen(false) : setOpen(true)};
 
   const handleRegister = async (data: initStateRegisterForm) => {
     try {
@@ -38,8 +42,10 @@ export default function Register(props: IRegisterProps) {
       if (errMessage) {
         setvalidationsMessages(result.data.errMessage.details);
       } 
-      if (message) alert(message);
-      if (status) props.history.push('/login');
+      if (message && status) {
+        setSuccessMessage(message)
+        handleAlertOpen()
+      } 
     } catch {
       console.log("some error register (client)");
     }
@@ -132,6 +138,13 @@ export default function Register(props: IRegisterProps) {
           >
             Register
           </Button>
+          <AlertDialog
+              open={open}
+              onClose={handleAlertOpen}
+              message={successMessage}
+              history={props.history}
+              route={'/login'}
+              />
           <Grid container justify="flex-end">
             <Grid item>
               <Link to="/login" className={classes.link}>

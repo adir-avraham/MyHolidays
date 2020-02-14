@@ -132,4 +132,5 @@ export interface IAlertDialogProps {
     onClose: any;
     message: string;
     history: History;
+    route: string;
 }

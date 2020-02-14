@@ -162,6 +162,7 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
               onClose={handleAlertOpen}
               message={successMessage}
               history={props.history}
+              route={'/holidays'}
               />
         </form>
       </div>
