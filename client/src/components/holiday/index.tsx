@@ -18,7 +18,6 @@ import { Holiday as IHolidayProps } from "sharing-interfaces";
 import { useStyles } from './style';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
-import Divider from '@material-ui/core/Divider';
 
 
 export default function Holiday(props: IHolidayProps) {
@@ -50,14 +49,13 @@ export default function Holiday(props: IHolidayProps) {
               End date: {moment(end_date).format("DD/MM/YYYY")}
             </Typography>
           </CardContent>
-          <Divider/>
           <CardActions>
-            <Button size="small" color="primary" variant="text"
+            <Button size="small" color="secondary" variant="text"
               onClick={()=>{handleClickOpen()}}
               onMouseEnter={()=>{setDeleteIcon(true)}}
               onMouseLeave={()=>{setDeleteIcon(false)}}
               >
-              {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon color="disabled"/>}
+              {deleteIcon ? <DeleteForeverIcon/> :  <DeleteForeverOutlinedIcon />}
             </Button>
             <DeleteDialog
               open={open}
@@ -65,12 +63,12 @@ export default function Holiday(props: IHolidayProps) {
               holidayId={id}
               destination={destination}
               />
-            <Button size="small" color="primary" 
+            <Button size="small" color="secondary" 
               onClick={()=>{handleClickOpenEdit()}}
               onMouseEnter={()=>{setEditIcon(true)}}
               onMouseLeave={()=>{setEditIcon(false)}}
               > 
-            {editIcon ? <EditIcon/> : <EditOutlinedIcon color="disabled"/>}
+            {editIcon ? <EditIcon/> : <EditOutlinedIcon />}
             </Button>
             <EditDialog
               open={openEdit}

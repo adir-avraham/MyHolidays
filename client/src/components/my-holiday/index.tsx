@@ -48,7 +48,7 @@ export default function MyHoliday(props: IMyHolidayProps) {
                   </CardContent>
                   <CardActions>
                     <IconButton size="medium" onClick={()=>{dispatch(updateFollowHolidayAction(id))}}> 
-                    {!user_id ? <FavoriteBorderIcon color="disabled"/> : <FavoriteIcon color="error"/>}
+                    {!user_id ? <FavoriteIcon color="disabled"/> : <FavoriteIcon color="error"/>}
                     </IconButton>
                     {followers ? `${followers} likes` : "Be the first to like this"}
                   </CardActions>
