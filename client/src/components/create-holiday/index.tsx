@@ -35,9 +35,8 @@ export default function CreateHoliday(props: ICreateHolidayProps) {
   const handleCreateHoliday = async (data: initialStateHolidayForm) => {
     try {
       const result = await mainAxios.post('/createHoliday', data);
-      const { message, status } = result.data;
-      const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;
-      if (errMessage) setvalidationsMessages(result.data.errMessage.details);
+      const { message, status, errMessage } = result.data;
+      if (errMessage) setvalidationsMessages(errMessage);
       if (message && status) {
         setSuccessMessage(message)
         handleAlertOpen()

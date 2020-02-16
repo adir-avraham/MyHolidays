@@ -37,18 +37,16 @@ export default function Register(props: IRegisterProps) {
   const handleRegister = async (data: initStateRegisterForm) => {
     try {
       const result = await axios.post(registerUrl, data);
-      const { message, status } = result.data;
-      const errMessage = result.data.errMessage ? result.data.errMessage.details[0].message : 0;    
-      if (errMessage) {
-        setvalidationsMessages(result.data.errMessage.details);
-      } 
+      const { message, status, errMessage } = result.data; 
+      if (errMessage) { setvalidationsMessages(errMessage)}; 
       if (message && status) {
         setSuccessMessage(message)
         handleAlertOpen()
-      } 
+      };  
+      if (message && !status) {alert(message)};
     } catch {
       console.log("some error register (client)");
-    }
+    };
   };
 
   return (
