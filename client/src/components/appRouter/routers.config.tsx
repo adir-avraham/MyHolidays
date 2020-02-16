@@ -10,16 +10,8 @@ import Holidays from 'components/holidays';
 
 export const routes = [
     { authorized: "guest", title: "Login", path: "/login", component: Login },
-    // { authorized: "guest", title: "Login", path: "/login", component: (props: any) =>{
-    //     const LoginWithAuth = withAuth(Login);
-    //     return <LoginWithAuth {...props}/>
-    // } },
     { authorized: "both", title: "Logout", path: "/logout", component: Logout },
     { authorized: "guest", title: "Register", path: "/register", component: Register },
-    // { authorized: "guest", title: "Register", path: "/register", component: (props: any) =>{
-    //     const RegisterWithAuth = withAuth(Register);
-    //     return <RegisterWithAuth {...props}/>
-    // } },
     { authorized: "user", title: "MyHolidays", path: "/my-holidays", component: (props: any) =>{
         const MyHolidaysWithAuth = withAuth(Holidays);
         return <MyHolidaysWithAuth {...props}/>

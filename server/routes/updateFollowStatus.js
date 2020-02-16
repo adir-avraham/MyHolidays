@@ -21,16 +21,14 @@ router.post('/', async (req , res)=> {
             const result = await followHoliday(id, holidayId);
             const data = await getHolidays(id);
             res.json({holidays: data});
-            return; 
         }  
         if (holidayFollowed) {
             const result = await unFollowed(holidayFollowed);
             const data = await getHolidays(id);
             res.json({holidays: data});
-            return; 
         }
         } catch {
-        return res.json({error: "something went wrong..", status: false});
+            res.json({error: "something went wrong..", status: false});
     };
 });
 

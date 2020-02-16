@@ -19,15 +19,12 @@ router.post('/', async (req, res)=> {
     
     if (!holidayFollowed) {       
         const result = await deleteHoliday(holidayId);
-        console.log("res-delholiday", result)
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
             const data = await getHolidays(holidayId); 
             res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
-            return; 
         } 
         res.json({ message: "No deleted holiday", status: false }); 
-        return; 
     }  
 
     if (holidayFollowed) {
@@ -39,15 +36,12 @@ router.post('/', async (req, res)=> {
             if (affectedRows > 0) {
                 const data = await getHolidays(holidayId); 
                 res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
-                return; 
             }; 
             res.json({ message: "No deleted holiday", status: false }); 
-            return; 
         };
     };
     } catch {
         res.json({ error: "some error from delete", status: false }); 
-        return; 
     };
 
 });

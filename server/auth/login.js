@@ -18,10 +18,8 @@ router.post('/', async (req, res) => {
         if (user.length === 0) return res.json({message: "Incorrect password or username", status: false});
         const jwtToken = await getJwt({...user});
         res.json({message: "User logged in", user: user, token: jwtToken, status: true});  
-        return; 
     } catch {
         res.json({error: "some error from login", status: false});
-        return; 
     }
 }) 
 

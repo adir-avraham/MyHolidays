@@ -16,10 +16,8 @@ router.post('/', async (req, res) => {
         const insertId = await saveUser(req.body);
         if (insertId) return res.json({message: "Registration completed successfully, You can login now!", status: true, userId: insertId })
         res.json({message: "Register error!", status: false});
-        return; 
     } catch {
         res.json({error: "some error from post register", status: false});
-        return; 
     }
 })
 

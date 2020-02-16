@@ -32,12 +32,9 @@ export const withAuth = (WrappedComponent: Function) => {
 
         if (status === "loading") return <LinearIndeterminate/>;
         if (!status) return <Redirect to="/login" />;
-        //delete login and register paths if no use
-        if ((path === '/' || path === '/login' || path === '/register')  && role === "user") return <Redirect to='/my-holidays'/>;
-        if ((path === '/' || path === '/login' || path === '/register')  && role === "admin") return <Redirect to='/holidays'/>;
-        //if (path === '/login' && (role !== "admin" && role !== "user") ) return <WrappedComponent {...props} />;
+        if (path === '/' && role === "user") return <Redirect to='/my-holidays'/>;
+        if (path === '/' && role === "admin") return <Redirect to='/holidays'/>;
         if (path === "/create-holiday" && role === "admin") return <WrappedComponent {...props} />;
-        //if (path === "/register" && (role !== "admin" && role !== "user")) return <WrappedComponent {...props} />;
         if (path === "/report" && role === "admin") return <WrappedComponent {...props} />;
         if (path === "/holidays" && role === "admin") return <WrappedComponent {...props} />;
         if (path === "/my-holidays" && role === "user") return <WrappedComponent {...props} />;

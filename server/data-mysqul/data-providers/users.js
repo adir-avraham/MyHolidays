@@ -12,7 +12,6 @@ async function getUserSalt(userName) {
         return first.salt;
     } catch {
         res.json("some error from salt");
-        return;
     };
 }; 
 
@@ -23,7 +22,6 @@ async function getUserLogin(userName, password) {
         return user;
     } catch {
         res.json("error from user login");
-        return; 
     };
 }; 
 
@@ -44,7 +42,6 @@ async function isUserExist(userName) {
         return firstUser;
     } catch {
         res.json("some error from user exsit");
-        return; 
     };
 };
 
@@ -57,7 +54,6 @@ async function saveUser(payload) {
         return result;
     } catch {
         res.json("some error from save user");
-        return; 
     };
 };
 

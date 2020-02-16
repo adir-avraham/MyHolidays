@@ -14,10 +14,8 @@ router.post('/', async (req, res) => {
         const { id } = req.decoded[0];
         const result = await getHolidays(id);  
         res.json({holidays: result, status: true});
-        return; 
     } catch {
         res.json({error :"some error from get holidays", status: false});
-        return; 
     };
 });
 

@@ -14,10 +14,8 @@ router.post('/', async (req, res) => {
         const { followersReport } = holidays; 
         const result = await followersReport();
         res.json({report: result, status: true});
-        return; 
     } catch {
         res.json({error: "error from report", status: false});
-        return; 
     };
 });
 

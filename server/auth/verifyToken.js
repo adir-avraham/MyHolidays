@@ -14,7 +14,7 @@ router.post('/', (req, res, next) =>{
             next()
         });
     } catch {
-        return res.json({ error: "error from verification", status: false })
+        res.json({ error: "error from verification", status: false })
     }
   });
 
