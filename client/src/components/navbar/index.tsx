@@ -46,7 +46,7 @@ export default function Navbar() {
   return (
     <div className={classes.root}>
       <AppBar
-        color="secondary"
+        color="primary"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,

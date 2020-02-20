@@ -5,10 +5,10 @@ export function getGreeting() {
   
     const morning = moment(moment() ,format),
     beforeTime1 = moment('06:00:00', format),
-    afterTime1 = moment('11:00:00', format);
+    afterTime1 = moment('12:00:00', format);
     
     const afternoon = moment(moment() ,format),
-    beforeTime2 = moment('11:00:00', format),
+    beforeTime2 = moment('12:00:00', format),
     afterTime2 = moment('17:00:00', format);
   
     const evening = moment(moment() ,format),

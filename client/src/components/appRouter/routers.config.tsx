@@ -10,11 +10,14 @@ import Holidays from 'components/holidays';
 
 export const routes = [
     { authorized: "guest", title: "Login", path: "/login", component: Login },
-    { authorized: "both", title: "Logout", path: "/logout", component: Logout },
     { authorized: "guest", title: "Register", path: "/register", component: Register },
     { authorized: "user", title: "MyHolidays", path: "/my-holidays", component: (props: any) =>{
         const MyHolidaysWithAuth = withAuth(Holidays);
         return <MyHolidaysWithAuth {...props}/>
+    } },
+    { authorized: "admin", title: "Holidays", path: "/holidays", component:  (props: any) =>{
+        const HolidaysWithAuth = withAuth(Holidays);
+        return <HolidaysWithAuth {...props}/>
     } },
     { authorized: "admin", title: "Create-holiday", path: "/create-holiday", component: (props: any) =>{
         const CreateHolidayWithAuth = withAuth(CreateHoliday);
@@ -24,10 +27,7 @@ export const routes = [
         const ReportWithAuth = withAuth(Report);
         return <ReportWithAuth {...props}/>
     } },
-    { authorized: "admin", title: "Holidays", path: "/holidays", component:  (props: any) =>{
-        const HolidaysWithAuth = withAuth(Holidays);
-        return <HolidaysWithAuth {...props}/>
-    } },
+    { authorized: "both", title: "Logout", path: "/logout", component: Logout },
     { authorized: "guest", title: "/", path: "/", exact: true, component:(props: any) =>{
         const LoginWithAuth = withAuth(Login);
         return <LoginWithAuth {...props}/>
