@@ -13,7 +13,7 @@ import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DeleteDialog from "components/dialogs/delete";
 import EditDialog from "components/dialogs/edit";
-import moment from 'moment';
+import { convertDateFormat } from "utils";
 import { Holiday as IHolidayProps } from "sharing-interfaces";
 import { useStyles } from './style';
 import Paper from '@material-ui/core/Paper';
@@ -43,10 +43,10 @@ export default function Holiday(props: IHolidayProps) {
             </Typography>
             <Typography>Price: {`$${price}`}</Typography>
             <Typography>
-              Start date: {new Date(start_date).toLocaleDateString('en-GB')} 
+              Start date: {convertDateFormat(start_date)} 
             </Typography>
             <Typography>
-              End date: {moment(end_date).format("DD/MM/YYYY")}
+              End date: {convertDateFormat(end_date)}
             </Typography>
           </CardContent>
           <CardActions>

@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { updateFollowHolidayAction } from '../../redux/actions';
 import { Holiday as IMyHolidayProps } from 'sharing-interfaces';
 import { useStyles } from './style';
+import { convertDateFormat } from 'utils';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import { IconButton } from '@material-ui/core';
@@ -24,7 +25,7 @@ export default function MyHoliday(props: IMyHolidayProps) {
     return (
     <Grid item key={`holiday_${id}`} xs={12} sm={6} md={4}>
       <Grow in={true} style={{ transformOrigin: '0 0 0' }} {... { timeout: 3000 } }>
-        <Paper elevation={15}>
+        <Paper elevation={16}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -39,10 +40,10 @@ export default function MyHoliday(props: IMyHolidayProps) {
                      Price: {`$${price}`}
                     </Typography>
                     <Typography>
-                     Start date: {start_date}
+                     Start date: {convertDateFormat(start_date)} 
                     </Typography>
                     <Typography>
-                     End date: {end_date}
+                     End date: {convertDateFormat(end_date)} 
                     </Typography>
                   </CardContent>
                   <CardActions>
