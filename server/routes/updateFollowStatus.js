@@ -20,12 +20,12 @@ router.put('/', async (req , res) => {
         if (!holidayFollowed) {
             const result = await followHoliday(id, holidayId);
             const data = await getHolidays(id);
-            res.json({holidays: data});
+            return res.json({holidays: data});
         }  
         if (holidayFollowed) {
             const result = await unFollowed(holidayFollowed);
             const data = await getHolidays(id);
-            res.json({holidays: data});
+            return res.json({holidays: data});
         }
         } catch (err) {
             res.json({ err: err.message, error: "something went wrong..", status: false});

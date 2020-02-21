@@ -19,7 +19,7 @@ router.put('/', async (req, res)=>{
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
             const data = await getHolidays(id); 
-            res.json({ message: "holiday updated!!", status: true, affectedRows: affectedRows, holidays: data });
+            return res.json({ message: "holiday updated!!", status: true, affectedRows: affectedRows, holidays: data });
         };
         res.json({ message: "Updated holiday failed", status: false }); 
     } catch {

@@ -22,7 +22,7 @@ router.post('/', async (req, res)=> {
         const affectedRows = result.affectedRows;
         if (affectedRows > 0) {
             const data = await getHolidays(holidayId); 
-            res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
+            return res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
         } 
         res.json({ message: "No deleted holiday", status: false }); 
     }  
@@ -35,7 +35,7 @@ router.post('/', async (req, res)=> {
             const affectedRows = result.affectedRows;
             if (affectedRows > 0) {
                 const data = await getHolidays(holidayId); 
-                res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
+                return res.json({ message: "holiday deleted!!", status: true, affectedRows: affectedRows, holidays: data });
             }; 
             res.json({ message: "No deleted holiday", status: false }); 
         };
