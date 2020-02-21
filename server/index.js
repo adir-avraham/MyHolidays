@@ -4,6 +4,8 @@ const app = express();
 const checkEnvParams = require('./utils/checkEnvParams');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const logger = require("./utils/logger");
+const moment = require('moment');
 
 const verify = require('./auth/verify');
 const login = require('./auth/login');
@@ -34,4 +36,5 @@ app.use('/followersReport', followersReport);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is listening to port: ${process.env.PORT}`)
+    logger.info(`server is listening to port: ${process.env.PORT}, Date: ${moment().format("DD-MM-YYYY")}`)
 })
