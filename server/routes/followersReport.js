@@ -8,7 +8,7 @@ const holidays = require('../data-mysqul/data-providers/holidays');
 router.use(verifyToken);
 router.use(verifyAdminRole);
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try{
         const { followersReport } = holidays; 

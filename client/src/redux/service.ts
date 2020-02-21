@@ -5,7 +5,7 @@ import { Holiday } from 'sharing-interfaces';
 
 export const getHolidaysService = async () => {
     try {
-        const {data} = await mainAxios.post('/holidays');
+        const {data} = await mainAxios.get('/holidays');
         const { holidays } = data
         return holidays;
     } catch (ex) {
@@ -16,7 +16,7 @@ export const getHolidaysService = async () => {
 
 export const updateFollowHolidayService = async (holidayId: number) => {
     try{ 
-        const result = await mainAxios.post('/updateFollowStatus', {holidayId});
+        const result = await mainAxios.put('/updateFollowStatus', {holidayId});
         const { data } = result;
         return data;
     } catch {
@@ -34,6 +34,7 @@ export const deleteHolidayService = async (holidayId: number) => {
         console.error("error from deleteHolidayAction")
     };
 };
+
 
 export const updateHolidayService = async (holiday: Holiday) => {
     try{ 

@@ -13,7 +13,7 @@ export default function Report() {
   
   useEffect (() => {   
     const followersReport = async () => {
-      const result = await mainAxios.post('/followersReport');
+      const result = await mainAxios.get('/followersReport');
       const { report } = result.data 
       setReport(report) 
     } 
@@ -26,11 +26,11 @@ export default function Report() {
     datasets: [
       {
         label: 'Followers',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
+        hoverBackgroundColor: 'rgba(54, 162, 235, 0.4)',
+        hoverBorderColor: 'rgba(54, 162, 235, 1)',
         data: report.map((item: FollowedHoliday) => item.sum_of_followers)
       }
     ]

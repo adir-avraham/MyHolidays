@@ -19,7 +19,7 @@ export const withAuth = (WrappedComponent: Function) => {
         useEffect(() => {
             const verify = async () => {
                 try {
-                    const result = await mainAxios.post("/verifyToken")
+                    const result = await mainAxios.get("/verify")
                     const { status, role } = result.data;
                     setRole(role);
                     setStatus(status);

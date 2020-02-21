@@ -35,7 +35,7 @@ export default function Navbar() {
     const initReq = async () =>{
       const token = localStorage.getItem('token');
       if (token) {
-        const result = await mainAxios.post('/verifyToken');
+        const result = await mainAxios.get('/verify');
         const { firstName, role } = result.data;
         if (firstName) dispatch(updateUserNameConnectedAction(firstName, role));
       } 

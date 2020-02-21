@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 
-router.post('/', (req, res, next) =>{
+router.use('/', (req, res, next) =>{
     const { role } = req.decoded[0];
     if (role !== "admin") return res.json({message: "Role is not authorized", status: false})
     next()

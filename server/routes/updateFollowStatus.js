@@ -5,10 +5,10 @@ const verifyUserRole = require('../auth/verifyUserRole');
 const holidays = require('../data-mysqul/data-providers/holidays');
 
 
-router.use('/', verifyToken);
+router.use(verifyToken);
 router.use(verifyUserRole);
 
-router.post('/', async (req , res)=> {
+router.put('/', async (req , res) => {
 
     try {
         const { isHolidayExist, isFollowedByUser, followHoliday, getHolidays, unFollowed } = holidays; 
@@ -27,8 +27,8 @@ router.post('/', async (req , res)=> {
             const data = await getHolidays(id);
             res.json({holidays: data});
         }
-        } catch {
-            res.json({error: "something went wrong..", status: false});
+        } catch (err) {
+            res.json({ err: err.message, error: "something went wrong..", status: false});
     };
 });
 

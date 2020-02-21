@@ -5,7 +5,7 @@ const checkEnvParams = require('./utils/checkEnvParams');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const verifyToken = require('./auth/verifyToken');
+const verify = require('./auth/verify');
 const login = require('./auth/login');
 const register = require('./auth/register');
 const holidays = require('./routes/holidays');
@@ -21,10 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.use('/verifyToken',verifyToken, (req, res) =>{
-    const { first_name, role } = req.decoded[0];
-    res.json({status: true, firstName: first_name, role: role })
-});
+app.use('/verify',verify);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/holidays', holidays);

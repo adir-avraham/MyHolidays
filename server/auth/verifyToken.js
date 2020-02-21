@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 
-router.post('/', (req, res, next) =>{
+router.use('/', (req, res, next) =>{
     
     try {
         const { authorization } = req.headers;
@@ -16,8 +16,7 @@ router.post('/', (req, res, next) =>{
     } catch {
         res.json({ error: "error from verification", status: false })
     }
-  });
+});
 
 
-  
-  module.exports = router;
+module.exports = router;

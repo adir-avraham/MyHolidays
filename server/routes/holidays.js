@@ -7,15 +7,15 @@ const holidays = require('../data-mysqul/data-providers/holidays');
 
 router.use(verifyToken);
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try{
-        const { getHolidays } = holidays;
+        const { getHolidays } = holidays;        
         const { id } = req.decoded[0];
         const result = await getHolidays(id);  
         res.json({holidays: result, status: true});
-    } catch {
-        res.json({error :"some error from get holidays", status: false});
+    } catch (err) {
+        res.json({error : err.message , status: false});
     };
 });
 
